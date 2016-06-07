@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, inital-scale=1, maximum-scale=1">
+  <title>M.W. Bresnan | {% block sitetitle %}{% endblock %}</title>
+
+  {% if user.username == "mbresnan" %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  {% else %}
+    <link rel="stylesheet" type="text/css" href="{% static 'build/css/main.css' %}">
+  {% endif %}
+
+</head>
+<body>
+
+{% block content %}
+{% endblock %}
+
+{% if user.username == "mbresnan" %}
+  <script src="{% static 'js/index.js' %}" />
+{% else %}
+  <script src="{% static 'build/js/index.js' %}" />
+{% endif %}
+
+</body>
+</html>
