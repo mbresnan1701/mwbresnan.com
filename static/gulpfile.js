@@ -5,7 +5,8 @@ var gpconcat = require('gulp-concat');
 var gprename = require('gulp-rename');
 
 gulp.task('clean-css', function() {
-  return gulp.src('./css/*.css')
+  return gulp.src(['./css/normalize.css', './css/main.css'])
+    .pipe(gpconcat('main.min.css'))
     .pipe(minCSS())
     .pipe(gulp.dest('./build/css/'))
 });
