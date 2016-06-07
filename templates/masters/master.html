@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load render_bundle from webpack_loader %}
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -12,6 +13,7 @@
         <!-- Place favicon.ico in the root directory -->
         {% if user.username == "mbresnan" %}
           <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+          <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
           <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
         {% else %}
           <link rel="stylesheet" type="text/css" href="{% static 'build/css/main.min.css' %}">
@@ -24,20 +26,14 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <h1>Hello world! This is HTML5 Boilerplate.</h1>
         {% block content %}
         {% endblock %}
-
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="{% static 'js/plugins.js' %} "></script>
 
-        {% if user.username == "mbresnan" %}
-          <script src="{% static 'js/index.js' %}" />
-        {% else %}
-          <script src="{% static 'build/js/index.js' %}" />
-        {% endif %}
+        <script src="{% static 'build/js/bundle.js' %}"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

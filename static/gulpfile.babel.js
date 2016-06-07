@@ -1,6 +1,9 @@
+'use strict';
+
+
 var gulp = require('gulp');
 var minCSS = require('gulp-clean-css');
-var minJS = require('gulp-uglify');
+var minJS = require('gulp-minify');
 var gpconcat = require('gulp-concat');
 var gprename = require('gulp-rename');
 
@@ -12,8 +15,8 @@ gulp.task('clean-css', function() {
 });
 
 gulp.task('uglify', function() {
-  return gulp.src(['./js/**/*.js'])
-    .pipe(gpconcat('build.min.js'))
+  return gulp.src(['./js/**/.js'])
+    .pipe(gpconcat('scripts.min.js'))
     .pipe(minJS())
     .pipe(gulp.dest('./build/js/'))
 });

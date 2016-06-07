@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'rest_framework',
+    'webpack_loader',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -125,3 +126,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/home/mbresnan/Development/Python/mwbresnan/static',
 ]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'build/js/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
