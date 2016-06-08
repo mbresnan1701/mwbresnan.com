@@ -6,14 +6,14 @@ from .serializers import BlogSerializer
 # Create your views here.
 
 
-def all_posts(req):
-    return render(req, 'blog/index.html', {
+def main_posts(req):
+    return render(req, 'masters/post.html', {
                                           'posts': BlogPost.objects.all()
                                          })
 
 
-def post(req, pk):
-    return render(req, 'blog/detail.html', {
+def post_detail(req, pk):
+    return render(req, 'masters/post.html', {
                                            'post': get_object_or_404(BlogPost, pk=pk)
                                            })
 
