@@ -55062,7 +55062,6 @@
 	        _this2.setState({
 	          posts: JSON.parse(getRecent.responseText)
 	        });
-	        console.log(_this2.state.posts);
 	      });
 	    }
 

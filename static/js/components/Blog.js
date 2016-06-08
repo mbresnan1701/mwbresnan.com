@@ -20,7 +20,6 @@ class Blog extends React.Component {
       this.setState({
         posts: JSON.parse(getRecent.responseText),
       });
-      console.log(this.state.posts);
     });
   }
 
