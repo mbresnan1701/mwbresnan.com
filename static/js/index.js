@@ -3,13 +3,14 @@ import { render } from 'react-dom';
 import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 import App from './components/App.js';
 import Home from './components/Home.js';
-
+import Blog from './components/Blog.js';
       // <Route path='/blog' component={Blog} />
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App} >
       <IndexRoute component={Home} />
+      <Route path="/blog" component={Blog} />
     </Route>
 
     <Route path="/about" />

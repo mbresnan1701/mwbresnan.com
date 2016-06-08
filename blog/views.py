@@ -9,9 +9,7 @@ import random
 
 
 def main_posts(req):
-    return render(req, 'masters/post.html', {
-                                          'posts': BlogPost.objects.all()
-                                         })
+    return render(req, 'main/post.html')
 
 
 def post_detail(req, pk):

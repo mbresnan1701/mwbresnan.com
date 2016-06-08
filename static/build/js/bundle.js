@@ -62,6 +62,10 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
+	var _Blog = __webpack_require__(498);
+
+	var _Blog2 = _interopRequireDefault(_Blog);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// <Route path='/blog' component={Blog} />
@@ -72,7 +76,8 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: _App2.default },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default })
 	  ),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/about' })
 	), document.getElementById('app'));
@@ -54999,6 +55004,88 @@
 	}(_react2.default.Component);
 
 	module.exports = PostSummary;
+
+/***/ },
+/* 498 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(233);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// import PostSummary from './PostSummary.js';
+
+	var Blog = function (_React$Component) {
+	  _inherits(Blog, _React$Component);
+
+	  function Blog(props) {
+	    _classCallCheck(this, Blog);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+
+	    _this.state = {
+	      posts: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Blog, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getRecent = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/all'
+	      }).done(function () {
+	        _this2.setState({
+	          posts: JSON.parse(getRecent.responseText)
+	        });
+	        console.log(_this2.state.posts);
+	      });
+	    }
+	  }, {
+	    key: 'renderRecent',
+	    value: function renderRecent() {
+	      return this.state.posts.map(function (post) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: post.pk },
+	          _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: post.fields.text } }),
+	          _react2.default.createElement('hr', null)
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Row,
+	        null,
+	        this.renderRecent()
+	      );
+	    }
+	  }]);
+
+	  return Blog;
+	}(_react2.default.Component);
+
+	module.exports = Blog;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(232)))
 
 /***/ }
 /******/ ]);
