@@ -21,7 +21,7 @@ class PostSummary extends React.Component {
               {this.props.post.fields.subtitle}
             </h3>
             <p class="post-meta">
-              {this.props.post.fields.date}
+              {this.props.post.fields.datestr || this.props.post.fields.date}
             </p>
           </a>
         </div>

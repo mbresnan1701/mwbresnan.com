@@ -54986,7 +54986,7 @@
 	            _react2.default.createElement(
 	              'p',
 	              { 'class': 'post-meta' },
-	              this.props.post.fields.date
+	              this.props.post.fields.datestr || this.props.post.fields.date
 	            )
 	          )
 	        )
