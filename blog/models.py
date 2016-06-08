@@ -1,5 +1,7 @@
 from django.db import models
+from django.conf import settings
 import datetime
+from ckeditor.fields import RichTextField
 
 
 class BlogPost(models.Model):
@@ -9,7 +11,7 @@ class BlogPost(models.Model):
 
     title = models.CharField(max_length=255, null=True, blank=True)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
-    text = models.TextField(null=True, blank=True)
+    text = RichTextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     datestr = models.CharField(max_length=127, default=get_date_string())
     updated = models.DateTimeField(null=True, blank=True)
