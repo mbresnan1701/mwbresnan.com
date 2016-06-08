@@ -1,4 +1,6 @@
 import React from 'react';
+import { Row } from 'react-bootstrap';
+import PostSummary from './PostSummary.js';
 
 class Home extends React.Component {
 
@@ -18,13 +20,25 @@ class Home extends React.Component {
       this.setState({
         posts: JSON.parse(getRecent.responseText),
       });
-      console.log(this.state.posts)
+    });
+  }
+
+  renderRecent() {
+    return this.state.posts.map((post) => {
+      return (
+        <div key={post.pk}>
+          <PostSummary post={post} />
+          <hr />
+        </div>
+      );
     });
   }
 
   render() {
     return (
-      <div> I'm a lumberjack and I'm OK. I wear high heels and I work all day. </div>
+      <Row>
+        {this.renderRecent()}
+      </Row>
     );
   }
 

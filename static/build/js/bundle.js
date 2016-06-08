@@ -54856,6 +54856,12 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactBootstrap = __webpack_require__(233);
+
+	var _PostSummary = __webpack_require__(497);
+
+	var _PostSummary2 = _interopRequireDefault(_PostSummary);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54890,16 +54896,27 @@
 	        _this2.setState({
 	          posts: JSON.parse(getRecent.responseText)
 	        });
-	        console.log(_this2.state.posts);
+	      });
+	    }
+	  }, {
+	    key: 'renderRecent',
+	    value: function renderRecent() {
+	      return this.state.posts.map(function (post) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: post.pk },
+	          _react2.default.createElement(_PostSummary2.default, { post: post }),
+	          _react2.default.createElement('hr', null)
+	        );
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        _reactBootstrap.Row,
 	        null,
-	        ' I\'m a lumberjack and I\'m OK. I wear high heels and I work all day. '
+	        this.renderRecent()
 	      );
 	    }
 	  }]);
@@ -54909,6 +54926,78 @@
 
 	module.exports = Home;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(232)))
+
+/***/ },
+/* 497 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(233);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PostSummary = function (_React$Component) {
+	  _inherits(PostSummary, _React$Component);
+
+	  function PostSummary(props) {
+	    _classCallCheck(this, PostSummary);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PostSummary).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(PostSummary, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'post-preview' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'ADD LINK HERE' },
+	            _react2.default.createElement(
+	              'h2',
+	              { className: 'post-title' },
+	              this.props.post.fields.title
+	            ),
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'post-subtitle' },
+	              this.props.post.fields.subtitle
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { 'class': 'post-meta' },
+	              this.props.post.fields.date
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PostSummary;
+	}(_react2.default.Component);
+
+	module.exports = PostSummary;
 
 /***/ }
 /******/ ]);
