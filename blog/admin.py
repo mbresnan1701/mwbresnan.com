@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Comment
+from .models import BlogPost, Quote
 
 # Register your models here.
 
@@ -13,4 +13,4 @@ class BlogPostAdmin(admin.ModelAdmin):
     list_filter = ['date']
 
 admin.site.register(BlogPost)
-admin.site.register(Comment)
+admin.site.register(Quote)

@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^api/(?P<pk>\d+)/$', views.PostsData.as_view()),
     url(r'^api/recent$', views.recent),
     url(r'^api/all$', views.all),
+    url(r'^api/quote$', views.quote),
 ]
 
 

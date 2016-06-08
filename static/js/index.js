@@ -1,8 +1,8 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { browserHistory, Router, Route, Link, IndexRoute, transition } from 'react-router'
-import App from './components/App.js'
-import Home from './components/Home.js'
+import React from 'react';
+import { render } from 'react-dom';
+import { browserHistory, Router, Route, IndexRoute } from 'react-router';
+import App from './components/App.js';
+import Home from './components/Home.js';
 
       // <Route path='/blog' component={Blog} />
 
@@ -11,6 +11,8 @@ render((
     <Route path="/" component={App} >
       <IndexRoute component={Home} />
     </Route>
+
+    <Route path="/about" />
 
   </Router>
 ), document.getElementById('app'));
