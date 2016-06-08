@@ -54916,8 +54916,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostSummary2.default, { post: post }),
-	          _react2.default.createElement('hr', null)
+	          _react2.default.createElement(_PostSummary2.default, { post: post })
 	        );
 	      });
 	    }
@@ -54927,7 +54926,25 @@
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
-	        this.renderRecent()
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Latest Blog Entries:'
+	          )
+	        ),
+	        this.renderRecent(),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/blog' },
+	            'More Blog Entries'
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -55000,7 +55017,8 @@
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
 	          )
-	        )
+	        ),
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -55074,8 +55092,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post }),
-	          _react2.default.createElement('hr', null)
+	          _react2.default.createElement(_PostListItem2.default, { post: post })
 	        );
 	      });
 	    }
@@ -55158,7 +55175,8 @@
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
 	          )
-	        )
+	        ),
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -55250,7 +55268,6 @@
 	                this.state.post.fields.datestr || this.state.post.fields.date
 	              ),
 	              _react2.default.createElement('hr', null),
-	              _react2.default.createElement('br', null),
 	              _react2.default.createElement('br', null),
 	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
 	            )

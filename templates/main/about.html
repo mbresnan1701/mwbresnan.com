@@ -1,7 +1,20 @@
 {% extends 'masters/index.html' %}
 {% load staticfiles %}
 
-{% block content %}<div id="app"></div>{% endblock %}
+{% block content %}
+    <div id="app">
+
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <p>Well hello there! Welcome to my site!</p>
+            <p>My name is Matthew William Bresnan, and I'm a full stack web developer.</p>
+            <p>I'm extremely passionate about building quality software. I thrive on difficult problems, and live for the 'Eureka!' moment. My whole life I've loved to tinker with computers, and it's shaped the way I view the world. I get a thrill out of writing complex algorithms, but I also enjoy optimizing them to minimize time complexity in order to deliver the most responsive user experiences possible.</p>
+            <p>Check out my <a href="/blog">blog!</a></p>
+            <p>Live Long and Propser!</p>
+        </div>
+    </div>
+{% endblock %}
 
 {% block header %}
     <header class="intro-header" style="background-image: url({% static "img/home-bg.jpg" %})">
@@ -11,7 +24,7 @@
                     <div class="site-heading">
                         <h1>About Me</h1>
                         <hr class="small">
-                        <span class="subheading">Programmer</span>
+                        <span class="subheading">Web Developer</span>
                     </div>
                 </div>
             </div>

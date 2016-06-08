@@ -26,6 +26,7 @@ class PostSummary extends React.Component {
             {this.props.post.fields.datestr || this.props.post.fields.date}
           </p>
         </div>
+        <hr />
       </Col>
     );
   }

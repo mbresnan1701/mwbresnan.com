@@ -41,7 +41,6 @@ class BlogDetail extends React.Component {
               </p>
               <hr />
               <br />
-              <br />
               <div dangerouslySetInnerHTML={{ __html: this.state.post.fields.text }}>
               </div>
             </div>

@@ -30,7 +30,6 @@ class Blog extends React.Component {
       return (
         <div key={post.pk}>
           <PostListItem post={post} />
-          <hr />
         </div>
       );
     });
