@@ -4,6 +4,7 @@ import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 import App from './components/App.js';
 import Home from './components/Home.js';
 import Blog from './components/Blog.js';
+import BlogDetail from './components/BlogDetail.js';
       // <Route path='/blog' component={Blog} />
 
 render((
@@ -11,6 +12,7 @@ render((
     <Route path="/" component={App} >
       <IndexRoute component={Home} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/:id" component={BlogDetail} />
     </Route>
 
     <Route path="/about" />

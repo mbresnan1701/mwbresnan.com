@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
-// import PostSummary from './PostSummary.js';
+import PostListItem from './PostListItem.js';
 
 class Blog extends React.Component {
 
@@ -24,13 +24,13 @@ class Blog extends React.Component {
     });
   }
 
+          // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
 
-  renderRecent() {
+  renderPosts() {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
-          </div>
+          <PostListItem post={post} />
           <hr />
         </div>
       );
@@ -40,7 +40,7 @@ class Blog extends React.Component {
   render() {
     return (
       <Row>
-        {this.renderRecent()}
+        {this.renderPosts()}
       </Row>
     );
   }

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^api/recent$', views.recent),
     url(r'^api/all$', views.all),
     url(r'^api/quote$', views.quote),
+    url(r'^api/single/(?P<pk>\d+)/$', views.single),
 ]
 
 

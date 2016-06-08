@@ -66,6 +66,10 @@
 
 	var _Blog2 = _interopRequireDefault(_Blog);
 
+	var _BlogDetail = __webpack_require__(500);
+
+	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// <Route path='/blog' component={Blog} />
@@ -77,7 +81,8 @@
 	    _reactRouter.Route,
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:id', component: _BlogDetail2.default })
 	  ),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/about' })
 	), document.getElementById('app'));
@@ -54978,22 +54983,22 @@
 	          { className: 'post-preview' },
 	          _react2.default.createElement(
 	            'a',
-	            { href: 'ADD LINK HERE' },
+	            { href: '/blog/' + this.props.post.pk },
 	            _react2.default.createElement(
 	              'h2',
 	              { className: 'post-title' },
 	              this.props.post.fields.title
-	            ),
-	            _react2.default.createElement(
-	              'h3',
-	              { className: 'post-subtitle' },
-	              this.props.post.fields.subtitle
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { 'class': 'post-meta' },
-	              this.props.post.fields.datestr || this.props.post.fields.date
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'post-subtitle' },
+	            this.props.post.fields.subtitle
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'post-meta' },
+	            this.props.post.fields.datestr || this.props.post.fields.date
 	          )
 	        )
 	      );
@@ -55019,6 +55024,10 @@
 
 	var _reactBootstrap = __webpack_require__(233);
 
+	var _PostListItem = __webpack_require__(499);
+
+	var _PostListItem2 = _interopRequireDefault(_PostListItem);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55026,8 +55035,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// import PostSummary from './PostSummary.js';
 
 	var Blog = function (_React$Component) {
 	  _inherits(Blog, _React$Component);
@@ -55058,14 +55065,17 @@
 	        console.log(_this2.state.posts);
 	      });
 	    }
+
+	    // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
+
 	  }, {
-	    key: 'renderRecent',
-	    value: function renderRecent() {
+	    key: 'renderPosts',
+	    value: function renderPosts() {
 	      return this.state.posts.map(function (post) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: post.fields.text } }),
+	          _react2.default.createElement(_PostListItem2.default, { post: post }),
 	          _react2.default.createElement('hr', null)
 	        );
 	      });
@@ -55076,7 +55086,7 @@
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
-	        this.renderRecent()
+	        this.renderPosts()
 	      );
 	    }
 	  }]);
@@ -55085,6 +55095,178 @@
 	}(_react2.default.Component);
 
 	module.exports = Blog;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(232)))
+
+/***/ },
+/* 499 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(233);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PostListItem = function (_React$Component) {
+	  _inherits(PostListItem, _React$Component);
+
+	  function PostListItem(props) {
+	    _classCallCheck(this, PostListItem);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PostListItem).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(PostListItem, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'post-preview' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/blog/' + this.props.post.pk },
+	            _react2.default.createElement(
+	              'h2',
+	              { className: 'post-title' },
+	              this.props.post.fields.title
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'post-subtitle' },
+	            this.props.post.fields.subtitle
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'post-meta' },
+	            this.props.post.fields.datestr || this.props.post.fields.date
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PostListItem;
+	}(_react2.default.Component);
+
+	module.exports = PostListItem;
+
+/***/ },
+/* 500 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(233);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BlogDetail = function (_React$Component) {
+	  _inherits(BlogDetail, _React$Component);
+
+	  function BlogDetail(props) {
+	    _classCallCheck(this, BlogDetail);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogDetail).call(this, props));
+
+	    _this.state = {
+	      post: null
+	    };
+	    return _this;
+	  }
+
+	  _createClass(BlogDetail, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getPost = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/single/' + this.props.params.id
+	      }).done(function () {
+	        _this2.setState({
+	          post: JSON.parse(getPost.responseText)[0]
+	        });
+	      });
+	    }
+
+	    // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.post) {
+	        return _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'post-preview' },
+	              _react2.default.createElement(
+	                'h2',
+	                { className: 'post-title' },
+	                this.state.post.fields.title
+	              ),
+	              _react2.default.createElement(
+	                'h3',
+	                { className: 'post-subtitle' },
+	                this.state.post.fields.subtitle
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'post-meta' },
+	                this.state.post.fields.datestr || this.state.post.fields.date
+	              ),
+	              _react2.default.createElement('hr', null),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
+	            )
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement('div', null);
+	      }
+	    }
+	  }]);
+
+	  return BlogDetail;
+	}(_react2.default.Component);
+
+	module.exports = BlogDetail;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(232)))
 
 /***/ }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 
-class PostSummary extends React.Component {
+class PostListItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -32,4 +32,4 @@ class PostSummary extends React.Component {
 
 }
 
-module.exports = PostSummary;
+module.exports = PostListItem;
