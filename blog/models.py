@@ -3,8 +3,9 @@ from django.db import models
 
 class BlogPost(models.Model):
 
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title = models.CharField(max_length=255, null=True, blank=True)
+    subtitle = models.CharField(max_length=255, null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
 
@@ -13,8 +14,8 @@ class BlogPost(models.Model):
 
 
 class Comment(models.Model):
-    name = models.CharField(max_length=255)
-    text = models.TextField()
+    name = models.CharField(max_length=255, null=True, blank=True)
+    text = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

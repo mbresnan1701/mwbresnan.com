@@ -64,6 +64,18 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// <Route path='/blog' component={Blog} />
+
+	(0, _reactDom.render)(_react2.default.createElement(
+	  _reactRouter.Router,
+	  { history: _reactRouter.browserHistory },
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: _App2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
+	  )
+	), document.getElementById('app'));
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -25855,10 +25867,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavigationBar = __webpack_require__(230);
-
-	var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
-
 	var _reactBootstrap = __webpack_require__(233);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -25884,7 +25892,6 @@
 	      return _react2.default.createElement(
 	        _reactBootstrap.Grid,
 	        null,
-	        _react2.default.createElement(_NavigationBar2.default, null),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'main' },
@@ -25900,166 +25907,8 @@
 	module.exports = App;
 
 /***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _NavLink = __webpack_require__(231);
-
-	var _NavLink2 = _interopRequireDefault(_NavLink);
-
-	var _jquery = __webpack_require__(232);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _reactBootstrap = __webpack_require__(233);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// This is the only spot I'm using jquery. It's so the navigationbar
-	// dropdown hides when you click anywhere. If you can do this another way
-	// and get rid of jquery, the site will load much lot faster!
-	(0, _jquery2.default)(document).on('click', '.navbar-toggle', function (event) {
-	  (0, _jquery2.default)(this).parent().parent().find('.dropdown').addClass('open');
-	  (0, _jquery2.default)("#wrapper").toggleClass("toggled");
-	});
-	(0, _jquery2.default)(document).click(function (event) {
-	  var clickover = (0, _jquery2.default)(event.target);
-	  var _opened = (0, _jquery2.default)(".navbar-collapse").hasClass("navbar-collapse collapse in");
-	  if (_opened === true && !clickover.hasClass("navbar-toggle")) {
-	    (0, _jquery2.default)("button.navbar-toggle").click();
-	  }
-	});
-
-	var NavigationBar = function (_React$Component) {
-	  _inherits(NavigationBar, _React$Component);
-
-	  function NavigationBar(props) {
-	    _classCallCheck(this, NavigationBar);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigationBar).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  // renderMenuItems() {
-	  //   return (
-	  //     <Nav><Navbar.Text><NavLink to="/">
-	  //       Blog
-	  //     </NavLink></Navbar.Text></Nav>
-	  //   )
-	  // }
-
-	  _createClass(NavigationBar, [{
-	    key: 'navbarToggleDisplay',
-	    value: function navbarToggleDisplay() {
-
-	      return _react2.default.createElement(
-	        _reactBootstrap.Nav,
-	        { pullRight: true },
-	        _react2.default.createElement(
-	          _reactBootstrap.MenuItem,
-	          { header: true },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '/' },
-	            'Home'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.MenuItem,
-	          { header: true },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '/' },
-	            'Blog'
-	          )
-	        )
-	      );
-	    }
-
-	    // <NavLink to="/" onlyActiveOnIndex>
-	    //   <img className="image" src={`../assets/${logo}`} />
-	    // </NavLink>
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      // var logo = showInverse ? 'logo-dark.png' : 'logo.png'
-	      return _react2.default.createElement(
-	        _reactBootstrap.Navbar,
-	        { fixedTop: true, inverse: true },
-	        _react2.default.createElement(
-	          _reactBootstrap.Navbar.Header,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.Navbar.Brand,
-	            null,
-	            _react2.default.createElement(
-	              _NavLink2.default,
-	              { to: '/', onlyActiveOnIndex: true },
-	              'M.W. Bresnan'
-	            )
-	          ),
-	          _react2.default.createElement(_reactBootstrap.Navbar.Toggle, { animation: false })
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Navbar.Collapse,
-	          null,
-	          this.navbarToggleDisplay()
-	        )
-	      );
-	    }
-	  }]);
-
-	  return NavigationBar;
-	}(_react2.default.Component);
-
-	module.exports = NavigationBar;
-
-/***/ },
-/* 231 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // modules/NavLink.js
-
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(168);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'NavLink',
-	  render: function render() {
-	    return _react2.default.createElement(_reactRouter.Link, _extends({}, this.props, { activeClassName: 'active' }));
-	  }
-	});
-
-/***/ },
+/* 230 */,
+/* 231 */,
 /* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -54999,7 +54848,7 @@
 /* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -55023,11 +54872,28 @@
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
 
-	    _this.state = {};
+	    _this.state = {
+	      posts: []
+	    };
 	    return _this;
 	  }
 
 	  _createClass(Home, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getRecent = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/recent'
+	      }).done(function () {
+	        _this2.setState({
+	          posts: JSON.parse(getRecent.responseText)
+	        });
+	        console.log(_this2.state.posts);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -55042,6 +54908,7 @@
 	}(_react2.default.Component);
 
 	module.exports = Home;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(232)))
 
 /***/ }
 /******/ ]);

@@ -6,11 +6,11 @@ import Home from './components/Home.js'
 
       // <Route path='/blog' component={Blog} />
 
-// render((
-//   <Router history={browserHistory}>
-//     <Route path="/" component={App} >
-//       <IndexRoute component={Home} />
-//     </Route>
+render((
+  <Router history={browserHistory}>
+    <Route path="/" component={App} >
+      <IndexRoute component={Home} />
+    </Route>
 
-//   </Router>
-// ), document.getElementById('app'));
+  </Router>
+), document.getElementById('app'));
