@@ -54999,11 +54999,11 @@
 	          'div',
 	          { className: 'post-preview' },
 	          _react2.default.createElement(
-	            'a',
-	            { href: '/blog/' + this.props.post.pk },
+	            'h2',
+	            { className: 'post-title' },
 	            _react2.default.createElement(
-	              'h2',
-	              { className: 'post-title' },
+	              'a',
+	              { href: '/blog/' + this.props.post.pk },
 	              this.props.post.fields.title
 	            )
 	          ),
@@ -55157,11 +55157,11 @@
 	          'div',
 	          { className: 'post-preview' },
 	          _react2.default.createElement(
-	            'a',
-	            { href: '/blog/' + this.props.post.pk },
+	            'h2',
+	            { className: 'post-title' },
 	            _react2.default.createElement(
-	              'h2',
-	              { className: 'post-title' },
+	              'a',
+	              { href: '/blog/' + this.props.post.pk },
 	              this.props.post.fields.title
 	            )
 	          ),
