@@ -36,12 +36,9 @@ class Home extends React.Component {
   render() {
     return (
       <Row>
-        <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
-          <h3>Latest Blog Entries:</h3>
-        </Col>
         {this.renderRecent()}
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
-          <a href="/blog">More Blog Entries</a>
+          <a className="morebloglink" href="/blog">More Blog Entries</a>
         </Col>
       </Row>
     );

@@ -2,20 +2,31 @@
 {% load staticfiles %}
 
 {% block content %}
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="welcomemsg">&quot<span class="welcome">Welcome</span> to the personal website of Matthew William Bresnan, freelance web dev. I love programming; building cool software in new, innovative ways. Check out my blog!&quot
+        </div>
+        <hr>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <h3 class="latestblog" >Latest Blog Entries:</h3>
+    </div>
+
 <div id="app">
 </div>
 
 {% endblock %}
 
 {% block header %}
-    <header class="intro-header" style="background-image: url({% static "img/home-bg.jpg" %})">
+    <header class="intro-header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
                         <h1>Captain Bresnan</h1>
                         <hr class="small">
-                        <span class="subheading">Scourge of the high seas</span>
+                        <span class="subheading">Web Developer</span>
                     </div>
                 </div>
             </div>
