@@ -27,3 +27,7 @@ class Quote(models.Model):
 
     def __str__(self):
         return self.quote
+
+
+class Limit(models.Model):
+    count = models.IntegerField(default=0)

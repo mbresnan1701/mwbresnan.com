@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Quote
+from .models import BlogPost, Quote, Limit
 
 # Register your models here.
 
@@ -14,3 +14,4 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 admin.site.register(BlogPost)
 admin.site.register(Quote)
+admin.site.register(Limit)
