@@ -45,11 +45,3 @@ def single(req, pk):
     post = BlogPost.objects.get(pk=pk)
     post = serializers.serialize("json", [post])
     return HttpResponse(post)
-
-
-# def contact(req):
-#     success = send_message()
-#     if success is True:
-#         return HttpResponse(status=200)
-#     else:
-#         return HttpResponse(status=503)

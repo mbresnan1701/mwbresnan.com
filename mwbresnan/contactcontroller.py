@@ -1,18 +1,21 @@
 import requests
 from blog.models import Limit
+import os
 
+MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
 MAX_MESSAGE_COUNT = 50
 
 
 def send_message():
+    print(MAILGUN_API_KEY)
     if check_limit() is True:
         requests.post(
-          "https://api.mailgun.net/v3/samples.mailgun.org/messages",
-          auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
-          data={"from": "Excited User <excited@samples.mailgun.org>",
+          "https://api.mailgun.net/v3/djdeploy.com/messages",
+          auth=("api", MAILGUN_API_KEY),
+          data={"from": "Captain Bresnan <mwbresnan@djdeploy.com>",
                 "to": ["captobviouz@gmail.com"],
-                "subject": "Hello",
-                "text": "Testing some Mailgun awesomeness!"})
+                "subject": "You\'re awesome",
+                "text": "Testing some MATT awesomeness!"})
         return True
     else:
         return False
