@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.test import TestCase
 from .models import BlogPost, Limit
 from django.core.urlresolvers import reverse
-from .contactcontroller import increment_count, check_limit
+from .contactcontroller import increment_count, check_limit, reset_count
+
 
 def create_blog_post(title, subtitle, text):
     BlogPost.objects.create(title=title, subtitle=subtitle, text=text)
@@ -61,6 +62,14 @@ class MailMethodsTests(TestCase):
         '''Should return False if at or over limit'''
         create_limit(50)
         self.assertEqual(check_limit(), False)
+
+    def test_limit_reset(self):
+        '''Should be able to reset limit to 0'''
+        create_limit(45)
+        reset_count()
+        limit = Limit.objects.all()[0]
+        self.assertEqual(limit.count, 0)
+
 
 # def create_question(question_text, days):
 #     """

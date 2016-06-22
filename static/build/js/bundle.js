@@ -70,6 +70,10 @@
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
+	var _Contact = __webpack_require__(499);
+
+	var _Contact2 = _interopRequireDefault(_Contact);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// <Route path='/blog' component={Blog} />
@@ -82,7 +86,8 @@
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:id', component: _BlogDetail2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:id', component: _BlogDetail2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _Contact2.default })
 	  ),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/about' })
 	), document.getElementById('app'));
@@ -55273,6 +55278,138 @@
 
 	module.exports = BlogDetail;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 499 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Blog = function (_React$Component) {
+	  _inherits(Blog, _React$Component);
+
+	  function Blog(props) {
+	    _classCallCheck(this, Blog);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(Blog, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Row,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          _react2.default.createElement(
+	            'form',
+	            { name: 'sentMessage', id: 'contactForm', noValidate: true },
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              { className: 'control-group' },
+	              _react2.default.createElement(
+	                _reactBootstrap.FormGroup,
+	                { xs: 12, className: 'floating-label-form-group controls' },
+	                _react2.default.createElement(
+	                  'label',
+	                  null,
+	                  'Name'
+	                ),
+	                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
+	                _react2.default.createElement('p', { className: 'help-block text-danger' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              { className: 'control-group' },
+	              _react2.default.createElement(
+	                _reactBootstrap.FormGroup,
+	                { xs: 12, className: 'floating-label-form-group controls' },
+	                _react2.default.createElement(
+	                  'label',
+	                  null,
+	                  'Email Address'
+	                ),
+	                _react2.default.createElement('input', { type: 'email', className: 'form-control', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
+	                _react2.default.createElement('p', { className: 'help-block text-danger' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              { className: 'control-group' },
+	              _react2.default.createElement(
+	                _reactBootstrap.FormGroup,
+	                { xs: 12, className: 'floating-label-form-group controls' },
+	                _react2.default.createElement(
+	                  'label',
+	                  null,
+	                  'Phone Number'
+	                ),
+	                _react2.default.createElement('input', { type: 'tel', className: 'form-control', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
+	                _react2.default.createElement('p', { className: 'help-block text-danger' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              { className: 'control-group' },
+	              _react2.default.createElement(
+	                _reactBootstrap.FormGroup,
+	                { xs: 12, className: 'floating-label-form-group controls' },
+	                _react2.default.createElement(
+	                  'label',
+	                  null,
+	                  'Message'
+	                ),
+	                _react2.default.createElement('textarea', { rows: '5', className: 'form-control', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
+	                _react2.default.createElement('p', { className: 'help-block text-danger' })
+	              )
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement('div', { id: 'success' }),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.FormGroup,
+	                { xs: 12 },
+	                _react2.default.createElement(
+	                  'button',
+	                  { type: 'submit', className: 'btn btn-default' },
+	                  'Send'
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Blog;
+	}(_react2.default.Component);
+
+	module.exports = Blog;
 
 /***/ }
 /******/ ]);

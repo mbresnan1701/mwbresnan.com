@@ -5,6 +5,7 @@ import App from './components/App.js';
 import Home from './components/Home.js';
 import Blog from './components/Blog.js';
 import BlogDetail from './components/BlogDetail.js';
+import Contact from './components/Contact.js';
       // <Route path='/blog' component={Blog} />
 
 render((
@@ -13,6 +14,7 @@ render((
       <IndexRoute component={Home} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:id" component={BlogDetail} />
+      <Route path="/contact" component={Contact} />
     </Route>
 
     <Route path="/about" />
