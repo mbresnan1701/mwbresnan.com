@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import BlogPost, Quote
 from rest_framework import generics, viewsets
-from .contactcontroller import send_message
 from .serializers import BlogSerializer
 from django.core import serializers
 from django.db.models import Max
@@ -48,9 +47,9 @@ def single(req, pk):
     return HttpResponse(post)
 
 
-def contact(req):
-    success = send_message()
-    if success is True:
-        return HttpResponse(status=200)
-    else:
-        return HttpResponse(status=503)
+# def contact(req):
+#     success = send_message()
+#     if success is True:
+#         return HttpResponse(status=200)
+#     else:
+#         return HttpResponse(status=503)
