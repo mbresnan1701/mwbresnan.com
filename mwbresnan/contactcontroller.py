@@ -1,5 +1,5 @@
 import requests
-from .models import Limit
+from blog.models import Limit
 
 MAX_MESSAGE_COUNT = 50
 
@@ -10,7 +10,7 @@ def send_message():
           "https://api.mailgun.net/v3/samples.mailgun.org/messages",
           auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
           data={"from": "Excited User <excited@samples.mailgun.org>",
-                "to": ["bresnan.mw@gmail.com"],
+                "to": ["captobviouz@gmail.com"],
                 "subject": "Hello",
                 "text": "Testing some Mailgun awesomeness!"})
         return True

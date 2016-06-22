@@ -21,12 +21,13 @@ class Contact extends React.Component {
   submitForm() {
     const sendReq = $.ajax({
       method: 'POST',
-      url: '/api/contact/',
+      url: '/contact/send',
       data: {
         name: reactDOM.findDOMNode(this.refs.name).value,
         email: reactDOM.findDOMNode(this.refs.email).value,
         phnum: reactDOM.findDOMNode(this.refs.phnum).value,
         msg: reactDOM.findDOMNode(this.refs.msg).value,
+        csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value,
       },
     });
     this.clearForm();

@@ -6,7 +6,6 @@ from .contactcontroller import send_message
 from .serializers import BlogSerializer
 from django.core import serializers
 from django.db.models import Max
-import random
 
 
 def main_posts(req):

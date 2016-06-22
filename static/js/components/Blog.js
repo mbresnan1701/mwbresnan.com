@@ -23,8 +23,6 @@ class Blog extends React.Component {
     });
   }
 
-          // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
-
   renderPosts() {
     return this.state.posts.map((post) => {
       return (

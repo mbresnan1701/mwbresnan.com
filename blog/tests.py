@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.test import TestCase
 from .models import BlogPost, Limit
 from django.core.urlresolvers import reverse
-from .contactcontroller import increment_count, check_limit, reset_count
+from mwbresnan.contactcontroller import increment_count, check_limit, reset_count
 
 
 def create_blog_post(title, subtitle, text):

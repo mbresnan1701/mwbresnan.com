@@ -55076,9 +55076,6 @@
 	        });
 	      });
 	    }
-
-	    // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
-
 	  }, {
 	    key: 'renderPosts',
 	    value: function renderPosts() {
@@ -55332,12 +55329,13 @@
 	    value: function submitForm() {
 	      var sendReq = $.ajax({
 	        method: 'POST',
-	        url: '/api/contact/',
+	        url: '/contact/send',
 	        data: {
 	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
 	          email: _reactDom2.default.findDOMNode(this.refs.email).value,
 	          phnum: _reactDom2.default.findDOMNode(this.refs.phnum).value,
-	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value
+	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value,
+	          csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value
 	        }
 	      });
 	      this.clearForm();
