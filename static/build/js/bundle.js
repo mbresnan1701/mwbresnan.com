@@ -55283,7 +55283,7 @@
 /* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -55293,6 +55293,10 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
+	var _reactDom = __webpack_require__(38);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55301,19 +55305,51 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Blog = function (_React$Component) {
-	  _inherits(Blog, _React$Component);
+	var Contact = function (_React$Component) {
+	  _inherits(Contact, _React$Component);
 
-	  function Blog(props) {
-	    _classCallCheck(this, Blog);
+	  function Contact(props) {
+	    _classCallCheck(this, Contact);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
 
-	    _this.state = {};
+	    _this.state = {
+	      submitMsg: ''
+	    };
 	    return _this;
 	  }
 
-	  _createClass(Blog, [{
+	  _createClass(Contact, [{
+	    key: 'clearForm',
+	    value: function clearForm() {
+	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.email).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.phnum).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.msg).value = '';
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm() {
+	      var sendReq = $.ajax({
+	        method: 'POST',
+	        url: '/api/contact/',
+	        data: {
+	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
+	          email: _reactDom2.default.findDOMNode(this.refs.email).value,
+	          phnum: _reactDom2.default.findDOMNode(this.refs.phnum).value,
+	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value
+	        }
+	      });
+	      this.clearForm();
+	      if (sendReq.statusCode === 200) {
+	        this.setState({ submitMsg: 'Message Sent' });
+	      } else if (sendReq.statusCode === 503) {
+	        this.setState({ submitMsg: 'Mail server too busy. Try again later.' });
+	      } else {
+	        this.setState({ submitMsg: 'An unknown error has occured' });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -55336,7 +55372,7 @@
 	                  null,
 	                  'Name'
 	                ),
-	                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
+	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
 	                _react2.default.createElement('p', { className: 'help-block text-danger' })
 	              )
 	            ),
@@ -55351,7 +55387,7 @@
 	                  null,
 	                  'Email Address'
 	                ),
-	                _react2.default.createElement('input', { type: 'email', className: 'form-control', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
+	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
 	                _react2.default.createElement('p', { className: 'help-block text-danger' })
 	              )
 	            ),
@@ -55366,7 +55402,7 @@
 	                  null,
 	                  'Phone Number'
 	                ),
-	                _react2.default.createElement('input', { type: 'tel', className: 'form-control', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
+	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
 	                _react2.default.createElement('p', { className: 'help-block text-danger' })
 	              )
 	            ),
@@ -55381,7 +55417,7 @@
 	                  null,
 	                  'Message'
 	                ),
-	                _react2.default.createElement('textarea', { rows: '5', className: 'form-control', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
+	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
 	                _react2.default.createElement('p', { className: 'help-block text-danger' })
 	              )
 	            ),
@@ -55394,8 +55430,8 @@
 	                _reactBootstrap.FormGroup,
 	                { xs: 12 },
 	                _react2.default.createElement(
-	                  'button',
-	                  { type: 'submit', className: 'btn btn-default' },
+	                  _reactBootstrap.Button,
+	                  { onClick: this.submitForm.bind(this) },
 	                  'Send'
 	                )
 	              )
@@ -55406,10 +55442,11 @@
 	    }
 	  }]);
 
-	  return Blog;
+	  return Contact;
 	}(_react2.default.Component);
 
-	module.exports = Blog;
+	module.exports = Contact;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }
 /******/ ]);
