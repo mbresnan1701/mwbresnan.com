@@ -11,10 +11,10 @@ def send_message(data):
         requests.post(
           "https://api.mailgun.net/v3/djdeploy.com/messages",
           auth=("api", MAILGUN_API_KEY),
-          data={"from": "Captain Bresnan <mwbresnan@djdeploy.com>",
+          data={"from": "Admiral Bresnan <mwbresnan@djdeploy.com>",
                 "to": ["captobviouz@gmail.com"],
-                "subject": "Message from mwbresnan.com",
-                "text": "{} - {} - {} - {}".format(data['name'],
+                "subject": "Message for Captain Bresnan from Starfleet HQ",
+                "text": "Name: {}\nEmail: {}\nPhone: {}\n Message: {}".format(data['name'],
                                                    data['email'],
                                                    data['phnum'],
                                                    data['msg'])})

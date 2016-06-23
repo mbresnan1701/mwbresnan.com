@@ -55191,6 +55191,10 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
+	var _Comment = __webpack_require__(500);
+
+	var _Comment2 = _interopRequireDefault(_Comment);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55227,40 +55231,69 @@
 	        });
 	      });
 	    }
-
-	    // <div dangerouslySetInnerHTML={{ __html: post.fields.text }}>
-
+	  }, {
+	    key: 'renderComments',
+	    value: function renderComments() {
+	      var fakeData = {
+	        name: 'Snoop Dogg',
+	        date: 'now',
+	        msg: 'YOU SUCK M8'
+	      };
+	      return _react2.default.createElement(_Comment2.default, { comment: JSON.stringify(fakeData) });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.post) {
 	        return _react2.default.createElement(
-	          _reactBootstrap.Row,
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            _reactBootstrap.Col,
-	            { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	            _reactBootstrap.Row,
+	            null,
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'post-preview' },
+	              _reactBootstrap.Col,
+	              { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
 	              _react2.default.createElement(
-	                'h2',
-	                { className: 'post-title' },
-	                this.state.post.fields.title
+	                'div',
+	                { className: 'post-preview' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  { className: 'post-title' },
+	                  this.state.post.fields.title
+	                ),
+	                _react2.default.createElement(
+	                  'h3',
+	                  { className: 'post-subtitle' },
+	                  this.state.post.fields.subtitle
+	                ),
+	                _react2.default.createElement(
+	                  'p',
+	                  { className: 'post-meta' },
+	                  this.state.post.fields.datestr || this.state.post.fields.date
+	                ),
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
 	              ),
+	              _react2.default.createElement('hr', null)
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Row,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.Col,
+	              { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
 	              _react2.default.createElement(
-	                'h3',
-	                { className: 'post-subtitle' },
-	                this.state.post.fields.subtitle
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                { className: 'post-meta' },
-	                this.state.post.fields.datestr || this.state.post.fields.date
-	              ),
-	              _react2.default.createElement('hr', null),
-	              _react2.default.createElement('br', null),
-	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
+	                'div',
+	                { className: 'comments' },
+	                _react2.default.createElement(
+	                  'h3',
+	                  { className: 'post-title' },
+	                  'Comments:'
+	                ),
+	                this.renderComments()
+	              )
 	            )
 	          )
 	        );
@@ -55446,6 +55479,76 @@
 
 	module.exports = Contact;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 500 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Comment = function (_React$Component) {
+	  _inherits(Comment, _React$Component);
+
+	  function Comment(props) {
+	    _classCallCheck(this, Comment);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Comment).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(Comment, [{
+	    key: 'render',
+	    value: function render() {
+	      var data = JSON.parse(this.props.comment);
+	      return _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'comment' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'comment-name' },
+	            data.name
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'comment-name' },
+	            data.date
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'comment-name' },
+	            data.msg
+	          )
+	        ),
+	        _react2.default.createElement('hr', null)
+	      );
+	    }
+	  }]);
+
+	  return Comment;
+	}(_react2.default.Component);
+
+	module.exports = Comment;
 
 /***/ }
 /******/ ]);
