@@ -55330,6 +55330,7 @@
 	      var sendReq = $.ajax({
 	        method: 'POST',
 	        url: '/contact/send',
+	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 	        data: {
 	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
 	          email: _reactDom2.default.findDOMNode(this.refs.email).value,

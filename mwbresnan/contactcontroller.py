@@ -6,16 +6,19 @@ MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
 MAX_MESSAGE_COUNT = 50
 
 
-def send_message():
-    print(MAILGUN_API_KEY)
+def send_message(data):
     if check_limit() is True:
         requests.post(
           "https://api.mailgun.net/v3/djdeploy.com/messages",
           auth=("api", MAILGUN_API_KEY),
           data={"from": "Captain Bresnan <mwbresnan@djdeploy.com>",
                 "to": ["captobviouz@gmail.com"],
-                "subject": "You\'re awesome",
-                "text": "Testing some MATT awesomeness!"})
+                "subject": "Message from mwbresnan.com",
+                "text": "{} - {} - {} - {}".format(data['name'],
+                                                   data['email'],
+                                                   data['phnum'],
+                                                   data['msg'])})
+        increment_count()
         return True
     else:
         return False

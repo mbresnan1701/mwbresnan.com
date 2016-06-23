@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .contactcontroller import send_message
 
+
 def index(req):
     return render(req, 'main/index.html')
 
@@ -15,8 +16,7 @@ def contact(req):
 
 
 def contact_send(req):
-    print('In contact_send')
-    success = send_message()
+    success = send_message(req.POST)
     print(success)
     if success is True:
         return HttpResponse(status=200)

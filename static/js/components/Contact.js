@@ -22,6 +22,7 @@ class Contact extends React.Component {
     const sendReq = $.ajax({
       method: 'POST',
       url: '/contact/send',
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
       data: {
         name: reactDOM.findDOMNode(this.refs.name).value,
         email: reactDOM.findDOMNode(this.refs.email).value,
