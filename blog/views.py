@@ -58,16 +58,3 @@ def add_comment(req, pk):
     selectedPost = get_object_or_404(BlogPost, pk=pk)
     Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
     return HttpResponse()
-
-
-
-
-
-
-
-
-
-
-
-
-

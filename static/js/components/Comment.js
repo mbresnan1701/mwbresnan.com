@@ -10,12 +10,12 @@ class Comment extends React.Component {
   }
 
   render() {
-    const data = JSON.parse(this.props.comment);
+    const data = this.props.comment;
     return (
         <div className="comment">
-          <span className="comment-name">{data.name} </span><span className="comment-date">{data.date}</span>
+          <span className="comment-name">{data.name} </span><span className="comment-date">{data.datestr}</span>
           <br />
-          <span className="comment-msg">{data.msg}</span>
+          <span className="comment-msg">{data.text}</span>
         </div>
 
     );

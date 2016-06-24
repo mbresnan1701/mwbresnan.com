@@ -19,8 +19,6 @@ class AddComment extends React.Component {
   }
 
   submitComment() {
-    console.log(this.getCookie('csrftoken'));
-    console.log('DOOM IS NEAR!!! REPENT!!!');
     const sendReq = $.ajax({
       method: 'POST',
       url: 'api/comments/add/',
@@ -33,6 +31,7 @@ class AddComment extends React.Component {
     });
     reactDOM.findDOMNode(this.refs.name).value = '';
     reactDOM.findDOMNode(this.refs.commenttext).value = '';
+    this.props.refcom();
   }
 
   render() {

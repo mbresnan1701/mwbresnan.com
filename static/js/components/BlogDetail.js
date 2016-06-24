@@ -22,21 +22,28 @@ class BlogDetail extends React.Component {
       this.setState({
         post: JSON.parse(getPost.responseText)[0],
       });
+      this.getComments();
+    });
+  }
+
+  getComments() {
+    const getComments = $.ajax({
+      method: 'GET',
+      url: 'api/comments',
+    })
+    .done(() => {
+      this.setState({
+        comments: JSON.parse(getComments.responseText),
+      });
     });
   }
 
   renderComments() {
-    const fakeData = {
-      name: 'Snoop Dogg',
-      date: 'now',
-      msg: 'YOU SUCK M8',
-    };
-    return (<Comment comment={JSON.stringify(fakeData)} />);
-    // return this.state.comments.map((comment)=> {
-    //   return (<Comment comment={comment} />
-
-    //   );
-    // });
+    return this.state.comments.map((comment) => {
+      return (
+        <Comment comment={comment.fields} />
+      );
+    });
   }
   render() {
     if (this.state.post) {
@@ -69,7 +76,7 @@ class BlogDetail extends React.Component {
                 {this.renderComments()}
               </div>
               <hr />
-              <AddComment />
+              <AddComment refcom={this.getComments.bind(this)} />
             </Col>
           </Row>
         </div>

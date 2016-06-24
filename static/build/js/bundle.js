@@ -55234,22 +55234,29 @@
 	        _this2.setState({
 	          post: JSON.parse(getPost.responseText)[0]
 	        });
+	        _this2.getComments();
+	      });
+	    }
+	  }, {
+	    key: 'getComments',
+	    value: function getComments() {
+	      var _this3 = this;
+
+	      var getComments = $.ajax({
+	        method: 'GET',
+	        url: 'api/comments'
+	      }).done(function () {
+	        _this3.setState({
+	          comments: JSON.parse(getComments.responseText)
+	        });
 	      });
 	    }
 	  }, {
 	    key: 'renderComments',
 	    value: function renderComments() {
-	      var fakeData = {
-	        name: 'Snoop Dogg',
-	        date: 'now',
-	        msg: 'YOU SUCK M8'
-	      };
-	      return _react2.default.createElement(_Comment2.default, { comment: JSON.stringify(fakeData) });
-	      // return this.state.comments.map((comment)=> {
-	      //   return (<Comment comment={comment} />
-
-	      //   );
-	      // });
+	      return this.state.comments.map(function (comment) {
+	        return _react2.default.createElement(_Comment2.default, { comment: comment.fields });
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -55305,7 +55312,7 @@
 	                this.renderComments()
 	              ),
 	              _react2.default.createElement('hr', null),
-	              _react2.default.createElement(_AddComment2.default, null)
+	              _react2.default.createElement(_AddComment2.default, { refcom: this.getComments.bind(this) })
 	            )
 	          )
 	        );
@@ -55536,7 +55543,7 @@
 	  _createClass(Comment, [{
 	    key: 'render',
 	    value: function render() {
-	      var data = JSON.parse(this.props.comment);
+	      var data = this.props.comment;
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'comment' },
@@ -55549,13 +55556,13 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'comment-date' },
-	          data.date
+	          data.datestr
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'comment-msg' },
-	          data.msg
+	          data.text
 	        )
 	      );
 	    }
@@ -55616,8 +55623,6 @@
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
-	      console.log(this.getCookie('csrftoken'));
-	      console.log('DOOM IS NEAR!!! REPENT!!!');
 	      var sendReq = $.ajax({
 	        method: 'POST',
 	        url: 'api/comments/add/',
@@ -55630,6 +55635,7 @@
 	      });
 	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
 	      _reactDom2.default.findDOMNode(this.refs.commenttext).value = '';
+	      this.props.refcom();
 	    }
 	  }, {
 	    key: 'render',
