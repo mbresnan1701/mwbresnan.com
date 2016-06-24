@@ -25,7 +25,7 @@ def not_found(req):
 
 
 def recent(req):
-    data = BlogPost.objects.all().order_by('-date')[:5]
+    data = BlogPost.objects.all().order_by('-date')[:3]
     data = serializers.serialize("json", data)
     return HttpResponse(data)
 
@@ -57,7 +57,6 @@ def get_comments(req, pk):
 
 def add_comment(req, pk):
     selectedPost = get_object_or_404(BlogPost, pk=pk)
-    print(selectedPost)
     send_new_comment_message(selectedPost.title)
     Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
     return HttpResponse()

@@ -55011,8 +55011,7 @@
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
 	          )
-	        ),
-	        _react2.default.createElement('hr', null)
+	        )
 	      );
 	    }
 	  }]);
