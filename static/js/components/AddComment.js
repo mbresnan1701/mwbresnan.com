@@ -11,19 +11,28 @@ class AddComment extends React.Component {
     };
   }
 
+  getCookie(name) {
+    const value = '; ' + document.cookie;
+    const parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    else return;
+  }
+
   submitComment() {
-    console.log('2 + 2 = 5 for sufficiently large values of \'2\'');
-    // const sendReq = $.ajax({
-    //   method: 'POST',
-    //   url: 'URL HERE',
-    //   contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-    //   data: {
-    //     msg: reactDOM.findDOMNode(this.refs.msg).value,
-    //     csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value,
-    //   },
-    // });
+    console.log(this.getCookie('csrftoken'));
+    console.log('DOOM IS NEAR!!! REPENT!!!');
+    const sendReq = $.ajax({
+      method: 'POST',
+      url: 'api/comments/add/',
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: {
+        name: reactDOM.findDOMNode(this.refs.name).value,
+        text: reactDOM.findDOMNode(this.refs.commenttext).value,
+        csrfmiddlewaretoken: this.getCookie('csrftoken'),
+      },
+    });
     reactDOM.findDOMNode(this.refs.name).value = '';
-    reactDOM.findDOMNode(this.refs.commentbox).value = '';
+    reactDOM.findDOMNode(this.refs.commenttext).value = '';
   }
 
   render() {
@@ -37,7 +46,7 @@ class AddComment extends React.Component {
           </FormGroup>
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Text</ControlLabel>
-            <FormControl ref="commentbox" componentClass="textarea" placeholder="Write comment here" />
+            <FormControl ref="commenttext" componentClass="textarea" placeholder="Write comment here" />
           </FormGroup>
           <Button onClick={this.submitComment.bind(this)}>Submit</Button>
         </form>

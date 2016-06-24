@@ -11,6 +11,13 @@ class Contact extends React.Component {
     };
   }
 
+  getCookie(name) {
+    const value = '; ' + document.cookie;
+    const parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    else return;
+  }
+
   clearForm() {
     reactDOM.findDOMNode(this.refs.name).value = '';
     reactDOM.findDOMNode(this.refs.email).value = '';
@@ -28,7 +35,7 @@ class Contact extends React.Component {
         email: reactDOM.findDOMNode(this.refs.email).value,
         phnum: reactDOM.findDOMNode(this.refs.phnum).value,
         msg: reactDOM.findDOMNode(this.refs.msg).value,
-        csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value,
+        csrfmiddlewaretoken: this.getCookie('csrftoken'),
       },
     });
     this.clearForm();

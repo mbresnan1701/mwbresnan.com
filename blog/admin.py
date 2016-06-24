@@ -18,7 +18,16 @@ class BlogPostAdmin(admin.ModelAdmin):
     list_filter = ['date']
     search_fields = ['title', 'text']
 
+
+class CommentAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['post_id', 'name', 'text']}),
+    ]
+    list_display = ('post_id', 'name', 'text')
+    list_filter = ['date']
+    search_fields = ['post_id', 'name', 'text']
+
 admin.site.register(BlogPost, BlogPostAdmin)
 admin.site.register(Quote)
 admin.site.register(Limit)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentAdmin)

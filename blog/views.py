@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import BlogPost, Quote
+from .models import BlogPost, Quote, Comment
 from rest_framework import generics, viewsets
 from .serializers import BlogSerializer
 from django.core import serializers
@@ -45,3 +45,28 @@ def single(req, pk):
     post = BlogPost.objects.get(pk=pk)
     post = serializers.serialize("json", [post])
     return HttpResponse(post)
+
+
+def get_comments(req, pk):
+    data = BlogPost.objects.get(post_id=pk).order_by('-date')
+    data = serializers.serialize("json", data)
+    return HttpResponse(data)
+
+
+def add_comment(req, pk):
+    selectedPost = get_object_or_404(BlogPost, pk=pk)
+    Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
+    return HttpResponse()
+
+
+
+
+
+
+
+
+
+
+
+
+

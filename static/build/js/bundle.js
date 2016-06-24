@@ -55362,6 +55362,13 @@
 	  }
 
 	  _createClass(Contact, [{
+	    key: 'getCookie',
+	    value: function getCookie(name) {
+	      var value = '; ' + document.cookie;
+	      var parts = value.split('; ' + name + '=');
+	      if (parts.length === 2) return parts.pop().split(';').shift();else return;
+	    }
+	  }, {
 	    key: 'clearForm',
 	    value: function clearForm() {
 	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
@@ -55381,7 +55388,7 @@
 	          email: _reactDom2.default.findDOMNode(this.refs.email).value,
 	          phnum: _reactDom2.default.findDOMNode(this.refs.phnum).value,
 	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value,
-	          csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value
+	          csrfmiddlewaretoken: this.getCookie('csrftoken')
 	        }
 	      });
 	      this.clearForm();
@@ -55563,7 +55570,7 @@
 /* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -55600,20 +55607,29 @@
 	  }
 
 	  _createClass(AddComment, [{
+	    key: 'getCookie',
+	    value: function getCookie(name) {
+	      var value = '; ' + document.cookie;
+	      var parts = value.split('; ' + name + '=');
+	      if (parts.length === 2) return parts.pop().split(';').shift();else return;
+	    }
+	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
-	      console.log('2 + 2 = 5 for sufficiently large values of \'2\'');
-	      // const sendReq = $.ajax({
-	      //   method: 'POST',
-	      //   url: 'URL HERE',
-	      //   contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	      //   data: {
-	      //     msg: reactDOM.findDOMNode(this.refs.msg).value,
-	      //     csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]')[0].value,
-	      //   },
-	      // });
+	      console.log(this.getCookie('csrftoken'));
+	      console.log('DOOM IS NEAR!!! REPENT!!!');
+	      var sendReq = $.ajax({
+	        method: 'POST',
+	        url: 'api/comments/add/',
+	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	        data: {
+	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
+	          text: _reactDom2.default.findDOMNode(this.refs.commenttext).value,
+	          csrfmiddlewaretoken: this.getCookie('csrftoken')
+	        }
+	      });
 	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
-	      _reactDom2.default.findDOMNode(this.refs.commentbox).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.commenttext).value = '';
 	    }
 	  }, {
 	    key: 'render',
@@ -55647,7 +55663,7 @@
 	              null,
 	              'Text'
 	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'commentbox', componentClass: 'textarea', placeholder: 'Write comment here' })
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'commenttext', componentClass: 'textarea', placeholder: 'Write comment here' })
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
@@ -55663,6 +55679,7 @@
 	}(_react2.default.Component);
 
 	module.exports = AddComment;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }
 /******/ ]);

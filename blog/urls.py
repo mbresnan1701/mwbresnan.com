@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^api/all$', views.all),
     url(r'^api/quote$', views.quote),
     url(r'^api/single/(?P<pk>\d+)/$', views.single),
+    url(r'^api/comments/(?P<pk>\d+)/$', views.get_comments),
+    url(r'^(?P<pk>\d+)/api/comments/add/$', views.add_comment),
 ]
 
 
