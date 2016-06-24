@@ -24,7 +24,7 @@ class AddComment extends React.Component {
       url: 'api/comments/add/',
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
       data: {
-        name: reactDOM.findDOMNode(this.refs.name).value,
+        name: reactDOM.findDOMNode(this.refs.name).value || 'Anonymous',
         text: reactDOM.findDOMNode(this.refs.commenttext).value,
         csrfmiddlewaretoken: this.getCookie('csrftoken'),
       },
@@ -37,7 +37,7 @@ class AddComment extends React.Component {
   render() {
     return (
       <div className="add-comment">
-        <div className="new-comment-text">Add comment</div>
+        <div className="new-comment-text">Post a Comment</div>
         <form>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Name</ControlLabel>
@@ -47,7 +47,7 @@ class AddComment extends React.Component {
             <ControlLabel>Text</ControlLabel>
             <FormControl ref="commenttext" componentClass="textarea" placeholder="Write comment here" />
           </FormGroup>
-          <Button onClick={this.submitComment.bind(this)}>Submit</Button>
+          <Button type="submit" onClick={this.submitComment.bind(this)}>Submit</Button>
         </form>
       </div>
     );

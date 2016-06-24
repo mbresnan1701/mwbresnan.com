@@ -55255,7 +55255,12 @@
 	    key: 'renderComments',
 	    value: function renderComments() {
 	      return this.state.comments.map(function (comment) {
-	        return _react2.default.createElement(_Comment2.default, { comment: comment.fields });
+	        return _react2.default.createElement(
+	          'div',
+	          { key: comment.pk },
+	          _react2.default.createElement(_Comment2.default, { comment: comment.fields }),
+	          _react2.default.createElement('hr', null)
+	        );
 	      });
 	    }
 	  }, {
@@ -55300,14 +55305,14 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
-	              { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	              { lg: 6, lgOffset: 2, md: 8, mdOffset: 1 },
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'comments' },
 	                _react2.default.createElement(
 	                  'h3',
 	                  { className: 'post-title' },
-	                  'Comments:'
+	                  'Comments'
 	                ),
 	                this.renderComments()
 	              ),
@@ -55628,7 +55633,7 @@
 	        url: 'api/comments/add/',
 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 	        data: {
-	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
+	          name: _reactDom2.default.findDOMNode(this.refs.name).value || 'Anonymous',
 	          text: _reactDom2.default.findDOMNode(this.refs.commenttext).value,
 	          csrfmiddlewaretoken: this.getCookie('csrftoken')
 	        }
@@ -55646,7 +55651,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'new-comment-text' },
-	          'Add comment'
+	          'Post a Comment'
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -55673,7 +55678,7 @@
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { onClick: this.submitComment.bind(this) },
+	            { type: 'submit', onClick: this.submitComment.bind(this) },
 	            'Submit'
 	          )
 	        )

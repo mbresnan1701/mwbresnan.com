@@ -41,7 +41,10 @@ class BlogDetail extends React.Component {
   renderComments() {
     return this.state.comments.map((comment) => {
       return (
-        <Comment comment={comment.fields} />
+        <div key={comment.pk}>
+          <Comment comment={comment.fields} />
+          <hr />
+        </div>
       );
     });
   }
@@ -70,9 +73,9 @@ class BlogDetail extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
+            <Col lg={6} lgOffset={2} md={8} mdOffset={1}>
               <div className="comments">
-                <h3 className="post-title">Comments:</h3>
+                <h3 className="post-title">Comments</h3>
                 {this.renderComments()}
               </div>
               <hr />
