@@ -55414,88 +55414,80 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _reactBootstrap.Row,
-	        null,
+	        'form',
+	        { name: 'sentMessage', id: 'contactForm', noValidate: true },
 	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
 	          _react2.default.createElement(
-	            'form',
-	            { name: 'sentMessage', id: 'contactForm', noValidate: true },
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
 	            _react2.default.createElement(
-	              _reactBootstrap.Row,
-	              { className: 'control-group' },
-	              _react2.default.createElement(
-	                _reactBootstrap.FormGroup,
-	                { xs: 12, className: 'floating-label-form-group controls' },
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Name'
-	                ),
-	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
-	                _react2.default.createElement('p', { className: 'help-block text-danger' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Row,
-	              { className: 'control-group' },
-	              _react2.default.createElement(
-	                _reactBootstrap.FormGroup,
-	                { xs: 12, className: 'floating-label-form-group controls' },
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Email Address'
-	                ),
-	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
-	                _react2.default.createElement('p', { className: 'help-block text-danger' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Row,
-	              { className: 'control-group' },
-	              _react2.default.createElement(
-	                _reactBootstrap.FormGroup,
-	                { xs: 12, className: 'floating-label-form-group controls' },
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Phone Number'
-	                ),
-	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
-	                _react2.default.createElement('p', { className: 'help-block text-danger' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Row,
-	              { className: 'control-group' },
-	              _react2.default.createElement(
-	                _reactBootstrap.FormGroup,
-	                { xs: 12, className: 'floating-label-form-group controls' },
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Message'
-	                ),
-	                _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
-	                _react2.default.createElement('p', { className: 'help-block text-danger' })
-	              )
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement('div', { id: 'success' }),
-	            _react2.default.createElement(
-	              _reactBootstrap.Row,
+	              'label',
 	              null,
-	              _react2.default.createElement(
-	                _reactBootstrap.FormGroup,
-	                { xs: 12 },
-	                _react2.default.createElement(
-	                  _reactBootstrap.Button,
-	                  { onClick: this.submitForm.bind(this) },
-	                  'Send'
-	                )
-	              )
+	              'Name'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Email Address'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Phone Number'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Message'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('div', { id: 'success' }),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12 },
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { onClick: this.submitForm.bind(this) },
+	              'Send'
 	            )
 	          )
 	        )
