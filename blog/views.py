@@ -5,6 +5,7 @@ from rest_framework import generics, viewsets
 from .serializers import BlogSerializer
 from django.core import serializers
 from django.db.models import Max
+from mwbresnan.contactcontroller import send_new_comment_message
 
 
 def main_posts(req):
@@ -56,5 +57,7 @@ def get_comments(req, pk):
 
 def add_comment(req, pk):
     selectedPost = get_object_or_404(BlogPost, pk=pk)
+    print(selectedPost)
+    send_new_comment_message(selectedPost.title)
     Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
     return HttpResponse()

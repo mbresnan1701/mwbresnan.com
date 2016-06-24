@@ -13,7 +13,7 @@ def send_message(data):
           auth=("api", MAILGUN_API_KEY),
           data={"from": "Admiral Bresnan <mwbresnan@djdeploy.com>",
                 "to": ["captobviouz@gmail.com"],
-                "subject": "Message for Captain Bresnan from Starfleet HQ",
+                "subject": "Priority One message for Captain Bresnan",
                 "text": "Name: {}\nEmail: {}\nPhone: {}\n Message: {}".format(data['name'],
                                                    data['email'],
                                                    data['phnum'],
@@ -22,6 +22,16 @@ def send_message(data):
         return True
     else:
         return False
+
+
+def send_new_comment_message(post_title):
+   requests.post(
+     "https://api.mailgun.net/v3/djdeploy.com/messages",
+     auth=("api", MAILGUN_API_KEY),
+     data={"from": "Admiral Bresnan <mwbresnan@djdeploy.com>",
+           "to": ["captobviouz@gmail.com"],
+           "subject": "Sensors picking up unusual readings, Captain",
+           "text": "New comment in post: {}".format(post_title)})
 
 
 def check_limit():
