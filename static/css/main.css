@@ -330,3 +330,16 @@ textarea {
 .biobloglink {
   color: #7094A8;
 }
+
+.comment {
+  border: 2px solid red;
+}
+
+.comment-name {
+  font-weight: bold;
+}
+
+.comment-date {
+  font-style: italic;
+  font-size: 14px;
+}

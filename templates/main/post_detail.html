@@ -1,7 +1,10 @@
 {% extends 'masters/index.html' %}
 {% load staticfiles %}
 
-{% block content %}<div id="app"></div>{% endblock %}
+{% block content %}
+    {% csrf_token %}
+    <div id="app"></div>
+{% endblock %}
 
 {% block header %}
     <header class="intro-header">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Comment from './Comment.js';
+import AddComment from './AddComment.js';
 
 class BlogDetail extends React.Component {
 
@@ -8,6 +9,7 @@ class BlogDetail extends React.Component {
     super(props);
     this.state = {
       post: null,
+      comments: [],
     };
   }
 
@@ -30,6 +32,11 @@ class BlogDetail extends React.Component {
       msg: 'YOU SUCK M8',
     };
     return (<Comment comment={JSON.stringify(fakeData)} />);
+    // return this.state.comments.map((comment)=> {
+    //   return (<Comment comment={comment} />
+
+    //   );
+    // });
   }
   render() {
     if (this.state.post) {
@@ -61,6 +68,8 @@ class BlogDetail extends React.Component {
                 <h3 className="post-title">Comments:</h3>
                 {this.renderComments()}
               </div>
+              <hr />
+              <AddComment />
             </Col>
           </Row>
         </div>

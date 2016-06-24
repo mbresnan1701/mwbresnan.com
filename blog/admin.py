@@ -4,9 +4,9 @@ from .models import BlogPost, Quote, Limit, Comment
 # Register your models here.
 
 
-class CommentInline(admin.TabularInline):
+class CommentInline(admin.StackedInline):
     model = Comment
-    extra = 4
+    extra = 1
 
 
 class BlogPostAdmin(admin.ModelAdmin):
