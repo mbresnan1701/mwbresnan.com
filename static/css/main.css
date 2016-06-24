@@ -353,3 +353,7 @@ textarea {
 .add-comment {
   font-size: 16px;
 }
+
+.comment-well {
+  background-color: white;
+}

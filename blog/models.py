@@ -4,10 +4,15 @@ import datetime
 from ckeditor.fields import RichTextField
 
 
-class BlogPost(models.Model):
+def get_date_string():
+    return datetime.datetime.now().strftime('%B %d, %Y')
 
-    def get_date_string():
-        return datetime.datetime.now().strftime('%B %d, %Y')
+
+def get_date_string_long():
+    return datetime.datetime.now().strftime('%B %d, %Y %-I:%M %p PST')
+
+
+class BlogPost(models.Model):
 
     title = models.CharField(max_length=255, null=True, blank=True)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
@@ -22,14 +27,11 @@ class BlogPost(models.Model):
 
 class Comment(models.Model):
 
-    def get_date_string():
-        return datetime.datetime.now().strftime('%B %d, %Y %-I:%M %p PST')
-
     post_id = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, null=True, blank=True, default="Anonymous")
     text = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-    datestr = models.CharField(max_length=127, default=get_date_string())
+    datestr = models.CharField(max_length=127, default=get_date_string_long())
 
     def __str__(self):
         return "{}-{}".format(self.post_id, self.text)

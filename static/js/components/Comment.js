@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Well, Col } from 'react-bootstrap';
 
 class Comment extends React.Component {
 
@@ -12,12 +12,13 @@ class Comment extends React.Component {
   render() {
     const data = this.props.comment;
     return (
-        <div className="comment">
-          <span className="comment-name">{data.name} </span><span className="comment-date">{data.datestr}</span>
-          <br />
+      <div className="comment">
+        <span className="comment-name">{data.name} </span><span className="comment-date">{data.datestr}</span>
+        <br />
+        <Well className="comment-well">
           <span className="comment-msg">{data.text}</span>
-          <hr />
-        </div>
+        </Well>
+      </div>
 
     );
   }

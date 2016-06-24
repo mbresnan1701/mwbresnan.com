@@ -55564,11 +55564,14 @@
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'comment-msg' },
-	          data.text
-	        ),
-	        _react2.default.createElement('hr', null)
+	          _reactBootstrap.Well,
+	          { className: 'comment-well' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'comment-msg' },
+	            data.text
+	          )
+	        )
 	      );
 	    }
 	  }]);
