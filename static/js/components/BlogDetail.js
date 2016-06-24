@@ -41,14 +41,12 @@ class BlogDetail extends React.Component {
   renderComments() {
     return this.state.comments.map((comment) => {
       return (
-        <div key={comment.pk}>
-          <Comment comment={comment.fields} />
-          <hr />
-        </div>
+        <Comment key={comment.pk} comment={comment.fields} />
       );
     });
   }
   render() {
+    const commentSec = this.state.comments.length > 0 ? this.renderComments() : <div> No comments yet. Be the first!</div>;
     if (this.state.post) {
       return (
         <div>
@@ -76,9 +74,8 @@ class BlogDetail extends React.Component {
             <Col lg={6} lgOffset={2} md={8} mdOffset={1}>
               <div className="comments">
                 <h3 className="post-title">Comments</h3>
-                {this.renderComments()}
+                {commentSec}
               </div>
-              <hr />
               <AddComment refcom={this.getComments.bind(this)} />
             </Col>
           </Row>

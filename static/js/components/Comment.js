@@ -16,6 +16,7 @@ class Comment extends React.Component {
           <span className="comment-name">{data.name} </span><span className="comment-date">{data.datestr}</span>
           <br />
           <span className="comment-msg">{data.text}</span>
+          <hr />
         </div>
 
     );

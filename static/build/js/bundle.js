@@ -55255,17 +55255,17 @@
 	    key: 'renderComments',
 	    value: function renderComments() {
 	      return this.state.comments.map(function (comment) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: comment.pk },
-	          _react2.default.createElement(_Comment2.default, { comment: comment.fields }),
-	          _react2.default.createElement('hr', null)
-	        );
+	        return _react2.default.createElement(_Comment2.default, { key: comment.pk, comment: comment.fields });
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var commentSec = this.state.comments.length > 0 ? this.renderComments() : _react2.default.createElement(
+	        'div',
+	        null,
+	        ' No comments yet. Be the first!'
+	      );
 	      if (this.state.post) {
 	        return _react2.default.createElement(
 	          'div',
@@ -55314,9 +55314,8 @@
 	                  { className: 'post-title' },
 	                  'Comments'
 	                ),
-	                this.renderComments()
+	                commentSec
 	              ),
-	              _react2.default.createElement('hr', null),
 	              _react2.default.createElement(_AddComment2.default, { refcom: this.getComments.bind(this) })
 	            )
 	          )
@@ -55568,7 +55567,8 @@
 	          'span',
 	          { className: 'comment-msg' },
 	          data.text
-	        )
+	        ),
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -55649,8 +55649,8 @@
 	        'div',
 	        { className: 'add-comment' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'new-comment-text' },
+	          'h4',
+	          { className: 'post-title' },
 	          'Post a Comment'
 	        ),
 	        _react2.default.createElement(
@@ -55678,7 +55678,7 @@
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { type: 'submit', onClick: this.submitComment.bind(this) },
+	            { onClick: this.submitComment.bind(this) },
 	            'Submit'
 	          )
 	        )

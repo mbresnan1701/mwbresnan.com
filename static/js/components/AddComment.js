@@ -37,7 +37,7 @@ class AddComment extends React.Component {
   render() {
     return (
       <div className="add-comment">
-        <div className="new-comment-text">Post a Comment</div>
+        <h4 className="post-title">Post a Comment</h4>
         <form>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Name</ControlLabel>
@@ -47,7 +47,7 @@ class AddComment extends React.Component {
             <ControlLabel>Text</ControlLabel>
             <FormControl ref="commenttext" componentClass="textarea" placeholder="Write comment here" />
           </FormGroup>
-          <Button type="submit" onClick={this.submitComment.bind(this)}>Submit</Button>
+          <Button onClick={this.submitComment.bind(this)}>Submit</Button>
         </form>
       </div>
     );

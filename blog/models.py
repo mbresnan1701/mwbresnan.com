@@ -26,7 +26,7 @@ class Comment(models.Model):
         return datetime.datetime.now().strftime('%B %d, %Y %-I:%M %p PST')
 
     post_id = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, null=True, blank=True, default="Anonymous")
+    name = models.CharField(max_length=64, null=True, blank=True, default="Anonymous")
     text = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     datestr = models.CharField(max_length=127, default=get_date_string())

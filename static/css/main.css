@@ -332,7 +332,7 @@ textarea {
 }
 
 .comment {
-  margin-top: 10px;
+  margin-top: 20px;
   word-wrap: break-word;
 }
 
@@ -348,4 +348,8 @@ textarea {
 
 .comment-msg {
   font-size: 14px;
+}
+
+.add-comment {
+  font-size: 16px;
 }
