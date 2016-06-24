@@ -48,7 +48,8 @@ def single(req, pk):
 
 
 def get_comments(req, pk):
-    data = BlogPost.objects.get(post_id=pk).order_by('-date')
+    selectedPost = get_object_or_404(BlogPost, pk=pk)
+    data = Comment.objects.filter(post_id=selectedPost).order_by('-date')
     data = serializers.serialize("json", data)
     return HttpResponse(data)
 
