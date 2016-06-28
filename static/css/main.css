@@ -358,3 +358,12 @@ textarea {
 .comment-well {
   background-color: white;
 }
+
+.add-comment-msg {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
+
+.add-comment-err {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+  color: red;
+}

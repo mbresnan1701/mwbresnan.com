@@ -8,6 +8,7 @@ class AddComment extends React.Component {
     super(props);
     this.state = {
       lastCommentTime: null,
+      infoMessage: '',
     };
   }
 
@@ -19,7 +20,9 @@ class AddComment extends React.Component {
   }
 
   submitComment() {
-    const sendReq = $.ajax({
+    const that = this;
+    this.setState({ infoMessage: 'Submitting...' });
+    $.ajax({
       method: 'POST',
       url: 'api/comments/add/',
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -28,11 +31,20 @@ class AddComment extends React.Component {
         text: reactDOM.findDOMNode(this.refs.commenttext).value,
         csrfmiddlewaretoken: this.getCookie('csrftoken'),
       },
-    })
-    .then(() => {
-      reactDOM.findDOMNode(this.refs.name).value = '';
-      reactDOM.findDOMNode(this.refs.commenttext).value = '';
-      this.props.refcom();
+      complete: (xhr) => {
+        if (xhr.status === 200) {
+          that.setState({ infoMessage: 'Comment submitted!' });
+        } else if (xhr.status === 503) {
+          that.setState({ errMessage: 'Mail servers are getting flooded. Please try again later',
+                          infoMessage: '' });
+        } else {
+          that.setState({ errMessage: 'An error has occurred. Thanks Obama.',
+                          infoMessage: '' });
+        }
+        reactDOM.findDOMNode(that.refs.name).value = '';
+        reactDOM.findDOMNode(that.refs.commenttext).value = '';
+        that.props.refcom();
+      },
     });
   }
 
@@ -49,6 +61,8 @@ class AddComment extends React.Component {
             <ControlLabel>Text</ControlLabel>
             <FormControl ref="commenttext" componentClass="textarea" placeholder="Write comment here" />
           </FormGroup>
+          <div className="add-comment-msg">{this.state.infoMessage}</div>
+          <div className="add-comment-err">{this.state.errMessage}</div>
           <Button onClick={this.submitComment.bind(this)}>Submit</Button>
         </form>
       </div>

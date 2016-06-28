@@ -4,10 +4,11 @@ import os
 
 MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
 MAX_MESSAGE_COUNT = 50
+CONTACT_DISABLED = True
 
 
 def send_message(data):
-    if check_limit() is True:
+    if check_limit() is True and CONTACT_DISABLED is False:
         requests.post(
           "https://api.mailgun.net/v3/djdeploy.com/messages",
           auth=("api", MAILGUN_API_KEY),
@@ -25,13 +26,14 @@ def send_message(data):
 
 
 def send_new_comment_message(post_title):
-   requests.post(
-     "https://api.mailgun.net/v3/djdeploy.com/messages",
-     auth=("api", MAILGUN_API_KEY),
-     data={"from": "Admiral Bresnan <mwbresnan@djdeploy.com>",
-           "to": ["captobviouz@gmail.com"],
-           "subject": "Sensors picking up unusual readings, Captain",
-           "text": "New comment in post: {}".format(post_title)})
+    if CONTACT_DISABLED is False:
+        requests.post(
+          "https://api.mailgun.net/v3/djdeploy.com/messages",
+          auth=("api", MAILGUN_API_KEY),
+          data={"from": "Admiral Bresnan <mwbresnan@djdeploy.com>",
+                "to": ["captobviouz@gmail.com"],
+                "subject": "Sensors picking up unusual readings, Captain",
+                "text": "New comment in post: {}".format(post_title)})
 
 
 def check_limit():

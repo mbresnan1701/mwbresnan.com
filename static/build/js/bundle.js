@@ -55607,7 +55607,8 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AddComment).call(this, props));
 
 	    _this.state = {
-	      lastCommentTime: null
+	      lastCommentTime: null,
+	      infoMessage: ''
 	    };
 	    return _this;
 	  }
@@ -55622,9 +55623,9 @@
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
-	      var _this2 = this;
-
-	      var sendReq = $.ajax({
+	      var that = this;
+	      this.setState({ infoMessage: 'Submitting...' });
+	      $.ajax({
 	        method: 'POST',
 	        url: 'api/comments/add/',
 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -55632,11 +55633,21 @@
 	          name: _reactDom2.default.findDOMNode(this.refs.name).value || 'Anonymous',
 	          text: _reactDom2.default.findDOMNode(this.refs.commenttext).value,
 	          csrfmiddlewaretoken: this.getCookie('csrftoken')
+	        },
+	        complete: function complete(xhr) {
+	          if (xhr.status === 200) {
+	            that.setState({ infoMessage: 'Comment submitted!' });
+	          } else if (xhr.status === 503) {
+	            that.setState({ errMessage: 'Mail servers are getting flooded. Please try again later',
+	              infoMessage: '' });
+	          } else {
+	            that.setState({ errMessage: 'An error has occurred. Thanks Obama.',
+	              infoMessage: '' });
+	          }
+	          _reactDom2.default.findDOMNode(that.refs.name).value = '';
+	          _reactDom2.default.findDOMNode(that.refs.commenttext).value = '';
+	          that.props.refcom();
 	        }
-	      }).then(function () {
-	        _reactDom2.default.findDOMNode(_this2.refs.name).value = '';
-	        _reactDom2.default.findDOMNode(_this2.refs.commenttext).value = '';
-	        _this2.props.refcom();
 	      });
 	    }
 	  }, {
@@ -55672,6 +55683,16 @@
 	              'Text'
 	            ),
 	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'commenttext', componentClass: 'textarea', placeholder: 'Write comment here' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'add-comment-msg' },
+	            this.state.infoMessage
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'add-comment-err' },
+	            this.state.errMessage
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,

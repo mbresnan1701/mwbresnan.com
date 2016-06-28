@@ -1,7 +1,7 @@
 from django.db import models
-from django.conf import settings
-import datetime
+from django.utils import timezone
 from ckeditor.fields import RichTextField
+import datetime
 
 
 def get_date_string():
@@ -17,24 +17,36 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
     text = RichTextField(null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
-    datestr = models.CharField(max_length=127, default=get_date_string())
+    date = models.DateTimeField()
+    datestr = models.CharField(max_length=127)
     updated = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.date = timezone.now()
+            self.datestr = get_date_string()
+        return super(BlogPost, self).save(*args, **kwargs)
+
 
 class Comment(models.Model):
 
     post_id = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
-    name = models.CharField(max_length=64, null=True, blank=True, default="Anonymous")
+    name = models.CharField(max_length=64, default="Anonymous")
     text = models.TextField(null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
-    datestr = models.CharField(max_length=127, default=get_date_string_long())
+    date = models.DateTimeField()
+    datestr = models.CharField(max_length=127)
 
     def __str__(self):
         return "{}-{}".format(self.post_id, self.text)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.date = timezone.now()
+            self.datestr = get_date_string_long()
+        return super(Comment, self).save(*args, **kwargs)
 
 
 class Quote(models.Model):
