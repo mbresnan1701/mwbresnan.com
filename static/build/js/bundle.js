@@ -55126,6 +55126,10 @@
 
 	var _AddComment2 = _interopRequireDefault(_AddComment);
 
+	var _reactDisqusThread = __webpack_require__(502);
+
+	var _reactDisqusThread2 = _interopRequireDefault(_reactDisqusThread);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55154,7 +55158,6 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      console.log(this.props.params);
 	      var getPost = $.ajax({
 	        method: 'GET',
 	        url: '/blog/api/single/' + this.props.params.urlstr
@@ -55162,38 +55165,45 @@
 	        _this2.setState({
 	          post: JSON.parse(getPost.responseText)[0]
 	        });
-	        _this2.getComments();
+	        // this.getComments();
 	      });
 	    }
-	  }, {
-	    key: 'getComments',
-	    value: function getComments() {
-	      var _this3 = this;
 
-	      var getComments = $.ajax({
-	        method: 'GET',
-	        url: 'api/comments'
-	      }).done(function () {
-	        _this3.setState({
-	          comments: JSON.parse(getComments.responseText)
-	        });
-	      });
-	    }
+	    // getComments() {
+	    //   const getComments = $.ajax({
+	    //     method: 'GET',
+	    //     url: 'api/comments',
+	    //   })
+	    //   .done(() => {
+	    //     this.setState({
+	    //       comments: JSON.parse(getComments.responseText),
+	    //     });
+	    //   });
+	    // }
+
+	    // renderComments() {
+	    //   return this.state.comments.map((comment) => {
+	    //     return (
+	    //       <Comment key={comment.pk} comment={comment.fields} />
+	    //     );
+	    //   });
+	    // }
+
+	    // <div className="comments">
+	    //   <h3 className="post-title">Comments</h3>
+	    //   {commentSec}
+	    // </div>
+	    // <AddComment refcom={this.getComments.bind(this)} />
+
 	  }, {
-	    key: 'renderComments',
-	    value: function renderComments() {
-	      return this.state.comments.map(function (comment) {
-	        return _react2.default.createElement(_Comment2.default, { key: comment.pk, comment: comment.fields });
-	      });
+	    key: 'handleNewComment',
+	    value: function handleNewComment(comment) {
+	      console.log(comment.text);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var commentSec = this.state.comments.length > 0 ? this.renderComments() : _react2.default.createElement(
-	        'div',
-	        null,
-	        ' No comments yet. Be the first!'
-	      );
+	      // const commentSec = this.state.comments.length > 0 ? this.renderComments() : <div> No comments yet. Be the first!</div>;
 	      if (this.state.post) {
 	        return _react2.default.createElement(
 	          'div',
@@ -55234,17 +55244,14 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
 	              { lg: 6, lgOffset: 2, md: 8, mdOffset: 1 },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'comments' },
-	                _react2.default.createElement(
-	                  'h3',
-	                  { className: 'post-title' },
-	                  'Comments'
-	                ),
-	                commentSec
-	              ),
-	              _react2.default.createElement(_AddComment2.default, { refcom: this.getComments.bind(this) })
+	              _react2.default.createElement(_reactDisqusThread2.default, {
+	                shortname: 'mwbresnan.disqus.com',
+	                identifier: this.state.post.fields.url,
+	                title: this.state.post.fields.title + ': ' + this.state.post.fields.subtitle,
+	                url: 'http://127.0.0.1:8000',
+	                category_id: '123456',
+	                onNewComment: this.handleNewComment
+	              })
 	            )
 	          )
 	        );
@@ -55638,6 +55645,205 @@
 
 	module.exports = AddComment;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 502 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(503);
+
+/***/ },
+/* 503 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var DISQUS_CONFIG = ['shortname', 'identifier', 'title', 'url', 'category_id', 'onNewComment'];
+	var __disqusAdded = false;
+
+	function copyProps(context, props) {
+	  var prefix = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+
+	  Object.keys(props).forEach(function (prop) {
+	    context[prefix + prop] = props[prop];
+	  });
+
+	  if (typeof props.onNewComment === 'function') {
+	    context[prefix + 'config'] = function config() {
+	      this.callbacks.onNewComment = [function handleNewComment(comment) {
+	        props.onNewComment(comment);
+	      }];
+	    };
+	  }
+	}
+
+	module.exports = _react2['default'].createClass({
+	  displayName: 'DisqusThread',
+
+	  propTypes: {
+	    id: _react2['default'].PropTypes.string,
+
+	    /**
+	     * `shortname` tells the Disqus service your forum's shortname,
+	     * which is the unique identifier for your website as registered
+	     * on Disqus. If undefined , the Disqus embed will not load.
+	     */
+	    shortname: _react2['default'].PropTypes.string.isRequired,
+
+	    /**
+	     * `identifier` tells the Disqus service how to identify the
+	     * current page. When the Disqus embed is loaded, the identifier
+	     * is used to look up the correct thread. If disqus_identifier
+	     * is undefined, the page's URL will be used. The URL can be
+	     * unreliable, such as when renaming an article slug or changing
+	     * domains, so we recommend using your own unique way of
+	     * identifying a thread.
+	     */
+	    identifier: _react2['default'].PropTypes.string,
+
+	    /**
+	     * `title` tells the Disqus service the title of the current page.
+	     * This is used when creating the thread on Disqus for the first time.
+	     * If undefined, Disqus will use the <title> attribute of the page.
+	     * If that attribute could not be used, Disqus will use the URL of the page.
+	     */
+	    title: _react2['default'].PropTypes.string,
+
+	    /**
+	     * `url` tells the Disqus service the URL of the current page.
+	     * If undefined, Disqus will take the window.location.href.
+	     * This URL is used to look up or create a thread if disqus_identifier
+	     * is undefined. In addition, this URL is always saved when a thread is
+	     * being created so that Disqus knows what page a thread belongs to.
+	     */
+	    url: _react2['default'].PropTypes.string,
+
+	    /**
+	     * `category_id` tells the Disqus service the category to be used for
+	     * the current page. This is used when creating the thread on Disqus
+	     * for the first time.
+	     */
+	    category_id: _react2['default'].PropTypes.string,
+
+	    /**
+	     * `onNewComment` function accepts one parameter `comment` which is a
+	     * JavaScript object with comment `id` and `text`. This allows you to track
+	     * user comments and replies and run a script after a comment is posted.
+	     */
+	    onNewComment: _react2['default'].PropTypes.func
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      shortname: null,
+	      identifier: null,
+	      title: null,
+	      url: null,
+	      category_id: null,
+	      onNewComment: null
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.loadDisqus();
+	  },
+
+	  componentDidUpdate: function componentDidUpdate() {
+	    this.loadDisqus();
+	  },
+
+	  render: function render() {
+	    return _react2['default'].createElement(
+	      'div',
+	      this.props,
+	      _react2['default'].createElement('div', { id: 'disqus_thread' }),
+	      _react2['default'].createElement(
+	        'noscript',
+	        null,
+	        _react2['default'].createElement(
+	          'span',
+	          null,
+	          'Please enable JavaScript to view the',
+	          _react2['default'].createElement(
+	            'a',
+	            { href: 'http://disqus.com/?ref_noscript' },
+	            'comments powered by Disqus.'
+	          )
+	        )
+	      ),
+	      _react2['default'].createElement(
+	        'a',
+	        { href: 'http://disqus.com', className: 'dsq-brlink' },
+	        'Blog comments powered by ',
+	        _react2['default'].createElement(
+	          'span',
+	          { className: 'logo-disqus' },
+	          'Disqus'
+	        ),
+	        '.'
+	      )
+	    );
+	  },
+
+	  addDisqusScript: function addDisqusScript() {
+	    if (__disqusAdded) {
+	      return;
+	    }
+
+	    var child = this.disqus = document.createElement('script');
+	    var parent = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0];
+
+	    child.async = true;
+	    child.type = 'text/javascript';
+	    child.src = '//' + this.props.shortname + '.disqus.com/embed.js';
+
+	    parent.appendChild(child);
+	    __disqusAdded = true;
+	  },
+
+	  loadDisqus: function loadDisqus() {
+	    var _this = this;
+
+	    var props = {};
+
+	    // Extract Disqus props that were supplied to this component
+	    DISQUS_CONFIG.forEach(function (prop) {
+	      if (!!_this.props[prop]) {
+	        props[prop] = _this.props[prop];
+	      }
+	    });
+
+	    // Always set URL
+	    if (!props.url || !props.url.length) {
+	      props.url = window.location.href;
+	    }
+
+	    // If Disqus has already been added, reset it
+	    if (typeof DISQUS !== 'undefined') {
+	      DISQUS.reset({
+	        reload: true,
+	        config: function config() {
+	          copyProps(this.page, props);
+
+	          // Disqus needs hashbang URL, see https://help.disqus.com/customer/portal/articles/472107
+	          this.page.url = this.page.url.replace(/#/, '') + '#!newthread';
+	        }
+	      });
+	    } else {
+	      // Otherwise add Disqus to the page
+	      copyProps(window, props, 'disqus_');
+	      this.addDisqusScript();
+	    }
+	  }
+	});
 
 /***/ }
 /******/ ]);

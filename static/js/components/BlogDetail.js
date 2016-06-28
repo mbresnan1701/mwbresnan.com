@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Comment from './Comment.js';
 import AddComment from './AddComment.js';
+import ReactDisqusThread from 'react-disqus-thread';
 
 class BlogDetail extends React.Component {
 
@@ -14,7 +15,6 @@ class BlogDetail extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this.props.params);
     const getPost = $.ajax({
       method: 'GET',
       url: '/blog/api/single/' + this.props.params.urlstr,
@@ -23,31 +23,41 @@ class BlogDetail extends React.Component {
       this.setState({
         post: JSON.parse(getPost.responseText)[0],
       });
-      this.getComments();
+      // this.getComments();
     });
   }
 
-  getComments() {
-    const getComments = $.ajax({
-      method: 'GET',
-      url: 'api/comments',
-    })
-    .done(() => {
-      this.setState({
-        comments: JSON.parse(getComments.responseText),
-      });
-    });
+  // getComments() {
+  //   const getComments = $.ajax({
+  //     method: 'GET',
+  //     url: 'api/comments',
+  //   })
+  //   .done(() => {
+  //     this.setState({
+  //       comments: JSON.parse(getComments.responseText),
+  //     });
+  //   });
+  // }
+
+  // renderComments() {
+  //   return this.state.comments.map((comment) => {
+  //     return (
+  //       <Comment key={comment.pk} comment={comment.fields} />
+  //     );
+  //   });
+  // }
+
+  // <div className="comments">
+  //   <h3 className="post-title">Comments</h3>
+  //   {commentSec}
+  // </div>
+  // <AddComment refcom={this.getComments.bind(this)} />
+  handleNewComment(comment) {
+    console.log(comment.text);
   }
 
-  renderComments() {
-    return this.state.comments.map((comment) => {
-      return (
-        <Comment key={comment.pk} comment={comment.fields} />
-      );
-    });
-  }
   render() {
-    const commentSec = this.state.comments.length > 0 ? this.renderComments() : <div> No comments yet. Be the first!</div>;
+    // const commentSec = this.state.comments.length > 0 ? this.renderComments() : <div> No comments yet. Be the first!</div>;
     if (this.state.post) {
       return (
         <div>
@@ -73,11 +83,14 @@ class BlogDetail extends React.Component {
           </Row>
           <Row>
             <Col lg={6} lgOffset={2} md={8} mdOffset={1}>
-              <div className="comments">
-                <h3 className="post-title">Comments</h3>
-                {commentSec}
-              </div>
-              <AddComment refcom={this.getComments.bind(this)} />
+              <ReactDisqusThread
+                shortname="mwbresnan.disqus.com"
+                identifier={this.state.post.fields.url}
+                title={this.state.post.fields.title + ': ' + this.state.post.fields.subtitle}
+                url="http://127.0.0.1:8000"
+                category_id="123456"
+                onNewComment={this.handleNewComment}
+              />
             </Col>
           </Row>
         </div>
