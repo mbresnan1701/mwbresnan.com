@@ -298,7 +298,8 @@ textarea {
 }
 
 .intro-header {
-  background-color: #c7d0d5;
+  /*background-color: #c7d0d5;*/
+  background-image: url('../websiteimgs/pMAiU.jpg')
 }
 
 .latestblog {

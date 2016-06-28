@@ -28,10 +28,12 @@ class AddComment extends React.Component {
         text: reactDOM.findDOMNode(this.refs.commenttext).value,
         csrfmiddlewaretoken: this.getCookie('csrftoken'),
       },
+    })
+    .then(() => {
+      reactDOM.findDOMNode(this.refs.name).value = '';
+      reactDOM.findDOMNode(this.refs.commenttext).value = '';
+      this.props.refcom();
     });
-    reactDOM.findDOMNode(this.refs.name).value = '';
-    reactDOM.findDOMNode(this.refs.commenttext).value = '';
-    this.props.refcom();
   }
 
   render() {

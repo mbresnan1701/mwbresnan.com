@@ -55622,6 +55622,8 @@
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
+	      var _this2 = this;
+
 	      var sendReq = $.ajax({
 	        method: 'POST',
 	        url: 'api/comments/add/',
@@ -55631,10 +55633,11 @@
 	          text: _reactDom2.default.findDOMNode(this.refs.commenttext).value,
 	          csrfmiddlewaretoken: this.getCookie('csrftoken')
 	        }
+	      }).then(function () {
+	        _reactDom2.default.findDOMNode(_this2.refs.name).value = '';
+	        _reactDom2.default.findDOMNode(_this2.refs.commenttext).value = '';
+	        _this2.props.refcom();
 	      });
-	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
-	      _reactDom2.default.findDOMNode(this.refs.commenttext).value = '';
-	      this.props.refcom();
 	    }
 	  }, {
 	    key: 'render',
