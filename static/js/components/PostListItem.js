@@ -24,6 +24,7 @@ class PostListItem extends React.Component {
           <p className="post-meta">
             {this.props.post.fields.datestr || this.props.post.fields.date}
           </p>
+          <hr />
         </div>
       </Col>
     );

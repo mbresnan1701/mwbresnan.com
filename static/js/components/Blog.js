@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
 
 class Blog extends React.Component {
@@ -8,17 +8,47 @@ class Blog extends React.Component {
     super(props);
     this.state = {
       posts: [],
+      totalposts: 0,
+      localposts: 0,
     };
   }
 
   componentWillMount() {
     const getRecent = $.ajax({
       method: 'GET',
-      url: '/blog/api/all',
+      url: '/blog/api/blogstart',
     })
     .done(() => {
       this.setState({
         posts: JSON.parse(getRecent.responseText),
+      });
+      this.setState({
+        localposts: this.state.posts.length,
+      });
+      const getCount = $.ajax({
+        method: 'GET',
+        url: '/blog/api/postcount',
+      })
+      .done(() => {
+        this.setState({
+          totalposts: parseInt(getCount.responseText),
+        });
+
+      });
+    });
+  }
+
+  getMorePosts() {
+    const localTotalDiff = this.state.totalposts - this.state.localposts;
+    const getMore = $.ajax({
+      method: 'GET',
+      url: '/blog/api/nextposts/?count=' + this.state.localposts,
+    })
+    .done(() => {
+      const moreData = JSON.parse(getMore.responseText);
+      this.setState({
+        localposts: this.state.localposts += moreData.length,
+        posts: this.state.posts.concat(moreData),
       });
     });
   }
@@ -33,10 +63,25 @@ class Blog extends React.Component {
     });
   }
 
+  renderMoreButton() {
+    if (this.state.localposts < this.state.totalposts) {
+      return (
+        <Button onClick={this.getMorePosts.bind(this)}>Load older</Button>
+      );
+    } else {
+      return (
+        <div></div>
+      );
+    }
+  }
+
   render() {
     return (
       <Row>
         {this.renderPosts()}
+        <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
+          {this.renderMoreButton()}
+        </Col>
       </Row>
     );
   }

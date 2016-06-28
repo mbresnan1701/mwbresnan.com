@@ -30,8 +30,20 @@ def recent(req):
     return HttpResponse(data)
 
 
-def all(req):
-    data = BlogPost.objects.all().order_by('-date')
+def get_post_count(req):
+    data = BlogPost.objects.count()
+    return HttpResponse(data)
+
+
+def first_ten(req):
+    data = BlogPost.objects.all().order_by('-date')[:10]
+    data = serializers.serialize("json", data)
+    return HttpResponse(data)
+
+
+def next_ten(req):
+    start = int(req.GET.get('count', 1))
+    data = BlogPost.objects.all().order_by('-date')[start:start + 10]
     data = serializers.serialize("json", data)
     return HttpResponse(data)
 
@@ -44,6 +56,7 @@ def quote(req):
 
 def single(req, url):
     post = BlogPost.objects.get(url=url)
+    post.get_tags()
     post = serializers.serialize("json", [post])
     return HttpResponse(post)
 

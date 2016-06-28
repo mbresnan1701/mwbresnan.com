@@ -54985,7 +54985,9 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
 
 	    _this.state = {
-	      posts: []
+	      posts: [],
+	      totalposts: 0,
+	      localposts: 0
 	    };
 	    return _this;
 	  }
@@ -54997,10 +54999,38 @@
 
 	      var getRecent = $.ajax({
 	        method: 'GET',
-	        url: '/blog/api/all'
+	        url: '/blog/api/blogstart'
 	      }).done(function () {
 	        _this2.setState({
 	          posts: JSON.parse(getRecent.responseText)
+	        });
+	        _this2.setState({
+	          localposts: _this2.state.posts.length
+	        });
+	        var getCount = $.ajax({
+	          method: 'GET',
+	          url: '/blog/api/postcount'
+	        }).done(function () {
+	          _this2.setState({
+	            totalposts: parseInt(getCount.responseText)
+	          });
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'getMorePosts',
+	    value: function getMorePosts() {
+	      var _this3 = this;
+
+	      var localTotalDiff = this.state.totalposts - this.state.localposts;
+	      var getMore = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/nextposts/?count=' + this.state.localposts
+	      }).done(function () {
+	        var moreData = JSON.parse(getMore.responseText);
+	        _this3.setState({
+	          localposts: _this3.state.localposts += moreData.length,
+	          posts: _this3.state.posts.concat(moreData)
 	        });
 	      });
 	    }
@@ -55016,12 +55046,30 @@
 	      });
 	    }
 	  }, {
+	    key: 'renderMoreButton',
+	    value: function renderMoreButton() {
+	      if (this.state.localposts < this.state.totalposts) {
+	        return _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          { onClick: this.getMorePosts.bind(this) },
+	          'Load older'
+	        );
+	      } else {
+	        return _react2.default.createElement('div', null);
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
-	        this.renderPosts()
+	        this.renderPosts(),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          this.renderMoreButton()
+	        )
 	      );
 	    }
 	  }]);
@@ -55093,7 +55141,8 @@
 	            'p',
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
-	          )
+	          ),
+	          _react2.default.createElement('hr', null)
 	        )
 	      );
 	    }

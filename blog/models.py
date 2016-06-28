@@ -33,6 +33,9 @@ class BlogPost(models.Model):
             self.datestr = get_date_string_long()
         return super(BlogPost, self).save(*args, **kwargs)
 
+    def get_tags(self):
+        return self.tags.all()
+
 
 class Comment(models.Model):
 
