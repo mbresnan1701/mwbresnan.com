@@ -86,7 +86,7 @@
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:id', component: _BlogDetail2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:urlstr', component: _BlogDetail2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _Contact2.default })
 	  ),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/about' })
@@ -45052,9 +45052,9 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
-	var _PostSummary = __webpack_require__(495);
+	var _PostListItem = __webpack_require__(497);
 
-	var _PostSummary2 = _interopRequireDefault(_PostSummary);
+	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45099,7 +45099,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostSummary2.default, { post: post })
+	          _react2.default.createElement(_PostListItem2.default, { post: post })
 	        );
 	      });
 	    }
@@ -54950,78 +54950,7 @@
 
 
 /***/ },
-/* 495 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(230);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PostSummary = function (_React$Component) {
-	  _inherits(PostSummary, _React$Component);
-
-	  function PostSummary(props) {
-	    _classCallCheck(this, PostSummary);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PostSummary).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(PostSummary, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _reactBootstrap.Col,
-	        { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'post-preview' },
-	          _react2.default.createElement(
-	            'h2',
-	            { className: 'post-title' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '/blog/' + this.props.post.pk },
-	              this.props.post.fields.title
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            { className: 'post-subtitle' },
-	            this.props.post.fields.subtitle
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'post-meta' },
-	            this.props.post.fields.datestr || this.props.post.fields.date
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return PostSummary;
-	}(_react2.default.Component);
-
-	module.exports = PostSummary;
-
-/***/ },
+/* 495 */,
 /* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -55151,7 +55080,7 @@
 	            { className: 'post-title' },
 	            _react2.default.createElement(
 	              'a',
-	              { href: '/blog/' + this.props.post.pk },
+	              { href: '/blog/' + this.props.post.fields.url },
 	              this.props.post.fields.title
 	            )
 	          ),
@@ -55165,8 +55094,7 @@
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
 	          )
-	        ),
-	        _react2.default.createElement('hr', null)
+	        )
 	      );
 	    }
 	  }]);
@@ -55226,9 +55154,10 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      console.log(this.props.params);
 	      var getPost = $.ajax({
 	        method: 'GET',
-	        url: '/blog/api/single/' + this.props.params.id
+	        url: '/blog/api/single/' + this.props.params.urlstr
 	      }).done(function () {
 	        _this2.setState({
 	          post: JSON.parse(getPost.responseText)[0]

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import PostSummary from './PostSummary.js';
+import PostListItem from './PostListItem.js';
 
 class Home extends React.Component {
 
@@ -27,7 +27,7 @@ class Home extends React.Component {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <PostSummary post={post} />
+          <PostListItem post={post} />
         </div>
       );
     });

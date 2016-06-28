@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
-import datetime
+from taggit.managers import TaggableManager
+import datetime, re
 
 
 def get_date_string():
@@ -16,6 +17,8 @@ class BlogPost(models.Model):
 
     title = models.CharField(max_length=255, null=True, blank=True)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
+    url = models.CharField(max_length=127, unique=True)
+    tags = TaggableManager()
     text = RichTextField(null=True, blank=True)
     date = models.DateTimeField()
     datestr = models.CharField(max_length=127)
@@ -27,7 +30,7 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.date = timezone.now()
-            self.datestr = get_date_string()
+            self.datestr = get_date_string_long()
         return super(BlogPost, self).save(*args, **kwargs)
 
 

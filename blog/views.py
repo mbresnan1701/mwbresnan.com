@@ -12,9 +12,9 @@ def main_posts(req):
     return render(req, 'main/post.html')
 
 
-def post_detail(req, pk):
+def post_detail(req, url):
     try:
-        BlogPost.objects.get(pk=pk)
+        BlogPost.objects.get(url=url)
         return render(req, 'main/post.html')
     except BlogPost.DoesNotExist:
         return render(req, 'masters/404.html')
@@ -42,8 +42,8 @@ def quote(req):
     return HttpResponse(quote)
 
 
-def single(req, pk):
-    post = BlogPost.objects.get(pk=pk)
+def single(req, url):
+    post = BlogPost.objects.get(url=url)
     post = serializers.serialize("json", [post])
     return HttpResponse(post)
 

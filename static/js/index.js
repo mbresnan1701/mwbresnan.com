@@ -13,7 +13,7 @@ render((
     <Route path="/" component={App} >
       <IndexRoute component={Home} />
       <Route path="/blog" component={Blog} />
-      <Route path="/blog/:id" component={BlogDetail} />
+      <Route path="/blog/:urlstr" component={BlogDetail} />
       <Route path="/contact" component={Contact} />
     </Route>
 

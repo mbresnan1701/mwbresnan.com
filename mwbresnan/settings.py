@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpack_loader',
     'ckeditor',
+    'taggit',
 ]
 
 MIDDLEWARE_CLASSES = [

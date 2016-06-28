@@ -14,9 +14,10 @@ class BlogDetail extends React.Component {
   }
 
   componentWillMount() {
+    console.log(this.props.params);
     const getPost = $.ajax({
       method: 'GET',
-      url: '/blog/api/single/' + this.props.params.id,
+      url: '/blog/api/single/' + this.props.params.urlstr,
     })
     .done(() => {
       this.setState({
