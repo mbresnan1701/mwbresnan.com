@@ -8,6 +8,7 @@ class Blog extends React.Component {
     super(props);
     this.state = {
       posts: [],
+      tags: [],
       totalposts: 0,
       localposts: 0,
     };
@@ -20,7 +21,8 @@ class Blog extends React.Component {
     })
     .done(() => {
       this.setState({
-        posts: JSON.parse(getRecent.responseText),
+        posts: JSON.parse(getRecent.responseText).posts,
+        tags: JSON.parse(getRecent.responseText).tags,
       });
       this.setState({
         localposts: this.state.posts.length,
@@ -33,7 +35,6 @@ class Blog extends React.Component {
         this.setState({
           totalposts: parseInt(getCount.responseText),
         });
-
       });
     });
   }
@@ -47,8 +48,9 @@ class Blog extends React.Component {
     .done(() => {
       const moreData = JSON.parse(getMore.responseText);
       this.setState({
-        localposts: this.state.localposts += moreData.length,
-        posts: this.state.posts.concat(moreData),
+        localposts: this.state.localposts += moreData.posts.length,
+        posts: this.state.posts.concat(moreData.posts),
+        tags: this.state.tags.concat(moreData.tags),
       });
     });
   }
@@ -76,6 +78,7 @@ class Blog extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <Row>
         {this.renderPosts()}

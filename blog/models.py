@@ -18,6 +18,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
     url = models.CharField(max_length=127, unique=True)
+    description = models.TextField(null=True, blank=True)
     tags = TaggableManager()
     text = RichTextField(null=True, blank=True)
     date = models.DateTimeField()

@@ -6,6 +6,7 @@ from .serializers import BlogSerializer
 from django.core import serializers
 from django.db.models import Max
 from mwbresnan.contactcontroller import send_new_comment_message
+import json
 
 
 def main_posts(req):
@@ -26,8 +27,19 @@ def not_found(req):
 
 def recent(req):
     data = BlogPost.objects.all().order_by('-date')[:3]
+    tag_data = {}
+    for item in data:
+        print(item.tags.all())
+        tags = serializers.serialize("json", item.tags.all())
+        tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)
-    return HttpResponse(data)
+    data = json.loads(data)
+    pkg_data = {
+      'posts': data,
+      'tags': tag_data
+    }
+
+    return HttpResponse(json.dumps(pkg_data))
 
 
 def get_post_count(req):
@@ -37,15 +49,37 @@ def get_post_count(req):
 
 def first_ten(req):
     data = BlogPost.objects.all().order_by('-date')[:10]
+    tag_data = {}
+    for item in data:
+        print(item.tags.all())
+        tags = serializers.serialize("json", item.tags.all())
+        tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)
-    return HttpResponse(data)
+    data = json.loads(data)
+    pkg_data = {
+      'posts': data,
+      'tags': tag_data
+    }
+
+    return HttpResponse(json.dumps(pkg_data))
 
 
 def next_ten(req):
     start = int(req.GET.get('count', 1))
     data = BlogPost.objects.all().order_by('-date')[start:start + 10]
+    tag_data = {}
+    for item in data:
+        print(item.tags.all())
+        tags = serializers.serialize("json", item.tags.all())
+        tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)
-    return HttpResponse(data)
+    data = json.loads(data)
+    pkg_data = {
+      'posts': data,
+      'tags': tag_data
+    }
+
+    return HttpResponse(json.dumps(pkg_data))
 
 
 def quote(req):

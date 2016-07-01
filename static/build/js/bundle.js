@@ -66,11 +66,11 @@
 
 	var _Blog2 = _interopRequireDefault(_Blog);
 
-	var _BlogDetail = __webpack_require__(498);
+	var _BlogDetail = __webpack_require__(497);
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
-	var _Contact = __webpack_require__(499);
+	var _Contact = __webpack_require__(502);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
@@ -45052,7 +45052,7 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
-	var _PostListItem = __webpack_require__(497);
+	var _PostListItem = __webpack_require__(495);
 
 	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
@@ -54950,138 +54950,7 @@
 
 
 /***/ },
-/* 495 */,
-/* 496 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(230);
-
-	var _PostListItem = __webpack_require__(497);
-
-	var _PostListItem2 = _interopRequireDefault(_PostListItem);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Blog = function (_React$Component) {
-	  _inherits(Blog, _React$Component);
-
-	  function Blog(props) {
-	    _classCallCheck(this, Blog);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
-
-	    _this.state = {
-	      posts: [],
-	      totalposts: 0,
-	      localposts: 0
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Blog, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      var getRecent = $.ajax({
-	        method: 'GET',
-	        url: '/blog/api/blogstart'
-	      }).done(function () {
-	        _this2.setState({
-	          posts: JSON.parse(getRecent.responseText)
-	        });
-	        _this2.setState({
-	          localposts: _this2.state.posts.length
-	        });
-	        var getCount = $.ajax({
-	          method: 'GET',
-	          url: '/blog/api/postcount'
-	        }).done(function () {
-	          _this2.setState({
-	            totalposts: parseInt(getCount.responseText)
-	          });
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'getMorePosts',
-	    value: function getMorePosts() {
-	      var _this3 = this;
-
-	      var localTotalDiff = this.state.totalposts - this.state.localposts;
-	      var getMore = $.ajax({
-	        method: 'GET',
-	        url: '/blog/api/nextposts/?count=' + this.state.localposts
-	      }).done(function () {
-	        var moreData = JSON.parse(getMore.responseText);
-	        _this3.setState({
-	          localposts: _this3.state.localposts += moreData.length,
-	          posts: _this3.state.posts.concat(moreData)
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'renderPosts',
-	    value: function renderPosts() {
-	      return this.state.posts.map(function (post) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post })
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'renderMoreButton',
-	    value: function renderMoreButton() {
-	      if (this.state.localposts < this.state.totalposts) {
-	        return _react2.default.createElement(
-	          _reactBootstrap.Button,
-	          { onClick: this.getMorePosts.bind(this) },
-	          'Load older'
-	        );
-	      } else {
-	        return _react2.default.createElement('div', null);
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _reactBootstrap.Row,
-	        null,
-	        this.renderPosts(),
-	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
-	          this.renderMoreButton()
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Blog;
-	}(_react2.default.Component);
-
-	module.exports = Blog;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
-
-/***/ },
-/* 497 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55154,7 +55023,7 @@
 	module.exports = PostListItem;
 
 /***/ },
-/* 498 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -55167,15 +55036,149 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
-	var _Comment = __webpack_require__(500);
+	var _PostListItem = __webpack_require__(495);
+
+	var _PostListItem2 = _interopRequireDefault(_PostListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Blog = function (_React$Component) {
+	  _inherits(Blog, _React$Component);
+
+	  function Blog(props) {
+	    _classCallCheck(this, Blog);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+
+	    _this.state = {
+	      posts: [],
+	      tags: [],
+	      totalposts: 0,
+	      localposts: 0
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Blog, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getRecent = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/blogstart'
+	      }).done(function () {
+	        _this2.setState({
+	          posts: JSON.parse(getRecent.responseText).posts,
+	          tags: JSON.parse(getRecent.responseText).tags
+	        });
+	        _this2.setState({
+	          localposts: _this2.state.posts.length
+	        });
+	        var getCount = $.ajax({
+	          method: 'GET',
+	          url: '/blog/api/postcount'
+	        }).done(function () {
+	          _this2.setState({
+	            totalposts: parseInt(getCount.responseText)
+	          });
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'getMorePosts',
+	    value: function getMorePosts() {
+	      var _this3 = this;
+
+	      var localTotalDiff = this.state.totalposts - this.state.localposts;
+	      var getMore = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/nextposts/?count=' + this.state.localposts
+	      }).done(function () {
+	        var moreData = JSON.parse(getMore.responseText);
+	        _this3.setState({
+	          localposts: _this3.state.localposts += moreData.posts.length,
+	          posts: _this3.state.posts.concat(moreData.posts),
+	          tags: _this3.state.tags.concat(moreData.tags)
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'renderPosts',
+	    value: function renderPosts() {
+	      return this.state.posts.map(function (post) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: post.pk },
+	          _react2.default.createElement(_PostListItem2.default, { post: post })
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'renderMoreButton',
+	    value: function renderMoreButton() {
+	      if (this.state.localposts < this.state.totalposts) {
+	        return _react2.default.createElement(
+	          _reactBootstrap.Button,
+	          { onClick: this.getMorePosts.bind(this) },
+	          'Load older'
+	        );
+	      } else {
+	        return _react2.default.createElement('div', null);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.state);
+	      return _react2.default.createElement(
+	        _reactBootstrap.Row,
+	        null,
+	        this.renderPosts(),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	          this.renderMoreButton()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Blog;
+	}(_react2.default.Component);
+
+	module.exports = Blog;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 497 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	var _Comment = __webpack_require__(498);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _AddComment = __webpack_require__(501);
+	var _AddComment = __webpack_require__(499);
 
 	var _AddComment2 = _interopRequireDefault(_AddComment);
 
-	var _reactDisqusThread = __webpack_require__(502);
+	var _reactDisqusThread = __webpack_require__(500);
 
 	var _reactDisqusThread2 = _interopRequireDefault(_reactDisqusThread);
 
@@ -55317,177 +55320,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 499 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(230);
-
-	var _reactDom = __webpack_require__(38);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Contact = function (_React$Component) {
-	  _inherits(Contact, _React$Component);
-
-	  function Contact(props) {
-	    _classCallCheck(this, Contact);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
-
-	    _this.state = {
-	      submitMsg: ''
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Contact, [{
-	    key: 'getCookie',
-	    value: function getCookie(name) {
-	      var value = '; ' + document.cookie;
-	      var parts = value.split('; ' + name + '=');
-	      if (parts.length === 2) return parts.pop().split(';').shift();else return;
-	    }
-	  }, {
-	    key: 'clearForm',
-	    value: function clearForm() {
-	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
-	      _reactDom2.default.findDOMNode(this.refs.email).value = '';
-	      _reactDom2.default.findDOMNode(this.refs.phnum).value = '';
-	      _reactDom2.default.findDOMNode(this.refs.msg).value = '';
-	    }
-	  }, {
-	    key: 'submitForm',
-	    value: function submitForm() {
-	      var sendReq = $.ajax({
-	        method: 'POST',
-	        url: '/contact/send',
-	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	        data: {
-	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
-	          email: _reactDom2.default.findDOMNode(this.refs.email).value,
-	          phnum: _reactDom2.default.findDOMNode(this.refs.phnum).value,
-	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value,
-	          csrfmiddlewaretoken: this.getCookie('csrftoken')
-	        }
-	      });
-	      this.clearForm();
-	      if (sendReq.statusCode === 200) {
-	        this.setState({ submitMsg: 'Message Sent' });
-	      } else if (sendReq.statusCode === 503) {
-	        this.setState({ submitMsg: 'Mail server too busy. Try again later.' });
-	      } else {
-	        this.setState({ submitMsg: 'An unknown error has occured' });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'form',
-	        { name: 'sentMessage', id: 'contactForm', noValidate: true },
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Name'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Email Address'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Phone Number'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Message'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('div', { id: 'success' }),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12 },
-	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { onClick: this.submitForm.bind(this) },
-	              'Send'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Contact;
-	}(_react2.default.Component);
-
-	module.exports = Contact;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
-
-/***/ },
-/* 500 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55558,7 +55391,7 @@
 	module.exports = Comment;
 
 /***/ },
-/* 501 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -55696,15 +55529,15 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 502 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(503);
+	module.exports = __webpack_require__(501);
 
 /***/ },
-/* 503 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55893,6 +55726,176 @@
 	    }
 	  }
 	});
+
+/***/ },
+/* 502 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	var _reactDom = __webpack_require__(38);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Contact = function (_React$Component) {
+	  _inherits(Contact, _React$Component);
+
+	  function Contact(props) {
+	    _classCallCheck(this, Contact);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
+
+	    _this.state = {
+	      submitMsg: ''
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Contact, [{
+	    key: 'getCookie',
+	    value: function getCookie(name) {
+	      var value = '; ' + document.cookie;
+	      var parts = value.split('; ' + name + '=');
+	      if (parts.length === 2) return parts.pop().split(';').shift();else return;
+	    }
+	  }, {
+	    key: 'clearForm',
+	    value: function clearForm() {
+	      _reactDom2.default.findDOMNode(this.refs.name).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.email).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.phnum).value = '';
+	      _reactDom2.default.findDOMNode(this.refs.msg).value = '';
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm() {
+	      var sendReq = $.ajax({
+	        method: 'POST',
+	        url: '/contact/send',
+	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	        data: {
+	          name: _reactDom2.default.findDOMNode(this.refs.name).value,
+	          email: _reactDom2.default.findDOMNode(this.refs.email).value,
+	          phnum: _reactDom2.default.findDOMNode(this.refs.phnum).value,
+	          msg: _reactDom2.default.findDOMNode(this.refs.msg).value,
+	          csrfmiddlewaretoken: this.getCookie('csrftoken')
+	        }
+	      });
+	      this.clearForm();
+	      if (sendReq.statusCode === 200) {
+	        this.setState({ submitMsg: 'Message Sent' });
+	      } else if (sendReq.statusCode === 503) {
+	        this.setState({ submitMsg: 'Mail server too busy. Try again later.' });
+	      } else {
+	        this.setState({ submitMsg: 'An unknown error has occured' });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { name: 'sentMessage', id: 'contactForm', noValidate: true },
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Name'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Email Address'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Phone Number'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'control-group' },
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Message'
+	            ),
+	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
+	            _react2.default.createElement('p', { className: 'help-block text-danger' })
+	          )
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('div', { id: 'success' }),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.FormGroup,
+	            { xs: 12 },
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { onClick: this.submitForm.bind(this) },
+	              'Send'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Contact;
+	}(_react2.default.Component);
+
+	module.exports = Contact;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }
 /******/ ]);
