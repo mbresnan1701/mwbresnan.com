@@ -285,14 +285,18 @@ textarea {
   text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                0px 8px 13px rgba(0,0,0,0.1),
                0px 18px 23px rgba(0,0,0,0.1);
+  font-family: 'Lucida Grande', 'Ariel', 'Times New Roman';
+  font-variant: small-caps;
 
-  color: #ff7148;
+  /*color: #ff7148;*/
+  /*color: #0080FF;*/
+  color: #80C0FF;
 
 }
 
 .site-heading .subheading {
   text-shadow: 0px 1px 1px #4d4d4d;
-  color: #93b1c6;
+  color: #FF8000;
   font: 80px 'LeagueGothicRegular';
 
 }
@@ -366,4 +370,41 @@ textarea {
 .add-comment-err {
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
   color: red;
+}
+
+.intro-index {
+  background-image: url('../websiteimgs/code-wallpaper.png');
+
+}
+
+.intro-about {
+  background-image: url('../img/Pc-Wallpapers-2c.jpg');
+}
+
+.intro-blog {
+  background-image: url('../img/server-datacenterc.jpg');
+}
+
+.intro-blogpost {
+  /*background-image: url('../img/desk.jpg');*/
+  background-image: url('../img/Keyboard-Computerc.jpg');
+
+  /*background-image: url('../websiteimgs/code-wallpaper-4.png');*/
+}
+
+.intro-contact {
+  background-image: url('../img/letter-mail-envelope copy.jpg');
+}
+
+.myNavBar {
+  background-image: url('../websiteimgs/black-website-background.jpg');
+  margin: 0 auto;
+  /*background-color: black;*/
+  border-bottom: 1px solid red;
+}
+
+footer {
+  margin-top: 20px;
+  border-top: 2px solid red;
+  background-image: url('../websiteimgs/black-website-background.jpg');
 }

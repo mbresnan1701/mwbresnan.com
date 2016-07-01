@@ -15,7 +15,7 @@ def main_posts(req):
 def post_detail(req, url):
     try:
         BlogPost.objects.get(url=url)
-        return render(req, 'main/post.html')
+        return render(req, 'main/post_detail.html')
     except BlogPost.DoesNotExist:
         return render(req, 'masters/404.html')
 
