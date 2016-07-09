@@ -56093,22 +56093,23 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Blog = function (_React$Component) {
-	  _inherits(Blog, _React$Component);
+	var BlogTags = function (_React$Component) {
+	  _inherits(BlogTags, _React$Component);
 
-	  function Blog(props) {
-	    _classCallCheck(this, Blog);
+	  function BlogTags(props) {
+	    _classCallCheck(this, BlogTags);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogTags).call(this, props));
 
 	    _this.state = {
 	      posts: [],
-	      tags: []
+	      tags: [],
+	      tagslist: []
 	    };
 	    return _this;
 	  }
 
-	  _createClass(Blog, [{
+	  _createClass(BlogTags, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      var _this2 = this;
@@ -56122,23 +56123,80 @@
 	          tags: JSON.parse(getAll.responseText).tags
 	        });
 	        console.log(_this2.state);
+	        _this2.buildTagsObj();
+	      });
+	    }
+	  }, {
+	    key: 'buildTagsObj',
+	    value: function buildTagsObj() {
+	      var newTagObj = {};
+	      for (var indvTagObj in this.state.tags) {
+	        for (var i = 0; i < this.state.tags[indvTagObj].length; i++) {
+	          if (newTagObj[this.state.tags[indvTagObj][i].fields.name]) {
+	            newTagObj[this.state.tags[indvTagObj][i].fields.name] += 1;
+	          } else {
+	            newTagObj[this.state.tags[indvTagObj][i].fields.name] = 1;
+	          }
+	        }
+	      }
+	      var tagList = [];
+	      for (var tagItem in newTagObj) {
+	        tagList.push({ item: tagItem, cnt: newTagObj[tagItem] });
+	      }
+	      tagList = tagList.sort(function (a, b) {
+	        var nameA = a.item.toUpperCase(); // ignore upper and lowercase
+	        var nameB = b.item.toUpperCase(); // ignore upper and lowercase
+	        if (nameA < nameB) {
+	          return -1;
+	        }
+	        if (nameA > nameB) {
+	          return 1;
+	        }
+	      });
+	      console.log(tagList);
+
+	      this.setState({
+	        tagslist: tagList
+	      });
+	    }
+	  }, {
+	    key: 'renderTags',
+	    value: function renderTags() {
+	      console.log(this.state);
+	      return this.state.tagslist.map(function (tag) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: tag.item },
+	          tag.item,
+	          ' (',
+	          tag.cnt,
+	          ')'
+	        );
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'THIS IS THE TAGS LIST'
-	      );
+	      if (this.state.tagslist) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          this.renderTags()
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'loading...'
+	        );
+	      }
 	    }
 	  }]);
 
-	  return Blog;
+	  return BlogTags;
 	}(_react2.default.Component);
 
-	module.exports = Blog;
+	module.exports = BlogTags;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }

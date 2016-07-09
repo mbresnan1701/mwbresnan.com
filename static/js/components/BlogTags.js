@@ -1,13 +1,14 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-class Blog extends React.Component {
+class BlogTags extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
       tags: [],
+      tagslist: [],
     };
   }
   componentWillMount() {
@@ -21,17 +22,67 @@ class Blog extends React.Component {
         tags: JSON.parse(getAll.responseText).tags,
       });
       console.log(this.state);
+      this.buildTagsObj();
+    });
+  }
+
+  buildTagsObj() {
+    let newTagObj = {};
+    for (let indvTagObj in this.state.tags) {
+      for (let i = 0; i < this.state.tags[indvTagObj].length; i++) {
+        if (newTagObj[this.state.tags[indvTagObj][i].fields.name]) {
+          newTagObj[this.state.tags[indvTagObj][i].fields.name] += 1;
+        } else {
+          newTagObj[this.state.tags[indvTagObj][i].fields.name] = 1;
+        }
+      }
+    }
+    let tagList = [];
+    for (let tagItem in newTagObj) {
+      tagList.push({ item: tagItem, cnt: newTagObj[tagItem] });
+    }
+    tagList = tagList.sort((a, b) => {
+      let nameA = a.item.toUpperCase(); // ignore upper and lowercase
+      let nameB = b.item.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+    console.log(tagList);
+
+    this.setState({
+      tagslist: tagList,
+    });
+  }
+
+  renderTags() {
+    console.log(this.state);
+    return this.state.tagslist.map((tag) => {
+      return (
+        <div key={tag.item}>
+          {tag.item} ({tag.cnt})
+        </div>
+      );
     });
   }
 
   render() {
-    return (
-      <div>
-        THIS IS THE TAGS LIST
-      </div>
-    );
+    if(this.state.tagslist) {
+      return (
+        <div>
+          {this.renderTags()}
+        </div>
+      );
+    } else {
+      return (
+        <div>loading...</div>
+      );
+    }
   }
 
 }
 
-module.exports = Blog;
+module.exports = BlogTags;
