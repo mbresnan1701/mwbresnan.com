@@ -62,15 +62,15 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Blog = __webpack_require__(496);
+	var _Blog = __webpack_require__(497);
 
 	var _Blog2 = _interopRequireDefault(_Blog);
 
-	var _BlogDetail = __webpack_require__(497);
+	var _BlogDetail = __webpack_require__(498);
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
-	var _Contact = __webpack_require__(502);
+	var _Contact = __webpack_require__(503);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
@@ -45073,7 +45073,8 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
 
 	    _this.state = {
-	      posts: []
+	      posts: [],
+	      tags: []
 	    };
 	    return _this;
 	  }
@@ -45087,19 +45088,23 @@
 	        method: 'GET',
 	        url: '/blog/api/recent'
 	      }).done(function () {
+	        var data = JSON.parse(getRecent.responseText);
 	        _this2.setState({
-	          posts: JSON.parse(getRecent.responseText)
+	          posts: data.posts,
+	          tags: data.tags
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'renderRecent',
 	    value: function renderRecent() {
+	      var _this3 = this;
+
 	      return this.state.posts.map(function (post) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post })
+	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this3.state.tags[post.pk] })
 	        );
 	      });
 	    }
@@ -54963,6 +54968,10 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
+	var _TagGroup = __webpack_require__(496);
+
+	var _TagGroup2 = _interopRequireDefault(_TagGroup);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55011,8 +55020,24 @@
 	            { className: 'post-meta' },
 	            this.props.post.fields.datestr || this.props.post.fields.date
 	          ),
-	          _react2.default.createElement('hr', null)
-	        )
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'post-description' },
+	            this.props.post.fields.description,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/blog/' + this.props.post.fields.url },
+	              '\t',
+	              ' Read More...'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Row,
+	            null,
+	            _react2.default.createElement(_TagGroup2.default, { tags: this.props.tags })
+	          )
+	        ),
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -55024,6 +55049,81 @@
 
 /***/ },
 /* 496 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TagGroup = function (_React$Component) {
+	  _inherits(TagGroup, _React$Component);
+
+	  function TagGroup(props) {
+	    _classCallCheck(this, TagGroup);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TagGroup).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(TagGroup, [{
+	    key: 'renderTags',
+	    value: function renderTags() {
+	      return this.props.tags.map(function (tag) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: tag.pk },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'tag' },
+	              tag.fields.name
+	            )
+	          )
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { xs: 12 },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'tag-group' },
+	          'Tags:',
+	          _react2.default.createElement('br', null),
+	          this.renderTags()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TagGroup;
+	}(_react2.default.Component);
+
+	module.exports = TagGroup;
+
+/***/ },
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -55112,11 +55212,13 @@
 	  }, {
 	    key: 'renderPosts',
 	    value: function renderPosts() {
+	      var _this4 = this;
+
 	      return this.state.posts.map(function (post) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post })
+	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this4.state.tags[post.pk] })
 	        );
 	      });
 	    }
@@ -55136,7 +55238,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state);
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
@@ -55157,7 +55258,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 497 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -55170,15 +55271,15 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
-	var _Comment = __webpack_require__(498);
+	var _Comment = __webpack_require__(499);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _AddComment = __webpack_require__(499);
+	var _AddComment = __webpack_require__(500);
 
 	var _AddComment2 = _interopRequireDefault(_AddComment);
 
-	var _reactDisqusThread = __webpack_require__(500);
+	var _reactDisqusThread = __webpack_require__(501);
 
 	var _reactDisqusThread2 = _interopRequireDefault(_reactDisqusThread);
 
@@ -55320,7 +55421,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 498 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55391,7 +55492,7 @@
 	module.exports = Comment;
 
 /***/ },
-/* 499 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -55529,15 +55630,15 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 500 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(501);
+	module.exports = __webpack_require__(502);
 
 /***/ },
-/* 501 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55728,7 +55829,7 @@
 	});
 
 /***/ },
-/* 502 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';

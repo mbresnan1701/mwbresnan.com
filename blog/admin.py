@@ -7,7 +7,7 @@ from .models import BlogPost, Quote, Limit, Comment
 class BlogPostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['title', 'subtitle',
-                                         'text', 'url', 'tags']}),
+                                         'text', 'description', 'url', 'tags']}),
     ]
     list_display = ('title', 'text', 'date')
     list_filter = ['date']

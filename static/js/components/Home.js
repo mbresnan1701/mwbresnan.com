@@ -8,6 +8,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       posts: [],
+      tags: [],
     };
   }
 
@@ -17,8 +18,10 @@ class Home extends React.Component {
       url: '/blog/api/recent',
     })
     .done(() => {
+      const data = JSON.parse(getRecent.responseText);
       this.setState({
-        posts: JSON.parse(getRecent.responseText),
+        posts: data.posts,
+        tags: data.tags,
       });
     });
   }
@@ -27,7 +30,7 @@ class Home extends React.Component {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <PostListItem post={post} />
+          <PostListItem post={post} tags={this.state.tags[post.pk]} />
         </div>
       );
     });

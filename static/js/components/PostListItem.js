@@ -1,5 +1,6 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import TagGroup from './TagGroup.js';
 
 class PostListItem extends React.Component {
 
@@ -24,8 +25,17 @@ class PostListItem extends React.Component {
           <p className="post-meta">
             {this.props.post.fields.datestr || this.props.post.fields.date}
           </p>
-          <hr />
+          <p className="post-description">
+            {this.props.post.fields.description}
+            <a href={'/blog/' + this.props.post.fields.url}>
+              {'\t'} Read More...
+            </a>
+          </p>
+          <Row>
+            <TagGroup tags={this.props.tags} />
+          </Row>
         </div>
+        <hr />
       </Col>
     );
   }

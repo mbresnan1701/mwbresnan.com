@@ -408,3 +408,21 @@ footer {
   border-top: 2px solid red;
   background-image: url('../websiteimgs/black-website-background.jpg');
 }
+
+.tag-group {
+
+}
+
+.tag {
+  background-color: #d6d09e;
+  border: 1px solid black;
+  border-radius: 25px;
+  width: 75px;
+  float: left;
+  text-align: center;
+  font-size: 12px;
+}
+
+.tagclear {
+  clear: left;
+}

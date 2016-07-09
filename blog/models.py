@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
-import datetime, re
+import datetime
 
 
 def get_date_string():
@@ -31,7 +31,7 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.date = timezone.now()
-            self.datestr = get_date_string_long()
+            self.datestr = get_date_string()
         return super(BlogPost, self).save(*args, **kwargs)
 
     def get_tags(self):

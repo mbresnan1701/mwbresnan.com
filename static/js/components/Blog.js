@@ -59,8 +59,9 @@ class Blog extends React.Component {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <PostListItem post={post} />
+          <PostListItem post={post} tags={this.state.tags[post.pk]} />
         </div>
+
       );
     });
   }
@@ -78,7 +79,6 @@ class Blog extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Row>
         {this.renderPosts()}
