@@ -426,3 +426,11 @@ footer {
 .tagclear {
   clear: left;
 }
+
+.blog-menu {
+  color: green;
+}
+
+.blog-menu-item {
+  color: green;
+}

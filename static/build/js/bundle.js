@@ -55140,6 +55140,10 @@
 
 	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
+	var _BlogMenu = __webpack_require__(504);
+
+	var _BlogMenu2 = _interopRequireDefault(_BlogMenu);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55241,6 +55245,12 @@
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { xs: 6, xsOffset: 3, sm: 4, smOffset: 4 },
+	          _react2.default.createElement(_BlogMenu2.default, null)
+	        ),
+	        _react2.default.createElement('br', null),
 	        this.renderPosts(),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
@@ -55997,6 +56007,66 @@
 
 	module.exports = Contact;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 504 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BlogMenu = function (_React$Component) {
+	  _inherits(BlogMenu, _React$Component);
+
+	  function BlogMenu(props) {
+	    _classCallCheck(this, BlogMenu);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogMenu).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(BlogMenu, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'blog-menu' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'blog-menu-item', href: '#' },
+	          'Main'
+	        ),
+	        '|',
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'blog-menu-item', href: '#' },
+	          'Tags'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return BlogMenu;
+	}(_react2.default.Component);
+
+	module.exports = BlogMenu;
 
 /***/ }
 /******/ ]);

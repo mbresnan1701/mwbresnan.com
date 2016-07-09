@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
+import BlogMenu from './BlogMenu.js';
 
 class Blog extends React.Component {
 
@@ -81,6 +82,10 @@ class Blog extends React.Component {
   render() {
     return (
       <Row>
+        <Col xs={6} xsOffset={3} sm={4} smOffset={4} >
+          <BlogMenu />
+        </Col>
+        <br />
         {this.renderPosts()}
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           {this.renderMoreButton()}
