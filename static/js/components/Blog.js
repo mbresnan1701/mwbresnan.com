@@ -81,8 +81,8 @@ class Blog extends React.Component {
 
   render() {
     return (
-      <Row>
-        <Col xs={6} xsOffset={3} sm={4} smOffset={4} >
+      <div>
+        <Col xs={6} xsOffset={3} sm={2} smOffset={5}>
           <BlogMenu />
         </Col>
         <br />
@@ -90,7 +90,7 @@ class Blog extends React.Component {
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           {this.renderMoreButton()}
         </Col>
-      </Row>
+      </div>
     );
   }
 
