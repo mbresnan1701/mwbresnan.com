@@ -4,9 +4,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^$', views.main_posts, name='allposts'),
+    url(r'^taglist$', views.main_posts, name='tags'),
     url(r'^(?P<url>\w+)$', views.post_detail, name='detail'),
     url(r'^api/recent$', views.recent),
+    url(r'^api/all$', views.all_posts),
     url(r'^api/blogstart$', views.first_ten),
+    url(r'^api/allposts$', views.all_posts),
     url(r'^api/nextposts', views.next_ten),
     url(r'^api/postcount$', views.get_post_count),
     url(r'^api/quote$', views.quote),

@@ -5,14 +5,16 @@ import App from './components/App.js';
 import Home from './components/Home.js';
 import Blog from './components/Blog.js';
 import BlogDetail from './components/BlogDetail.js';
+import BlogTags from './components/BlogTags.js';
 import Contact from './components/Contact.js';
-      // <Route path='/blog' component={Blog} />
+
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App} >
       <IndexRoute component={Home} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/taglist" component={BlogTags} />
       <Route path="/blog/:urlstr" component={BlogDetail} />
       <Route path="/contact" component={Contact} />
     </Route>

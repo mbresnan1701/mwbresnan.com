@@ -70,13 +70,15 @@
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
+	var _BlogTags = __webpack_require__(505);
+
+	var _BlogTags2 = _interopRequireDefault(_BlogTags);
+
 	var _Contact = __webpack_require__(503);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// <Route path='/blog' component={Blog} />
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
@@ -86,6 +88,7 @@
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/taglist', component: _BlogTags2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:urlstr', component: _BlogDetail2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _Contact2.default })
 	  ),
@@ -56050,13 +56053,13 @@
 	        { className: 'blog-menu' },
 	        _react2.default.createElement(
 	          'a',
-	          { className: 'blog-menu-item', href: '#' },
+	          { className: 'blog-menu-item', href: '/blog' },
 	          'Main'
 	        ),
 	        '|',
 	        _react2.default.createElement(
 	          'a',
-	          { className: 'blog-menu-item', href: '#' },
+	          { className: 'blog-menu-item', href: '/tags' },
 	          'Tags'
 	        )
 	      );
@@ -56067,6 +56070,76 @@
 	}(_react2.default.Component);
 
 	module.exports = BlogMenu;
+
+/***/ },
+/* 505 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Blog = function (_React$Component) {
+	  _inherits(Blog, _React$Component);
+
+	  function Blog(props) {
+	    _classCallCheck(this, Blog);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blog).call(this, props));
+
+	    _this.state = {
+	      posts: [],
+	      tags: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Blog, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getAll = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/allposts'
+	      }).done(function () {
+	        _this2.setState({
+	          posts: JSON.parse(getAll.responseText).posts,
+	          tags: JSON.parse(getAll.responseText).tags
+	        });
+	        console.log(_this2.state);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'THIS IS THE TAGS LIST'
+	      );
+	    }
+	  }]);
+
+	  return Blog;
+	}(_react2.default.Component);
+
+	module.exports = Blog;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }
 /******/ ]);

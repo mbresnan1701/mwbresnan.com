@@ -12,11 +12,11 @@ class BlogMenu extends React.Component {
   render() {
     return (
         <div className="blog-menu">
-          <a className="blog-menu-item" href="#">
+          <a className="blog-menu-item" href="/blog">
             Main
           </a>
           |
-          <a className="blog-menu-item" href="#">
+          <a className="blog-menu-item" href="/tags">
             Tags
           </a>
         </div>

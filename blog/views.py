@@ -25,11 +25,25 @@ def not_found(req):
     return render(req, 'masters/404.html')
 
 
+def all_posts(req):
+    data = BlogPost.objects.all().order_by('-date')
+    tag_data = {}
+    for item in data:
+        tags = serializers.serialize("json", item.tags.all())
+        tag_data[item.pk] = json.loads(tags)
+    data = serializers.serialize("json", data)
+    data = json.loads(data)
+    pkg_data = {
+      'posts': data,
+      'tags': tag_data
+    }
+    return HttpResponse(json.dumps(pkg_data))
+
+
 def recent(req):
     data = BlogPost.objects.all().order_by('-date')[:3]
     tag_data = {}
     for item in data:
-        print(item.tags.all())
         tags = serializers.serialize("json", item.tags.all())
         tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)
