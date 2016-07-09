@@ -56059,7 +56059,7 @@
 	        '|',
 	        _react2.default.createElement(
 	          'a',
-	          { className: 'blog-menu-item', href: '/tags' },
+	          { className: 'blog-menu-item', href: '/blog/taglist' },
 	          'Tags'
 	        )
 	      );
@@ -56084,6 +56084,10 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactBootstrap = __webpack_require__(230);
+
+	var _BlogMenu = __webpack_require__(504);
+
+	var _BlogMenu2 = _interopRequireDefault(_BlogMenu);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56167,10 +56171,14 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: tag.item },
-	          tag.item,
-	          ' (',
-	          tag.cnt,
-	          ')'
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            tag.item,
+	            ' (',
+	            tag.cnt,
+	            ')'
+	          )
 	        );
 	      });
 	    }
@@ -56181,6 +56189,14 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { xs: 6, xsOffset: 3, sm: 2, smOffset: 5 },
+	            _react2.default.createElement(_BlogMenu2.default, null)
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          'All Tags:',
 	          this.renderTags()
 	        );
 	      } else {

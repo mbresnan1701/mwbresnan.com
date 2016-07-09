@@ -16,7 +16,7 @@ class BlogMenu extends React.Component {
             Main
           </a>
           |
-          <a className="blog-menu-item" href="/tags">
+          <a className="blog-menu-item" href="/blog/taglist">
             Tags
           </a>
         </div>
