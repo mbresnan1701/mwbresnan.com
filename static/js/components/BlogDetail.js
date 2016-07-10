@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Panel, Row, Col } from 'react-bootstrap';
 import Comment from './Comment.js';
 import AddComment from './AddComment.js';
 import ReactDisqusThread from 'react-disqus-thread';
@@ -63,22 +63,21 @@ class BlogDetail extends React.Component {
         <div>
           <Row>
             <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
-              <div className="post-preview">
-                <h2 className="post-title">
-                  {this.state.post.fields.title}
-                </h2>
-                <h3 className="post-subtitle">
-                  {this.state.post.fields.subtitle}
-                </h3>
-                <p className="post-meta">
-                  {this.state.post.fields.datestr || this.state.post.fields.date}
-                </p>
-                <hr />
-                <div dangerouslySetInnerHTML={{ __html: this.state.post.fields.text }}>
+              <Panel>
+                <div className="post-preview">
+                  <h2 className="post-title">
+                    {this.state.post.fields.title}
+                  </h2>
+                  <h3 className="post-subtitle">
+                    {this.state.post.fields.subtitle}
+                  </h3>
+                  <p className="post-meta">
+                    {this.state.post.fields.datestr || this.state.post.fields.date}
+                  </p>
+                  <div dangerouslySetInnerHTML={{ __html: this.state.post.fields.text }}>
+                  </div>
                 </div>
-              </div>
-              <hr />
-
+              </Panel>
             </Col>
           </Row>
           <Row>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import BlogMenu from './BlogMenu.js';
 
 class BlogTags extends React.Component {
 
@@ -22,7 +21,6 @@ class BlogTags extends React.Component {
         posts: JSON.parse(getAll.responseText).posts,
         tags: JSON.parse(getAll.responseText).tags,
       });
-      console.log(this.state);
       this.buildTagsObj();
     });
   }
@@ -74,12 +72,6 @@ class BlogTags extends React.Component {
     if(this.state.tagslist) {
       return (
         <div>
-          <Col xs={6} xsOffset={3} sm={2} smOffset={5}>
-            <BlogMenu />
-          </Col>
-          <br />
-          <br />
-          All Tags:
           {this.renderTags()}
         </div>
       );

@@ -70,10 +70,6 @@
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
-	var _BlogTags = __webpack_require__(505);
-
-	var _BlogTags2 = _interopRequireDefault(_BlogTags);
-
 	var _Contact = __webpack_require__(503);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
@@ -88,7 +84,6 @@
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog', component: _Blog2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/taglist', component: _BlogTags2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/blog/:urlstr', component: _BlogDetail2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _Contact2.default })
 	  ),
@@ -55143,13 +55138,13 @@
 
 	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
-	var _BlogMenu = __webpack_require__(504);
-
-	var _BlogMenu2 = _interopRequireDefault(_BlogMenu);
-
 	var _DateRanges = __webpack_require__(506);
 
 	var _DateRanges2 = _interopRequireDefault(_DateRanges);
+
+	var _BlogTags = __webpack_require__(505);
+
+	var _BlogTags2 = _interopRequireDefault(_BlogTags);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55179,6 +55174,11 @@
 	  _createClass(Blog, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      this.getInitData();
+	    }
+	  }, {
+	    key: 'getInitData',
+	    value: function getInitData() {
 	      var _this2 = this;
 
 	      var getRecent = $.ajax({
@@ -55199,6 +55199,7 @@
 	          _this2.setState({
 	            totalposts: parseInt(getCount.responseText)
 	          });
+	          console.log(_this2.state);
 	        });
 	      });
 	    }
@@ -55221,15 +55222,31 @@
 	      });
 	    }
 	  }, {
+	    key: 'getTagPosts',
+	    value: function getTagPosts(tag) {
+	      var _this4 = this;
+
+	      var getPosts = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/tags/' + tag
+	      }).done(function () {
+	        _this4.setState({
+	          posts: JSON.parse(getPosts.responseText).posts,
+	          tags: JSON.parse(getPosts.responseText).tags
+	        });
+	        console.log(_this4.state);
+	      });
+	    }
+	  }, {
 	    key: 'renderPosts',
 	    value: function renderPosts() {
-	      var _this4 = this;
+	      var _this5 = this;
 
 	      return this.state.posts.map(function (post) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this4.state.tags[post.pk] })
+	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this5.state.tags[post.pk] })
 	        );
 	      });
 	    }
@@ -55253,30 +55270,44 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { xs: 10, xsOffset: 1, sm: 8, smOffset: 2, md: 6, mdOffset: 4 },
-	          _react2.default.createElement(_BlogMenu2.default, null)
-	        ),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { xsHidden: true, sm: 4 },
+	          _reactBootstrap.Row,
+	          null,
 	          _react2.default.createElement(
-	            _reactBootstrap.Well,
-	            null,
-	            _react2.default.createElement(_DateRanges2.default, null)
+	            _reactBootstrap.Col,
+	            { xsHidden: true, sm: 4 },
+	            _react2.default.createElement(
+	              _reactBootstrap.Panel,
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Most Recent'
+	              ),
+	              _react2.default.createElement('br', null),
+	              'By Date:',
+	              _react2.default.createElement(
+	                _reactBootstrap.Well,
+	                null,
+	                _react2.default.createElement(_DateRanges2.default, null)
+	              ),
+	              'By Tag:',
+	              _react2.default.createElement(
+	                _reactBootstrap.Well,
+	                null,
+	                _react2.default.createElement(_BlogTags2.default, null)
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { xs: 10, sm: 8 },
+	            _react2.default.createElement(
+	              _reactBootstrap.Panel,
+	              null,
+	              this.renderPosts()
+	            ),
+	            this.renderMoreButton()
 	          )
-	        ),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        this.renderPosts(),
-	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
-	          this.renderMoreButton()
 	        )
 	      );
 	    }
@@ -55399,27 +55430,29 @@
 	              _reactBootstrap.Col,
 	              { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'post-preview' },
+	                _reactBootstrap.Panel,
+	                null,
 	                _react2.default.createElement(
-	                  'h2',
-	                  { className: 'post-title' },
-	                  this.state.post.fields.title
-	                ),
-	                _react2.default.createElement(
-	                  'h3',
-	                  { className: 'post-subtitle' },
-	                  this.state.post.fields.subtitle
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'post-meta' },
-	                  this.state.post.fields.datestr || this.state.post.fields.date
-	                ),
-	                _react2.default.createElement('hr', null),
-	                _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
-	              ),
-	              _react2.default.createElement('hr', null)
+	                  'div',
+	                  { className: 'post-preview' },
+	                  _react2.default.createElement(
+	                    'h2',
+	                    { className: 'post-title' },
+	                    this.state.post.fields.title
+	                  ),
+	                  _react2.default.createElement(
+	                    'h3',
+	                    { className: 'post-subtitle' },
+	                    this.state.post.fields.subtitle
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'post-meta' },
+	                    this.state.post.fields.datestr || this.state.post.fields.date
+	                  ),
+	                  _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.post.fields.text } })
+	                )
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -56030,78 +56063,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
-/* 504 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(230);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BlogMenu = function (_React$Component) {
-	  _inherits(BlogMenu, _React$Component);
-
-	  function BlogMenu(props) {
-	    _classCallCheck(this, BlogMenu);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogMenu).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(BlogMenu, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'blog-menu' },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'blog-menu-item', href: '/blog' },
-	          ' ',
-	          'Main',
-	          ' '
-	        ),
-	        '|',
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'blog-menu-item', href: '/blog/taglist' },
-	          ' ',
-	          'By Tag',
-	          ' '
-	        ),
-	        '|',
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'blog-menu-item', href: '/blog/taglist' },
-	          ' ',
-	          'By Date',
-	          ' '
-	        )
-	      );
-	    }
-	  }]);
-
-	  return BlogMenu;
-	}(_react2.default.Component);
-
-	module.exports = BlogMenu;
-
-/***/ },
+/* 504 */,
 /* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -56114,10 +56076,6 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactBootstrap = __webpack_require__(230);
-
-	var _BlogMenu = __webpack_require__(504);
-
-	var _BlogMenu2 = _interopRequireDefault(_BlogMenu);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56156,7 +56114,6 @@
 	          posts: JSON.parse(getAll.responseText).posts,
 	          tags: JSON.parse(getAll.responseText).tags
 	        });
-	        console.log(_this2.state);
 	        _this2.buildTagsObj();
 	      });
 	    }
@@ -56217,14 +56174,6 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.Col,
-	            { xs: 6, xsOffset: 3, sm: 2, smOffset: 5 },
-	            _react2.default.createElement(_BlogMenu2.default, null)
-	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('br', null),
-	          'All Tags:',
 	          this.renderTags()
 	        );
 	      } else {

@@ -39,12 +39,11 @@ def get_archive_dates(req):
     for date_arr in archive_dates:
         num_entries = BlogPost.objects.filter(date__year=date_arr[2],
                                               date__month=date_arr[1]).count()
-        month_info.append({ 'datestr': "{} {}".format(date_arr[0],
-                                                      date_arr[2]),
-                            'month': date_arr[1],
-                            'year': date_arr[2],
-                            'count': num_entries,
-        })
+        month_info.append({'datestr': "{} {}".format(date_arr[0],
+                                                     date_arr[2]),
+                           'month': date_arr[1],
+                           'year': date_arr[2],
+                           'count': num_entries})
     return HttpResponse(json.dumps(month_info))
 
 
@@ -130,15 +129,21 @@ def single(req, url):
     return HttpResponse(post)
 
 
-def get_comments(req, pk):
-    selectedPost = get_object_or_404(BlogPost, pk=pk)
-    data = Comment.objects.filter(post_id=selectedPost).order_by('-date')
-    data = serializers.serialize("json", data)
-    return HttpResponse(data)
+def get_tag_posts(req, tag):
+    posts = BlogPost.objects.filter(tags__name__in=[tag])
+    posts = serializers.serialize("json", posts)
+    return HttpResponse(posts)
 
 
-def add_comment(req, pk):
-    selectedPost = get_object_or_404(BlogPost, pk=pk)
-    send_new_comment_message(selectedPost.title)
-    Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
-    return HttpResponse()
+# def get_comments(req, pk):
+#     selectedPost = get_object_or_404(BlogPost, pk=pk)
+#     data = Comment.objects.filter(post_id=selectedPost).order_by('-date')
+#     data = serializers.serialize("json", data)
+#     return HttpResponse(data)
+
+
+# def add_comment(req, pk):
+#     selectedPost = get_object_or_404(BlogPost, pk=pk)
+#     send_new_comment_message(selectedPost.title)
+#     Comment.objects.create(post_id=selectedPost, name=req.POST['name'], text=req.POST['text'])
+#     return HttpResponse()

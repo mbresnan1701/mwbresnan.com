@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^api/quote$', views.quote),
     url(r'^api/single/(?P<url>\w+)$', views.single),
     url(r'^api/archive/dates$', views.get_archive_dates),
+    url(r'^api/tags/(?P<tag>\w+)$', views.get_tag_posts),
     # url(r'^(?P<pk>\d+)/api/comments/$', views.get_comments),
     # url(r'^(?P<pk>\d+)/api/comments/add/$', views.add_comment),
 ]

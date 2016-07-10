@@ -1,8 +1,8 @@
 import React from 'react';
-import { Well, Button, Col, Row } from 'react-bootstrap';
+import { Panel, Well, Button, Col, Row } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
-import BlogMenu from './BlogMenu.js';
 import DateRanges from './DateRanges.js';
+import BlogTags from './BlogTags.js';
 
 class Blog extends React.Component {
 
@@ -17,6 +17,10 @@ class Blog extends React.Component {
   }
 
   componentWillMount() {
+    this.getInitData();
+  }
+
+  getInitData() {
     const getRecent = $.ajax({
       method: 'GET',
       url: '/blog/api/blogstart',
@@ -37,6 +41,7 @@ class Blog extends React.Component {
         this.setState({
           totalposts: parseInt(getCount.responseText),
         });
+        console.log(this.state)
       });
     });
   }
@@ -54,6 +59,20 @@ class Blog extends React.Component {
         posts: this.state.posts.concat(moreData.posts),
         tags: this.state.tags.concat(moreData.tags),
       });
+    });
+  }
+
+  getTagPosts(tag) {
+    const getPosts = $.ajax({
+      method: 'GET',
+      url: '/blog/api/tags/' + tag,
+    })
+    .done(() => {
+      this.setState({
+        posts: JSON.parse(getPosts.responseText).posts,
+        tags: JSON.parse(getPosts.responseText).tags,
+      });
+      console.log(this.state)
     });
   }
 
@@ -83,24 +102,30 @@ class Blog extends React.Component {
   render() {
     return (
       <div>
-        <Col xs={10} xsOffset={1} sm={8} smOffset={2} md={6} mdOffset={4}>
-          <BlogMenu />
-        </Col>
-        <br />
-        <br />
-        <br />
-        <Col xsHidden sm={4}>
-          <Well>
-            <DateRanges />
-          </Well>
-        </Col>
-        <br />
-        <br />
-        <br />
-        {this.renderPosts()}
-        <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
-          {this.renderMoreButton()}
-        </Col>
+        <Row>
+          <Col xsHidden sm={4}>
+            <Panel>
+              <a href="#">
+                Most Recent
+              </a>
+              <br />
+              By Date:
+              <Well>
+                <DateRanges />
+              </Well>
+              By Tag:
+              <Well>
+                <BlogTags />
+              </Well>
+            </Panel>
+          </Col>
+          <Col xs={10} sm={8}>
+            <Panel>
+            {this.renderPosts()}
+            </Panel>
+            {this.renderMoreButton()}
+          </Col>
+        </Row>
       </div>
     );
   }
