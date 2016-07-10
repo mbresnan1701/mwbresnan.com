@@ -55250,9 +55250,11 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
-	          { xs: 6, xsOffset: 3, sm: 2, smOffset: 5 },
+	          { xs: 10, xsOffset: 1, sm: 8, smOffset: 2, md: 6, mdOffset: 4 },
 	          _react2.default.createElement(_BlogMenu2.default, null)
 	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement('br', null),
 	        this.renderPosts(),
 	        _react2.default.createElement(
@@ -56054,13 +56056,25 @@
 	        _react2.default.createElement(
 	          'a',
 	          { className: 'blog-menu-item', href: '/blog' },
-	          'Main'
+	          ' ',
+	          'Main',
+	          ' '
 	        ),
 	        '|',
 	        _react2.default.createElement(
 	          'a',
 	          { className: 'blog-menu-item', href: '/blog/taglist' },
-	          'Tags'
+	          ' ',
+	          'By Tag',
+	          ' '
+	        ),
+	        '|',
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'blog-menu-item', href: '/blog/taglist' },
+	          ' ',
+	          'By Date',
+	          ' '
 	        )
 	      );
 	    }
@@ -56157,7 +56171,6 @@
 	          return 1;
 	        }
 	      });
-	      console.log(tagList);
 
 	      this.setState({
 	        tagslist: tagList
@@ -56166,7 +56179,6 @@
 	  }, {
 	    key: 'renderTags',
 	    value: function renderTags() {
-	      console.log(this.state);
 	      return this.state.tagslist.map(function (tag) {
 	        return _react2.default.createElement(
 	          'div',

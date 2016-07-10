@@ -13,11 +13,15 @@ class BlogMenu extends React.Component {
     return (
         <div className="blog-menu">
           <a className="blog-menu-item" href="/blog">
-            Main
+            {' '}Main{' '}
           </a>
           |
           <a className="blog-menu-item" href="/blog/taglist">
-            Tags
+            {' '}By Tag{' '}
+          </a>
+          |
+          <a className="blog-menu-item" href="/blog/taglist">
+            {' '}By Date{' '}
           </a>
         </div>
     );

@@ -4,9 +4,18 @@ from .models import BlogPost, Quote, Comment
 from rest_framework import generics, viewsets
 from .serializers import BlogSerializer
 from django.core import serializers
-from django.db.models import Max
+from django.db.models import Max, Count
 from mwbresnan.contactcontroller import send_new_comment_message
 import json
+
+
+archive_dates = [['June', '06', '2016'], ['July', '07', '2016'],
+                 ['August', '08', '2016'], ['September', '09', '2016'],
+                 ['October', '10', '2016'], ['November', '11', '2016'],
+                 ['December', '12', '2016'], ['January', '01', '2017'],
+                 ['February', '02', '2017'], ['March', '03', '2017'],
+                 ['April', '04', '2017'], ['May', '5', '2017'],
+                 ['June', '6', '2017'], ['July', '7', '2017']]
 
 
 def main_posts(req):
@@ -23,6 +32,18 @@ def post_detail(req, url):
 
 def not_found(req):
     return render(req, 'masters/404.html')
+
+
+def get_archive_dates(req):
+    month_info = {}
+    for date_arr in archive_dates:
+        num_entries = BlogPost.objects.filter(date__year=date_arr[2],
+                                              date__month=date_arr[1]).count()
+        month_info["{} {}, {}".format(date_arr[0],
+                                      date_arr[1],
+                                      date_arr[2])] = num_entries
+
+    return HttpResponse(json.dumps(archive_dates))
 
 
 def all_posts(req):
@@ -62,6 +83,7 @@ def get_post_count(req):
 
 
 def first_ten(req):
+    print(BlogPost.objects.filter(date__year='2016').extra({'month' : "MONTH(date)"}).values_list('month').annotate(total_item=Count('pk')))
     data = BlogPost.objects.all().order_by('-date')[:10]
     tag_data = {}
     for item in data:

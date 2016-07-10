@@ -2,20 +2,18 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import BlogMenu from './BlogMenu.js';
 
-class BlogTags extends React.Component {
+class DateRanges extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      tags: [],
-      tagslist: [],
+      dates: [],
     };
   }
   componentWillMount() {
     const getAll = $.ajax({
       method: 'GET',
-      url: '/blog/api/allposts',
+      url: '/blog/api/archive/dates',
     })
     .done(() => {
       this.setState({
@@ -24,37 +22,6 @@ class BlogTags extends React.Component {
       });
       console.log(this.state);
       this.buildTagsObj();
-    });
-  }
-
-  buildTagsObj() {
-    let newTagObj = {};
-    for (let indvTagObj in this.state.tags) {
-      for (let i = 0; i < this.state.tags[indvTagObj].length; i++) {
-        if (newTagObj[this.state.tags[indvTagObj][i].fields.name]) {
-          newTagObj[this.state.tags[indvTagObj][i].fields.name] += 1;
-        } else {
-          newTagObj[this.state.tags[indvTagObj][i].fields.name] = 1;
-        }
-      }
-    }
-    let tagList = [];
-    for (let tagItem in newTagObj) {
-      tagList.push({ item: tagItem, cnt: newTagObj[tagItem] });
-    }
-    tagList = tagList.sort((a, b) => {
-      let nameA = a.item.toUpperCase(); // ignore upper and lowercase
-      let nameB = b.item.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-    });
-
-    this.setState({
-      tagslist: tagList,
     });
   }
 
@@ -92,4 +59,4 @@ class BlogTags extends React.Component {
 
 }
 
-module.exports = BlogTags;
+module.exports = DateRanges;

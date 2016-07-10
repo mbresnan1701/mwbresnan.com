@@ -82,9 +82,11 @@ class Blog extends React.Component {
   render() {
     return (
       <div>
-        <Col xs={6} xsOffset={3} sm={2} smOffset={5}>
+        <Col xs={10} xsOffset={1} sm={8} smOffset={2} md={6} mdOffset={4}>
           <BlogMenu />
         </Col>
+        <br />
+        <br />
         <br />
         {this.renderPosts()}
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>

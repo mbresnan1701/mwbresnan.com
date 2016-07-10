@@ -14,8 +14,9 @@ urlpatterns = [
     url(r'^api/postcount$', views.get_post_count),
     url(r'^api/quote$', views.quote),
     url(r'^api/single/(?P<url>\w+)$', views.single),
-    url(r'^(?P<pk>\d+)/api/comments/$', views.get_comments),
-    url(r'^(?P<pk>\d+)/api/comments/add/$', views.add_comment),
+    url(r'^api/archive/dates$', views.get_archive_dates),
+    # url(r'^(?P<pk>\d+)/api/comments/$', views.get_comments),
+    # url(r'^(?P<pk>\d+)/api/comments/add/$', views.add_comment),
 ]
 
 
