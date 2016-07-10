@@ -39,14 +39,12 @@ def get_archive_dates(req):
     for date_arr in archive_dates:
         num_entries = BlogPost.objects.filter(date__year=date_arr[2],
                                               date__month=date_arr[1]).count()
-        month_info.append({ 'datestr': "{} {}, {}".format(date_arr[0],
-                                      date_arr[1],
-                                      date_arr[2]),
+        month_info.append({ 'datestr': "{} {}".format(date_arr[0],
+                                                      date_arr[2]),
                             'month': date_arr[1],
                             'year': date_arr[2],
                             'count': num_entries,
         })
-    # return HttpResponse()
     return HttpResponse(json.dumps(month_info))
 
 

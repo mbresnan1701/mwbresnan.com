@@ -56291,25 +56291,26 @@
 	        _this2.setState({
 	          dates: JSON.parse(getDates.responseText)
 	        });
-	        console.log(_this2.state);
 	      });
 	    }
 	  }, {
 	    key: 'renderDates',
 	    value: function renderDates() {
 	      return this.state.dates.map(function (date) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: date },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#' },
-	            date.datestr,
-	            ' (',
-	            date.count,
-	            ')'
-	          )
-	        );
+	        if (date.count > 0) {
+	          return _react2.default.createElement(
+	            'div',
+	            { key: date.datestr },
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#' },
+	              date.datestr,
+	              ' (',
+	              date.count,
+	              ')'
+	            )
+	          );
+	        }
 	      });
 	    }
 	  }, {

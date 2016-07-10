@@ -18,19 +18,20 @@ class DateRanges extends React.Component {
       this.setState({
         dates: JSON.parse(getDates.responseText),
       });
-      console.log(this.state);
     });
   }
 
   renderDates() {
     return this.state.dates.map((date) => {
-      return (
-        <div key={date}>
-          <a href="#">
-            {date.datestr} ({date.count})
-          </a>
-        </div>
-      );
+      if (date.count > 0) {
+        return (
+          <div key={date.datestr}>
+            <a href="#">
+              {date.datestr} ({date.count})
+            </a>
+          </div>
+        );
+      }
     });
   }
 
