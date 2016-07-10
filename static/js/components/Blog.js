@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Well, Button, Col, Row } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
 import BlogMenu from './BlogMenu.js';
+import DateRanges from './DateRanges.js';
 
 class Blog extends React.Component {
 
@@ -84,6 +85,14 @@ class Blog extends React.Component {
       <div>
         <Col xs={10} xsOffset={1} sm={8} smOffset={2} md={6} mdOffset={4}>
           <BlogMenu />
+        </Col>
+        <br />
+        <br />
+        <br />
+        <Col xsHidden sm={4}>
+          <Well>
+            <DateRanges />
+          </Well>
         </Col>
         <br />
         <br />

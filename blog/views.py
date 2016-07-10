@@ -35,15 +35,19 @@ def not_found(req):
 
 
 def get_archive_dates(req):
-    month_info = {}
+    month_info = []
     for date_arr in archive_dates:
         num_entries = BlogPost.objects.filter(date__year=date_arr[2],
                                               date__month=date_arr[1]).count()
-        month_info["{} {}, {}".format(date_arr[0],
+        month_info.append({ 'datestr': "{} {}, {}".format(date_arr[0],
                                       date_arr[1],
-                                      date_arr[2])] = num_entries
-
-    return HttpResponse(json.dumps(archive_dates))
+                                      date_arr[2]),
+                            'month': date_arr[1],
+                            'year': date_arr[2],
+                            'count': num_entries,
+        })
+    # return HttpResponse()
+    return HttpResponse(json.dumps(month_info))
 
 
 def all_posts(req):
@@ -83,11 +87,9 @@ def get_post_count(req):
 
 
 def first_ten(req):
-    print(BlogPost.objects.filter(date__year='2016').extra({'month' : "MONTH(date)"}).values_list('month').annotate(total_item=Count('pk')))
     data = BlogPost.objects.all().order_by('-date')[:10]
     tag_data = {}
     for item in data:
-        print(item.tags.all())
         tags = serializers.serialize("json", item.tags.all())
         tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)
@@ -105,7 +107,6 @@ def next_ten(req):
     data = BlogPost.objects.all().order_by('-date')[start:start + 10]
     tag_data = {}
     for item in data:
-        print(item.tags.all())
         tags = serializers.serialize("json", item.tags.all())
         tag_data[item.pk] = json.loads(tags)
     data = serializers.serialize("json", data)

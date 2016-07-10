@@ -55147,6 +55147,10 @@
 
 	var _BlogMenu2 = _interopRequireDefault(_BlogMenu);
 
+	var _DateRanges = __webpack_require__(506);
+
+	var _DateRanges2 = _interopRequireDefault(_DateRanges);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55252,6 +55256,18 @@
 	          _reactBootstrap.Col,
 	          { xs: 10, xsOffset: 1, sm: 8, smOffset: 2, md: 6, mdOffset: 4 },
 	          _react2.default.createElement(_BlogMenu2.default, null)
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { xsHidden: true, sm: 4 },
+	          _react2.default.createElement(
+	            _reactBootstrap.Well,
+	            null,
+	            _react2.default.createElement(_DateRanges2.default, null)
+	          )
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement('br', null),
@@ -56225,6 +56241,92 @@
 	}(_react2.default.Component);
 
 	module.exports = BlogTags;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 506 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DateRanges = function (_React$Component) {
+	  _inherits(DateRanges, _React$Component);
+
+	  function DateRanges(props) {
+	    _classCallCheck(this, DateRanges);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateRanges).call(this, props));
+
+	    _this.state = {
+	      dates: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(DateRanges, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getDates = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/archive/dates'
+	      }).done(function () {
+	        _this2.setState({
+	          dates: JSON.parse(getDates.responseText)
+	        });
+	        console.log(_this2.state);
+	      });
+	    }
+	  }, {
+	    key: 'renderDates',
+	    value: function renderDates() {
+	      return this.state.dates.map(function (date) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: date },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            date.datestr,
+	            ' (',
+	            date.count,
+	            ')'
+	          )
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.renderDates()
+	      );
+	    }
+	  }]);
+
+	  return DateRanges;
+	}(_react2.default.Component);
+
+	module.exports = DateRanges;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }

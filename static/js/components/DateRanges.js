@@ -1,6 +1,5 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import BlogMenu from './BlogMenu.js';
 
 class DateRanges extends React.Component {
 
@@ -11,26 +10,24 @@ class DateRanges extends React.Component {
     };
   }
   componentWillMount() {
-    const getAll = $.ajax({
+    const getDates = $.ajax({
       method: 'GET',
       url: '/blog/api/archive/dates',
     })
     .done(() => {
       this.setState({
-        posts: JSON.parse(getAll.responseText).posts,
-        tags: JSON.parse(getAll.responseText).tags,
+        dates: JSON.parse(getDates.responseText),
       });
       console.log(this.state);
-      this.buildTagsObj();
     });
   }
 
-  renderTags() {
-    return this.state.tagslist.map((tag) => {
+  renderDates() {
+    return this.state.dates.map((date) => {
       return (
-        <div key={tag.item}>
+        <div key={date}>
           <a href="#">
-            {tag.item} ({tag.cnt})
+            {date.datestr} ({date.count})
           </a>
         </div>
       );
@@ -38,25 +35,12 @@ class DateRanges extends React.Component {
   }
 
   render() {
-    if(this.state.tagslist) {
-      return (
-        <div>
-          <Col xs={6} xsOffset={3} sm={2} smOffset={5}>
-            <BlogMenu />
-          </Col>
-          <br />
-          <br />
-          All Tags:
-          {this.renderTags()}
-        </div>
-      );
-    } else {
-      return (
-        <div>loading...</div>
-      );
-    }
+    return (
+      <div>
+        {this.renderDates()}
+      </div>
+    );
   }
-
 }
 
 module.exports = DateRanges;
