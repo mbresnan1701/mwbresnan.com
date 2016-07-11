@@ -12,15 +12,6 @@ class BlogTags extends React.Component {
   }
 
   componentDidUpdate() {
-    // const getAll = $.ajax({
-    //   method: 'GET',
-    //   url: '/blog/api/allposts',
-    // })
-    // .done(() => {
-    //   this.setState({
-    //     posts: JSON.parse(getAll.responseText).posts,
-    //     tags: JSON.parse(getAll.responseText).tags,
-    //   });
     if (this.state.gotlist === false) {
       this.setState({
         tagslist: this.buildTagsObj(),
@@ -32,8 +23,6 @@ class BlogTags extends React.Component {
 
   buildTagsObj() {
     const newTagObj = {};
-    console.log('BTO')
-    console.log(this.props.tags)
     for (let indvTagObj in this.props.tags) {
       for (let i = 0; i < this.props.tags[indvTagObj].length; i++) {
         if (newTagObj[this.props.tags[indvTagObj][i].fields.name]) {
@@ -57,22 +46,24 @@ class BlogTags extends React.Component {
         return 1;
       }
     });
-    console.log(tagList)
     return tagList;
   }
-            // onClick={this.props.tagview(tag.item)}
+
+  handleClick(name) {
+    this.props.tagview(name);
+  }
 
   renderTags() {
     return this.state.tagslist.map((tag) => {
       return (
-        <div key={tag.item}>
-          <Button
-            bsStyle="link"
-            className="tag-date-list-item"
-          >
-            {tag.item} ({tag.cnt})
-          </Button>
-        </div>
+        <Button
+          onClick={this.handleClick.bind(this, tag.item)}
+          bsStyle="link"
+          key={tag.item}
+          className="tag-date-list-item"
+        >
+          {tag.item} ({tag.cnt})
+        </Button>
       );
     });
   }
@@ -86,7 +77,7 @@ class BlogTags extends React.Component {
       );
     } else {
       return (
-        <div>loading...</div>
+        <div>LOADING GIF HERE...</div>
       );
     }
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 
 class TagGroup extends React.Component {
 
@@ -9,16 +9,22 @@ class TagGroup extends React.Component {
     };
   }
 
+  handleClick(tag) {
+    this.props.tagview(tag);
+  }
+
   renderTags() {
     return this.props.tags.map((tag) => {
       return (
-        <div key={tag.pk}>
-          <a href="#">
-            <div className="tag">
-              {tag.fields.name}
-            </div>
-          </a>
-        </div>
+          <div key={tag.fields.name}>
+            <a
+              onClick={this.handleClick.bind(this, tag.fields.name)}
+            >
+              <div className="tag">
+                {tag.fields.name}
+              </div>
+            </a>
+          </div>
       );
     });
   }

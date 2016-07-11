@@ -409,8 +409,8 @@ footer {
   background-image: url('../websiteimgs/black-website-background.jpg');
 }
 
-.tag-group {
-
+.tag-button {
+  width: 37px;
 }
 
 .tag {
@@ -420,7 +420,9 @@ footer {
   width: 75px;
   float: left;
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
+  cursor: pointer;
+
 }
 
 .tagclear {

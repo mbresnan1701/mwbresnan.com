@@ -64,19 +64,14 @@ class Blog extends React.Component {
   }
 
   getTagPosts(tag) {
-    console.log("Hit getTagPosts")
-    console.log(tag)
-
     const getPosts = $.ajax({
       method: 'GET',
       url: '/blog/api/tags/' + tag,
     })
     .done(() => {
       this.setState({
-        posts: JSON.parse(getPosts.responseText).posts,
-        tags: JSON.parse(getPosts.responseText).tags,
+        posts: JSON.parse(getPosts.responseText),
       });
-      console.log(this.state)
     });
   }
 
@@ -96,17 +91,15 @@ class Blog extends React.Component {
   //   });
   // }
 
-  setSpecial() {
-    this.setState({
-      special: !this.state.special,
-    });
-  }
-
   renderPosts() {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <PostListItem post={post} tags={this.state.tags[post.pk]} />
+          <PostListItem
+            tagview={this.getTagPosts.bind(this)}
+            post={post}
+            tags={this.state.tags[post.pk]}
+          />
         </div>
 
       );
@@ -126,11 +119,9 @@ class Blog extends React.Component {
     }
   }
 
-                  // invertspecial={this.setSpecial.bind(this)}
-                  // tagview={this.getTagPosts.bind(this)}
 
   render() {
-    if(this.state.posts && this.state.tags) {
+    if (this.state.posts && this.state.tags) {
       return (
         <div>
           <Row>
@@ -149,6 +140,7 @@ class Blog extends React.Component {
                   <BlogTags
                     posts={this.state.posts}
                     tags={this.state.tags}
+                    tagview={this.getTagPosts.bind(this)}
                   />
                 </Well>
               </Panel>

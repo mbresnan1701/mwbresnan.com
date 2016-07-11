@@ -32,7 +32,7 @@ class PostListItem extends React.Component {
             </a>
           </p>
           <Row>
-            <TagGroup tags={this.props.tags} />
+            <TagGroup tagview={this.props.tagview} tags={this.props.tags} />
           </Row>
         </div>
         <hr />

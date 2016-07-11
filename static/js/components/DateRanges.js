@@ -25,11 +25,9 @@ class DateRanges extends React.Component {
     return this.state.dates.map((date) => {
       if (date.count > 0) {
         return (
-          <div key={date.datestr}>
-            <Button bsStyle="link" className="tag-date-list-item" >
-              {date.datestr} ({date.count})
-            </Button>
-          </div>
+          <Button key={date.datestr} bsStyle="link" className="tag-date-list-item" >
+            {date.datestr} ({date.count})
+          </Button>
         );
       }
     });

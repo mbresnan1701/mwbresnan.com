@@ -55032,7 +55032,7 @@
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
 	            null,
-	            _react2.default.createElement(_TagGroup2.default, { tags: this.props.tags })
+	            _react2.default.createElement(_TagGroup2.default, { tagview: this.props.tagview, tags: this.props.tags })
 	          )
 	        ),
 	        _react2.default.createElement('hr', null)
@@ -55080,15 +55080,24 @@
 	  }
 
 	  _createClass(TagGroup, [{
+	    key: 'handleClick',
+	    value: function handleClick(tag) {
+	      this.props.tagview(tag);
+	    }
+	  }, {
 	    key: 'renderTags',
 	    value: function renderTags() {
+	      var _this2 = this;
+
 	      return this.props.tags.map(function (tag) {
 	        return _react2.default.createElement(
 	          'div',
-	          { key: tag.pk },
+	          { key: tag.fields.name },
 	          _react2.default.createElement(
 	            'a',
-	            { href: '#' },
+	            {
+	              onClick: _this2.handleClick.bind(_this2, tag.fields.name)
+	            },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'tag' },
@@ -55228,18 +55237,13 @@
 	    value: function getTagPosts(tag) {
 	      var _this4 = this;
 
-	      console.log("Hit getTagPosts");
-	      console.log(tag);
-
 	      var getPosts = $.ajax({
 	        method: 'GET',
 	        url: '/blog/api/tags/' + tag
 	      }).done(function () {
 	        _this4.setState({
-	          posts: JSON.parse(getPosts.responseText).posts,
-	          tags: JSON.parse(getPosts.responseText).tags
+	          posts: JSON.parse(getPosts.responseText)
 	        });
-	        console.log(_this4.state);
 	      });
 	    }
 
@@ -55260,13 +55264,6 @@
 	    // }
 
 	  }, {
-	    key: 'setSpecial',
-	    value: function setSpecial() {
-	      this.setState({
-	        special: !this.state.special
-	      });
-	    }
-	  }, {
 	    key: 'renderPosts',
 	    value: function renderPosts() {
 	      var _this5 = this;
@@ -55275,7 +55272,11 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this5.state.tags[post.pk] })
+	          _react2.default.createElement(_PostListItem2.default, {
+	            tagview: _this5.getTagPosts.bind(_this5),
+	            post: post,
+	            tags: _this5.state.tags[post.pk]
+	          })
 	        );
 	      });
 	    }
@@ -55295,10 +55296,6 @@
 	        return _react2.default.createElement('div', null);
 	      }
 	    }
-
-	    // invertspecial={this.setSpecial.bind(this)}
-	    // tagview={this.getTagPosts.bind(this)}
-
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -55333,7 +55330,8 @@
 	                  null,
 	                  _react2.default.createElement(_BlogTags2.default, {
 	                    posts: this.state.posts,
-	                    tags: this.state.tags
+	                    tags: this.state.tags,
+	                    tagview: this.getTagPosts.bind(this)
 	                  })
 	                )
 	              )
@@ -56150,15 +56148,6 @@
 	  _createClass(BlogTags, [{
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      // const getAll = $.ajax({
-	      //   method: 'GET',
-	      //   url: '/blog/api/allposts',
-	      // })
-	      // .done(() => {
-	      //   this.setState({
-	      //     posts: JSON.parse(getAll.responseText).posts,
-	      //     tags: JSON.parse(getAll.responseText).tags,
-	      //   });
 	      if (this.state.gotlist === false) {
 	        this.setState({
 	          tagslist: this.buildTagsObj(),
@@ -56171,8 +56160,6 @@
 	    key: 'buildTagsObj',
 	    value: function buildTagsObj() {
 	      var newTagObj = {};
-	      console.log('BTO');
-	      console.log(this.props.tags);
 	      for (var indvTagObj in this.props.tags) {
 	        for (var i = 0; i < this.props.tags[indvTagObj].length; i++) {
 	          if (newTagObj[this.props.tags[indvTagObj][i].fields.name]) {
@@ -56196,29 +56183,31 @@
 	          return 1;
 	        }
 	      });
-	      console.log(tagList);
 	      return tagList;
 	    }
-	    // onClick={this.props.tagview(tag.item)}
-
+	  }, {
+	    key: 'handleClick',
+	    value: function handleClick(name) {
+	      this.props.tagview(name);
+	    }
 	  }, {
 	    key: 'renderTags',
 	    value: function renderTags() {
+	      var _this2 = this;
+
 	      return this.state.tagslist.map(function (tag) {
 	        return _react2.default.createElement(
-	          'div',
-	          { key: tag.item },
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            {
-	              bsStyle: 'link',
-	              className: 'tag-date-list-item'
-	            },
-	            tag.item,
-	            ' (',
-	            tag.cnt,
-	            ')'
-	          )
+	          _reactBootstrap.Button,
+	          {
+	            onClick: _this2.handleClick.bind(_this2, tag.item),
+	            bsStyle: 'link',
+	            key: tag.item,
+	            className: 'tag-date-list-item'
+	          },
+	          tag.item,
+	          ' (',
+	          tag.cnt,
+	          ')'
 	        );
 	      });
 	    }
@@ -56235,7 +56224,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          'loading...'
+	          'LOADING GIF HERE...'
 	        );
 	      }
 	    }
@@ -56302,16 +56291,12 @@
 	      return this.state.dates.map(function (date) {
 	        if (date.count > 0) {
 	          return _react2.default.createElement(
-	            'div',
-	            { key: date.datestr },
-	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { bsStyle: 'link', className: 'tag-date-list-item' },
-	              date.datestr,
-	              ' (',
-	              date.count,
-	              ')'
-	            )
+	            _reactBootstrap.Button,
+	            { key: date.datestr, bsStyle: 'link', className: 'tag-date-list-item' },
+	            date.datestr,
+	            ' (',
+	            date.count,
+	            ')'
 	          );
 	        }
 	      });
