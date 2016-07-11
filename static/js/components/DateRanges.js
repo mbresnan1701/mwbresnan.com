@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
 class DateRanges extends React.Component {
 
@@ -26,9 +26,9 @@ class DateRanges extends React.Component {
       if (date.count > 0) {
         return (
           <div key={date.datestr}>
-            <a href="#">
+            <Button bsStyle="link" className="tag-date-list-item" >
               {date.datestr} ({date.count})
-            </a>
+            </Button>
           </div>
         );
       }

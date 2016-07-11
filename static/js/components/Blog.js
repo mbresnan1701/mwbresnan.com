@@ -13,6 +13,7 @@ class Blog extends React.Component {
       tags: [],
       totalposts: 0,
       localposts: 0,
+      special: false,
     };
   }
 
@@ -21,28 +22,28 @@ class Blog extends React.Component {
   }
 
   getInitData() {
-    const getRecent = $.ajax({
+    const getAll = $.ajax({
       method: 'GET',
-      url: '/blog/api/blogstart',
+      url: '/blog/api/allposts',
     })
     .done(() => {
       this.setState({
-        posts: JSON.parse(getRecent.responseText).posts,
-        tags: JSON.parse(getRecent.responseText).tags,
+        posts: JSON.parse(getAll.responseText).posts,
+        tags: JSON.parse(getAll.responseText).tags,
       });
-      this.setState({
-        localposts: this.state.posts.length,
-      });
-      const getCount = $.ajax({
-        method: 'GET',
-        url: '/blog/api/postcount',
-      })
-      .done(() => {
-        this.setState({
-          totalposts: parseInt(getCount.responseText),
-        });
-        console.log(this.state)
-      });
+      // this.setState({
+      //   localposts: this.state.posts.length,
+      // });
+      // const getCount = $.ajax({
+      //   method: 'GET',
+      //   url: '/blog/api/postcount',
+      // })
+      // .done(() => {
+      //   this.setState({
+      //     totalposts: parseInt(getCount.responseText),
+      //   });
+        // console.log(this.state)
+      // });
     });
   }
 
@@ -63,6 +64,9 @@ class Blog extends React.Component {
   }
 
   getTagPosts(tag) {
+    console.log("Hit getTagPosts")
+    console.log(tag)
+
     const getPosts = $.ajax({
       method: 'GET',
       url: '/blog/api/tags/' + tag,
@@ -73,6 +77,28 @@ class Blog extends React.Component {
         tags: JSON.parse(getPosts.responseText).tags,
       });
       console.log(this.state)
+    });
+  }
+
+  // getDatePosts(date) {
+  //   const getPosts = $.ajax({
+  //     method: 'GET',
+  //     url: '/blog/api/archive/' + date,
+  //   })
+  //   .done(() => {
+  //     this.setState({
+  //       posts: JSON.parse(getPosts.responseText).posts,
+  //       tags: JSON.parse(getPosts.responseText).tags,
+          // special: true,
+
+  //     });
+  //     console.log(this.state)
+  //   });
+  // }
+
+  setSpecial() {
+    this.setState({
+      special: !this.state.special,
     });
   }
 
@@ -87,8 +113,9 @@ class Blog extends React.Component {
     });
   }
 
+  //UPDATE
   renderMoreButton() {
-    if (this.state.localposts < this.state.totalposts) {
+    if (true) {
       return (
         <Button onClick={this.getMorePosts.bind(this)}>Load older</Button>
       );
@@ -99,35 +126,50 @@ class Blog extends React.Component {
     }
   }
 
+                  // invertspecial={this.setSpecial.bind(this)}
+                  // tagview={this.getTagPosts.bind(this)}
+
   render() {
-    return (
-      <div>
-        <Row>
-          <Col xsHidden sm={4}>
-            <Panel>
-              <a href="#">
-                Most Recent
-              </a>
-              <br />
-              By Date:
-              <Well>
-                <DateRanges />
-              </Well>
-              By Tag:
-              <Well>
-                <BlogTags />
-              </Well>
-            </Panel>
-          </Col>
-          <Col xs={10} sm={8}>
-            <Panel>
-            {this.renderPosts()}
-            </Panel>
-            {this.renderMoreButton()}
-          </Col>
-        </Row>
-      </div>
-    );
+    if(this.state.posts && this.state.tags) {
+      return (
+        <div>
+          <Row>
+            <Col xsHidden sm={4}>
+              <Panel>
+                <a href="#">
+                  Most Recent
+                </a>
+                <br />
+                By Date:
+                <Well>
+                  <DateRanges />
+                </Well>
+                By Tag:
+                <Well>
+                  <BlogTags
+                    posts={this.state.posts}
+                    tags={this.state.tags}
+                  />
+                </Well>
+              </Panel>
+            </Col>
+            <Col xs={10} sm={8}>
+              <Panel>
+              {this.renderPosts()}
+              </Panel>
+              {this.renderMoreButton()}
+            </Col>
+          </Row>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          LOADING GIF HERE!!!
+        </div>
+      );
+    }
+
   }
 
 }

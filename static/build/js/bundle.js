@@ -55166,7 +55166,8 @@
 	      posts: [],
 	      tags: [],
 	      totalposts: 0,
-	      localposts: 0
+	      localposts: 0,
+	      special: false
 	    };
 	    return _this;
 	  }
@@ -55181,26 +55182,27 @@
 	    value: function getInitData() {
 	      var _this2 = this;
 
-	      var getRecent = $.ajax({
+	      var getAll = $.ajax({
 	        method: 'GET',
-	        url: '/blog/api/blogstart'
+	        url: '/blog/api/allposts'
 	      }).done(function () {
 	        _this2.setState({
-	          posts: JSON.parse(getRecent.responseText).posts,
-	          tags: JSON.parse(getRecent.responseText).tags
+	          posts: JSON.parse(getAll.responseText).posts,
+	          tags: JSON.parse(getAll.responseText).tags
 	        });
-	        _this2.setState({
-	          localposts: _this2.state.posts.length
-	        });
-	        var getCount = $.ajax({
-	          method: 'GET',
-	          url: '/blog/api/postcount'
-	        }).done(function () {
-	          _this2.setState({
-	            totalposts: parseInt(getCount.responseText)
-	          });
-	          console.log(_this2.state);
-	        });
+	        // this.setState({
+	        //   localposts: this.state.posts.length,
+	        // });
+	        // const getCount = $.ajax({
+	        //   method: 'GET',
+	        //   url: '/blog/api/postcount',
+	        // })
+	        // .done(() => {
+	        //   this.setState({
+	        //     totalposts: parseInt(getCount.responseText),
+	        //   });
+	        // console.log(this.state)
+	        // });
 	      });
 	    }
 	  }, {
@@ -55226,6 +55228,9 @@
 	    value: function getTagPosts(tag) {
 	      var _this4 = this;
 
+	      console.log("Hit getTagPosts");
+	      console.log(tag);
+
 	      var getPosts = $.ajax({
 	        method: 'GET',
 	        url: '/blog/api/tags/' + tag
@@ -55235,6 +55240,30 @@
 	          tags: JSON.parse(getPosts.responseText).tags
 	        });
 	        console.log(_this4.state);
+	      });
+	    }
+
+	    // getDatePosts(date) {
+	    //   const getPosts = $.ajax({
+	    //     method: 'GET',
+	    //     url: '/blog/api/archive/' + date,
+	    //   })
+	    //   .done(() => {
+	    //     this.setState({
+	    //       posts: JSON.parse(getPosts.responseText).posts,
+	    //       tags: JSON.parse(getPosts.responseText).tags,
+	    // special: true,
+
+	    //     });
+	    //     console.log(this.state)
+	    //   });
+	    // }
+
+	  }, {
+	    key: 'setSpecial',
+	    value: function setSpecial() {
+	      this.setState({
+	        special: !this.state.special
 	      });
 	    }
 	  }, {
@@ -55250,10 +55279,13 @@
 	        );
 	      });
 	    }
+
+	    //UPDATE
+
 	  }, {
 	    key: 'renderMoreButton',
 	    value: function renderMoreButton() {
-	      if (this.state.localposts < this.state.totalposts) {
+	      if (true) {
 	        return _react2.default.createElement(
 	          _reactBootstrap.Button,
 	          { onClick: this.getMorePosts.bind(this) },
@@ -55263,53 +55295,68 @@
 	        return _react2.default.createElement('div', null);
 	      }
 	    }
+
+	    // invertspecial={this.setSpecial.bind(this)}
+	    // tagview={this.getTagPosts.bind(this)}
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
+	      if (this.state.posts && this.state.tags) {
+	        return _react2.default.createElement(
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            _reactBootstrap.Col,
-	            { xsHidden: true, sm: 4 },
+	            _reactBootstrap.Row,
+	            null,
 	            _react2.default.createElement(
-	              _reactBootstrap.Panel,
-	              null,
+	              _reactBootstrap.Col,
+	              { xsHidden: true, sm: 4 },
 	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'Most Recent'
-	              ),
-	              _react2.default.createElement('br', null),
-	              'By Date:',
-	              _react2.default.createElement(
-	                _reactBootstrap.Well,
+	                _reactBootstrap.Panel,
 	                null,
-	                _react2.default.createElement(_DateRanges2.default, null)
-	              ),
-	              'By Tag:',
-	              _react2.default.createElement(
-	                _reactBootstrap.Well,
-	                null,
-	                _react2.default.createElement(_BlogTags2.default, null)
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  'Most Recent'
+	                ),
+	                _react2.default.createElement('br', null),
+	                'By Date:',
+	                _react2.default.createElement(
+	                  _reactBootstrap.Well,
+	                  null,
+	                  _react2.default.createElement(_DateRanges2.default, null)
+	                ),
+	                'By Tag:',
+	                _react2.default.createElement(
+	                  _reactBootstrap.Well,
+	                  null,
+	                  _react2.default.createElement(_BlogTags2.default, {
+	                    posts: this.state.posts,
+	                    tags: this.state.tags
+	                  })
+	                )
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Col,
-	            { xs: 10, sm: 8 },
-	            _react2.default.createElement(
-	              _reactBootstrap.Panel,
-	              null,
-	              this.renderPosts()
 	            ),
-	            this.renderMoreButton()
+	            _react2.default.createElement(
+	              _reactBootstrap.Col,
+	              { xs: 10, sm: 8 },
+	              _react2.default.createElement(
+	                _reactBootstrap.Panel,
+	                null,
+	                this.renderPosts()
+	              ),
+	              this.renderMoreButton()
+	            )
 	          )
-	        )
-	      );
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'LOADING GIF HERE!!!'
+	        );
+	      }
 	    }
 	  }]);
 
@@ -56067,7 +56114,7 @@
 /* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -56094,39 +56141,44 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogTags).call(this, props));
 
 	    _this.state = {
-	      posts: [],
-	      tags: [],
-	      tagslist: []
+	      tagslist: [],
+	      gotlist: false
 	    };
 	    return _this;
 	  }
 
 	  _createClass(BlogTags, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      var getAll = $.ajax({
-	        method: 'GET',
-	        url: '/blog/api/allposts'
-	      }).done(function () {
-	        _this2.setState({
-	          posts: JSON.parse(getAll.responseText).posts,
-	          tags: JSON.parse(getAll.responseText).tags
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      // const getAll = $.ajax({
+	      //   method: 'GET',
+	      //   url: '/blog/api/allposts',
+	      // })
+	      // .done(() => {
+	      //   this.setState({
+	      //     posts: JSON.parse(getAll.responseText).posts,
+	      //     tags: JSON.parse(getAll.responseText).tags,
+	      //   });
+	      if (this.state.gotlist === false) {
+	        this.setState({
+	          tagslist: this.buildTagsObj(),
+	          gotlist: true
 	        });
-	        _this2.buildTagsObj();
-	      });
+	        this.render();
+	      }
 	    }
 	  }, {
 	    key: 'buildTagsObj',
 	    value: function buildTagsObj() {
 	      var newTagObj = {};
-	      for (var indvTagObj in this.state.tags) {
-	        for (var i = 0; i < this.state.tags[indvTagObj].length; i++) {
-	          if (newTagObj[this.state.tags[indvTagObj][i].fields.name]) {
-	            newTagObj[this.state.tags[indvTagObj][i].fields.name] += 1;
+	      console.log('BTO');
+	      console.log(this.props.tags);
+	      for (var indvTagObj in this.props.tags) {
+	        for (var i = 0; i < this.props.tags[indvTagObj].length; i++) {
+	          if (newTagObj[this.props.tags[indvTagObj][i].fields.name]) {
+	            newTagObj[this.props.tags[indvTagObj][i].fields.name] += 1;
 	          } else {
-	            newTagObj[this.state.tags[indvTagObj][i].fields.name] = 1;
+	            newTagObj[this.props.tags[indvTagObj][i].fields.name] = 1;
 	          }
 	        }
 	      }
@@ -56135,8 +56187,8 @@
 	        tagList.push({ item: tagItem, cnt: newTagObj[tagItem] });
 	      }
 	      tagList = tagList.sort(function (a, b) {
-	        var nameA = a.item.toUpperCase(); // ignore upper and lowercase
-	        var nameB = b.item.toUpperCase(); // ignore upper and lowercase
+	        var nameA = a.item.toUpperCase();
+	        var nameB = b.item.toUpperCase();
 	        if (nameA < nameB) {
 	          return -1;
 	        }
@@ -56144,11 +56196,11 @@
 	          return 1;
 	        }
 	      });
-
-	      this.setState({
-	        tagslist: tagList
-	      });
+	      console.log(tagList);
+	      return tagList;
 	    }
+	    // onClick={this.props.tagview(tag.item)}
+
 	  }, {
 	    key: 'renderTags',
 	    value: function renderTags() {
@@ -56157,8 +56209,11 @@
 	          'div',
 	          { key: tag.item },
 	          _react2.default.createElement(
-	            'a',
-	            { href: '#' },
+	            _reactBootstrap.Button,
+	            {
+	              bsStyle: 'link',
+	              className: 'tag-date-list-item'
+	            },
 	            tag.item,
 	            ' (',
 	            tag.cnt,
@@ -56190,7 +56245,6 @@
 	}(_react2.default.Component);
 
 	module.exports = BlogTags;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ },
 /* 506 */
@@ -56251,8 +56305,8 @@
 	            'div',
 	            { key: date.datestr },
 	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
+	              _reactBootstrap.Button,
+	              { bsStyle: 'link', className: 'tag-date-list-item' },
 	              date.datestr,
 	              ' (',
 	              date.count,

@@ -1,38 +1,45 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
 class BlogTags extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      tags: [],
       tagslist: [],
+      gotlist: false,
     };
   }
-  componentWillMount() {
-    const getAll = $.ajax({
-      method: 'GET',
-      url: '/blog/api/allposts',
-    })
-    .done(() => {
+
+  componentDidUpdate() {
+    // const getAll = $.ajax({
+    //   method: 'GET',
+    //   url: '/blog/api/allposts',
+    // })
+    // .done(() => {
+    //   this.setState({
+    //     posts: JSON.parse(getAll.responseText).posts,
+    //     tags: JSON.parse(getAll.responseText).tags,
+    //   });
+    if (this.state.gotlist === false) {
       this.setState({
-        posts: JSON.parse(getAll.responseText).posts,
-        tags: JSON.parse(getAll.responseText).tags,
+        tagslist: this.buildTagsObj(),
+        gotlist: true,
       });
-      this.buildTagsObj();
-    });
+      this.render();
+    }
   }
 
   buildTagsObj() {
-    let newTagObj = {};
-    for (let indvTagObj in this.state.tags) {
-      for (let i = 0; i < this.state.tags[indvTagObj].length; i++) {
-        if (newTagObj[this.state.tags[indvTagObj][i].fields.name]) {
-          newTagObj[this.state.tags[indvTagObj][i].fields.name] += 1;
+    const newTagObj = {};
+    console.log('BTO')
+    console.log(this.props.tags)
+    for (let indvTagObj in this.props.tags) {
+      for (let i = 0; i < this.props.tags[indvTagObj].length; i++) {
+        if (newTagObj[this.props.tags[indvTagObj][i].fields.name]) {
+          newTagObj[this.props.tags[indvTagObj][i].fields.name] += 1;
         } else {
-          newTagObj[this.state.tags[indvTagObj][i].fields.name] = 1;
+          newTagObj[this.props.tags[indvTagObj][i].fields.name] = 1;
         }
       }
     }
@@ -41,8 +48,8 @@ class BlogTags extends React.Component {
       tagList.push({ item: tagItem, cnt: newTagObj[tagItem] });
     }
     tagList = tagList.sort((a, b) => {
-      let nameA = a.item.toUpperCase(); // ignore upper and lowercase
-      let nameB = b.item.toUpperCase(); // ignore upper and lowercase
+      const nameA = a.item.toUpperCase();
+      const nameB = b.item.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }
@@ -50,19 +57,21 @@ class BlogTags extends React.Component {
         return 1;
       }
     });
-
-    this.setState({
-      tagslist: tagList,
-    });
+    console.log(tagList)
+    return tagList;
   }
+            // onClick={this.props.tagview(tag.item)}
 
   renderTags() {
     return this.state.tagslist.map((tag) => {
       return (
         <div key={tag.item}>
-          <a href="#">
+          <Button
+            bsStyle="link"
+            className="tag-date-list-item"
+          >
             {tag.item} ({tag.cnt})
-          </a>
+          </Button>
         </div>
       );
     });
