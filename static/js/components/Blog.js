@@ -75,21 +75,17 @@ class Blog extends React.Component {
     });
   }
 
-  // getDatePosts(date) {
-  //   const getPosts = $.ajax({
-  //     method: 'GET',
-  //     url: '/blog/api/archive/' + date,
-  //   })
-  //   .done(() => {
-  //     this.setState({
-  //       posts: JSON.parse(getPosts.responseText).posts,
-  //       tags: JSON.parse(getPosts.responseText).tags,
-          // special: true,
-
-  //     });
-  //     console.log(this.state)
-  //   });
-  // }
+  getDatePosts(month, year) {
+    const getPosts = $.ajax({
+      method: 'GET',
+      url: '/blog/api/dates/' + year + '/' + month,
+    })
+    .done(() => {
+      this.setState({
+        posts: JSON.parse(getPosts.responseText),
+      });
+    });
+  }
 
   renderPosts() {
     return this.state.posts.map((post) => {
@@ -133,7 +129,9 @@ class Blog extends React.Component {
                 <br />
                 By Date:
                 <Well>
-                  <DateRanges />
+                  <DateRanges
+                    dateview={this.getDatePosts.bind(this)}
+                  />
                 </Well>
                 By Tag:
                 <Well>

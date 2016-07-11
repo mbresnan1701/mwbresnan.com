@@ -47,6 +47,13 @@ def get_archive_dates(req):
     return HttpResponse(json.dumps(month_info))
 
 
+def get_date_posts(req, year, month):
+    posts = BlogPost.objects.filter(date__year=year,
+                                    date__month=month).order_by('-date')
+    posts = serializers.serialize("json", posts)
+    return HttpResponse(posts)
+
+
 def all_posts(req):
     data = BlogPost.objects.all().order_by('-date')
     tag_data = {}
@@ -130,7 +137,7 @@ def single(req, url):
 
 
 def get_tag_posts(req, tag):
-    posts = BlogPost.objects.filter(tags__name__in=[tag])
+    posts = BlogPost.objects.filter(tags__name__in=[tag]).order_by('-date')
     posts = serializers.serialize("json", posts)
     return HttpResponse(posts)
 

@@ -9,10 +9,11 @@ class DateRanges extends React.Component {
       dates: [],
     };
   }
+
   componentWillMount() {
     const getDates = $.ajax({
       method: 'GET',
-      url: '/blog/api/archive/dates',
+      url: '/blog/api/dates',
     })
     .done(() => {
       this.setState({
@@ -21,11 +22,20 @@ class DateRanges extends React.Component {
     });
   }
 
+  handleClick(month, year) {
+    this.props.dateview(month, year);
+  }
+
   renderDates() {
     return this.state.dates.map((date) => {
       if (date.count > 0) {
         return (
-          <Button key={date.datestr} bsStyle="link" className="tag-date-list-item" >
+          <Button
+            onClick={this.handleClick.bind(this, date.month, date.year)}
+            key={date.datestr}
+            bsStyle="link"
+            className="tag-date-list-item"
+          >
             {date.datestr} ({date.count})
           </Button>
         );

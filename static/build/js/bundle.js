@@ -55246,36 +55246,33 @@
 	        });
 	      });
 	    }
+	  }, {
+	    key: 'getDatePosts',
+	    value: function getDatePosts(month, year) {
+	      var _this5 = this;
 
-	    // getDatePosts(date) {
-	    //   const getPosts = $.ajax({
-	    //     method: 'GET',
-	    //     url: '/blog/api/archive/' + date,
-	    //   })
-	    //   .done(() => {
-	    //     this.setState({
-	    //       posts: JSON.parse(getPosts.responseText).posts,
-	    //       tags: JSON.parse(getPosts.responseText).tags,
-	    // special: true,
-
-	    //     });
-	    //     console.log(this.state)
-	    //   });
-	    // }
-
+	      var getPosts = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/dates/' + year + '/' + month
+	      }).done(function () {
+	        _this5.setState({
+	          posts: JSON.parse(getPosts.responseText)
+	        });
+	      });
+	    }
 	  }, {
 	    key: 'renderPosts',
 	    value: function renderPosts() {
-	      var _this5 = this;
+	      var _this6 = this;
 
 	      return this.state.posts.map(function (post) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
 	          _react2.default.createElement(_PostListItem2.default, {
-	            tagview: _this5.getTagPosts.bind(_this5),
+	            tagview: _this6.getTagPosts.bind(_this6),
 	            post: post,
-	            tags: _this5.state.tags[post.pk]
+	            tags: _this6.state.tags[post.pk]
 	          })
 	        );
 	      });
@@ -55322,7 +55319,9 @@
 	                _react2.default.createElement(
 	                  _reactBootstrap.Well,
 	                  null,
-	                  _react2.default.createElement(_DateRanges2.default, null)
+	                  _react2.default.createElement(_DateRanges2.default, {
+	                    dateview: this.getDatePosts.bind(this)
+	                  })
 	                ),
 	                'By Tag:',
 	                _react2.default.createElement(
@@ -56278,7 +56277,7 @@
 
 	      var getDates = $.ajax({
 	        method: 'GET',
-	        url: '/blog/api/archive/dates'
+	        url: '/blog/api/dates'
 	      }).done(function () {
 	        _this2.setState({
 	          dates: JSON.parse(getDates.responseText)
@@ -56286,13 +56285,25 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleClick',
+	    value: function handleClick(month, year) {
+	      this.props.dateview(month, year);
+	    }
+	  }, {
 	    key: 'renderDates',
 	    value: function renderDates() {
+	      var _this3 = this;
+
 	      return this.state.dates.map(function (date) {
 	        if (date.count > 0) {
 	          return _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { key: date.datestr, bsStyle: 'link', className: 'tag-date-list-item' },
+	            {
+	              onClick: _this3.handleClick.bind(_this3, date.month, date.year),
+	              key: date.datestr,
+	              bsStyle: 'link',
+	              className: 'tag-date-list-item'
+	            },
 	            date.datestr,
 	            ' (',
 	            date.count,
