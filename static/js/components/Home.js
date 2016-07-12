@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
-import PostListItem from './PostListItem.js';
+import PostSnippet from './PostSnippet.js';
 import NewsFeed from './NewsFeed.js';
 import QuoteBox from './QuoteBox.js';
 
@@ -32,7 +32,7 @@ class Home extends React.Component {
     return this.state.posts.map((post) => {
       return (
         <div key={post.pk}>
-          <PostListItem post={post} tags={this.state.tags[post.pk]} />
+          <PostSnippet post={post} tags={this.state.tags[post.pk]} />
         </div>
       );
     });

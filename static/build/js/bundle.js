@@ -45050,9 +45050,9 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
-	var _PostListItem = __webpack_require__(495);
+	var _PostSnippet = __webpack_require__(510);
 
-	var _PostListItem2 = _interopRequireDefault(_PostListItem);
+	var _PostSnippet2 = _interopRequireDefault(_PostSnippet);
 
 	var _NewsFeed = __webpack_require__(507);
 
@@ -45110,7 +45110,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, { post: post, tags: _this3.state.tags[post.pk] })
+	          _react2.default.createElement(_PostSnippet2.default, { post: post, tags: _this3.state.tags[post.pk] })
 	        );
 	      });
 	    }
@@ -55339,9 +55339,9 @@
 	                _reactBootstrap.Panel,
 	                null,
 	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Most Recent'
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'link', onClick: this.getInitData.bind(this) },
+	                  'All Posts'
 	                ),
 	                _react2.default.createElement('br', null),
 	                'By Date:',
@@ -56615,6 +56615,82 @@
 
 	module.exports = QuoteBox;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PostSnippet = function (_React$Component) {
+	  _inherits(PostSnippet, _React$Component);
+
+	  function PostSnippet(props) {
+	    _classCallCheck(this, PostSnippet);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PostSnippet).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(PostSnippet, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
+	        _react2.default.createElement(
+	          _reactBootstrap.Panel,
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'post-preview' },
+	            _react2.default.createElement(
+	              'h2',
+	              { className: 'post-title' },
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/blog/' + this.props.post.fields.url },
+	                this.props.post.fields.title
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'post-subtitle' },
+	              this.props.post.fields.subtitle
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'post-meta' },
+	              this.props.post.fields.datestr || this.props.post.fields.date
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PostSnippet;
+	}(_react2.default.Component);
+
+	module.exports = PostSnippet;
 
 /***/ }
 /******/ ]);

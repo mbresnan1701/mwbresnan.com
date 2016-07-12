@@ -129,9 +129,9 @@ class Blog extends React.Component {
           <Row>
             <Col xsHidden sm={4}>
               <Panel>
-                <a href="#">
-                  Most Recent
-                </a>
+                <Button bsStyle="link" onClick={this.getInitData.bind(this)}>
+                  All Posts
+                </Button>
                 <br />
                 By Date:
                 <Well>
