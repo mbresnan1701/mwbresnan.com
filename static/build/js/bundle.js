@@ -45054,6 +45054,10 @@
 
 	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
+	var _NewsFeed = __webpack_require__(507);
+
+	var _NewsFeed2 = _interopRequireDefault(_NewsFeed);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45112,6 +45116,7 @@
 	      return _react2.default.createElement(
 	        _reactBootstrap.Row,
 	        null,
+	        _react2.default.createElement(_NewsFeed2.default, null),
 	        this.renderRecent(),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
@@ -56334,6 +56339,103 @@
 	}(_react2.default.Component);
 
 	module.exports = DateRanges;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 507 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewsFeed = function (_React$Component) {
+	  _inherits(NewsFeed, _React$Component);
+
+	  function NewsFeed(props) {
+	    _classCallCheck(this, NewsFeed);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsFeed).call(this, props));
+
+	    _this.state = {
+	      stories: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(NewsFeed, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getTop = $.ajax({
+	        method: 'GET',
+	        url: 'https://hacker-news.firebaseio.com/v0/topstories.json'
+	      }).done(function () {
+	        var topIds = JSON.parse(getTop.responseText).slice(0, 5);
+	        var loadedStories = [];
+
+	        var _loop = function _loop(i) {
+	          var getStory = $.ajax({
+	            method: 'GET',
+	            url: 'https://hacker-news.firebaseio.com/v0/item/' + topIds[i] + '.json'
+	          }).done(function () {
+	            loadedStories.push(JSON.parse(getStory.responseText));
+	          });
+	        };
+
+	        for (var i = 0; i < topIds.length; i++) {
+	          _loop(i);
+	        }
+	        _this2.setState({
+	          stories: loadedStories
+	        });
+	        console.log(_this2.state);
+	      });
+	    }
+
+	    // renderDates() {
+	    //   return this.state.dates.map((date) => {
+	    //     if (date.count > 0) {
+	    //       return (
+	    //         <Button
+	    //           onClick={this.handleClick.bind(this, date.month, date.year)}
+	    //           key={date.datestr}
+	    //           bsStyle="link"
+	    //           className="tag-date-list-item"
+	    //         >
+	    //           {date.datestr} ({date.count})
+	    //         </Button>
+	    //       );
+	    //     }
+	    //   });
+	    // }
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null);
+	    }
+	  }]);
+
+	  return NewsFeed;
+	}(_react2.default.Component);
+
+	module.exports = NewsFeed;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }

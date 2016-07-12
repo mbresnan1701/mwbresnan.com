@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
+import NewsFeed from './NewsFeed.js';
 
 class Home extends React.Component {
 
@@ -39,6 +40,7 @@ class Home extends React.Component {
   render() {
     return (
       <Row>
+        <NewsFeed />
         {this.renderRecent()}
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           <a className="morebloglink" href="/blog">More Blog Entries</a>
