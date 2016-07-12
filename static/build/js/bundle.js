@@ -45058,6 +45058,10 @@
 
 	var _NewsFeed2 = _interopRequireDefault(_NewsFeed);
 
+	var _QuoteBox = __webpack_require__(509);
+
+	var _QuoteBox2 = _interopRequireDefault(_QuoteBox);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45114,10 +45118,13 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _reactBootstrap.Row,
+	        'div',
 	        null,
-	        _react2.default.createElement(_NewsFeed2.default, null),
-	        this.renderRecent(),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          this.renderRecent()
+	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
@@ -45125,6 +45132,16 @@
 	            'a',
 	            { className: 'morebloglink', href: '/blog' },
 	            'More Blog Entries'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Panel,
+	            { header: "From The Web" },
+	            _react2.default.createElement(_NewsFeed2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Panel,
+	            { header: "Quote" },
+	            _react2.default.createElement(_QuoteBox2.default, null)
 	          )
 	        )
 	      );
@@ -56414,7 +56431,7 @@
 	            });
 	            clearInterval(check);
 	          }
-	        }, 20);
+	        }, 10);
 	      });
 	    }
 	  }, {
@@ -56425,6 +56442,7 @@
 	  }, {
 	    key: 'renderStories',
 	    value: function renderStories() {
+	      console.log(this.state);
 	      return this.state.stories.map(function (story) {
 	        return _react2.default.createElement(_NewsEntry2.default, { key: story.id, story: story });
 	      });
@@ -56436,10 +56454,19 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          this.renderStories()
+	          this.renderStories(),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Items courtesy of HackerNews'
+	          )
 	        );
 	      } else {
-	        return _react2.default.createElement('div', null);
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'LOADING GIF HERE'
+	        );
 	      }
 	    }
 	  }]);
@@ -56487,11 +56514,14 @@
 	  _createClass(NewsEntry, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.props.story.title
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'newslink', href: this.props.story.url },
+	          this.props.story.title
+	        )
 	      );
 	    }
 	  }]);
@@ -56500,6 +56530,91 @@
 	}(_react2.default.Component);
 
 	module.exports = NewsEntry;
+
+/***/ },
+/* 509 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var QuoteBox = function (_React$Component) {
+	  _inherits(QuoteBox, _React$Component);
+
+	  function QuoteBox(props) {
+	    _classCallCheck(this, QuoteBox);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(QuoteBox).call(this, props));
+
+	    _this.state = {
+	      quote: null
+	    };
+	    return _this;
+	  }
+
+	  _createClass(QuoteBox, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      var getQuote = $.ajax({
+	        method: 'GET',
+	        url: '/blog/api/quote'
+	      }).done(function () {
+	        _this2.setState({
+	          quote: JSON.parse(getQuote.responseText)
+	        });
+	        console.log(_this2.state);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.quote) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'quote-text' },
+	            this.state.quote[0].fields.quote
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'quote-author' },
+	            this.state.quote[0].fields.author
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'LOADING GIF HERE'
+	        );
+	      }
+	    }
+	  }]);
+
+	  return QuoteBox;
+	}(_react2.default.Component);
+
+	module.exports = QuoteBox;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
 
 /***/ }
 /******/ ]);

@@ -10,10 +10,11 @@ class NewsEntry extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
-        {this.props.story.title}
+        <a className="newslink" href={this.props.story.url}>
+          {this.props.story.title}
+        </a>
       </div>
     );
   }

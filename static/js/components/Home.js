@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Panel, Row, Col } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
 import NewsFeed from './NewsFeed.js';
+import QuoteBox from './QuoteBox.js';
 
 class Home extends React.Component {
 
@@ -39,13 +40,22 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Row>
-        <NewsFeed />
-        {this.renderRecent()}
+      <div>
+        <div>
+          {this.renderRecent()}
+        </div>
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           <a className="morebloglink" href="/blog">More Blog Entries</a>
+          <Panel header={"From The Web"}>
+            <NewsFeed />
+          </Panel>
+          <Panel header={"Quote"}>
+            <QuoteBox />
+          </Panel>
+
         </Col>
-      </Row>
+
+      </div>
     );
   }
 

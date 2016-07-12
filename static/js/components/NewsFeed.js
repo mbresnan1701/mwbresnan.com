@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Panel, Col, Row } from 'react-bootstrap';
 import NewsEntry from './NewsEntry.js';
 
 const numEntries = 5;
@@ -37,7 +37,7 @@ class NewsFeed extends React.Component {
           });
           clearInterval(check);
         }
-      }, 20);
+      }, 10);
     });
   }
 
@@ -46,6 +46,7 @@ class NewsFeed extends React.Component {
   }
 
   renderStories() {
+    console.log(this.state)
     return this.state.stories.map((story) => {
       return (
         <NewsEntry key={story.id} story={story} />
@@ -58,11 +59,14 @@ class NewsFeed extends React.Component {
       return (
         <div>
           {this.renderStories()}
+          <div>
+            Items courtesy of HackerNews
+          </div>
         </div>
       );
     } else {
       return (
-        <div></div>
+        <div>LOADING GIF HERE</div>
       );
     }
   }
