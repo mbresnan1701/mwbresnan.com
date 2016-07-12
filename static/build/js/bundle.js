@@ -55174,9 +55174,7 @@
 	    _this.state = {
 	      posts: [],
 	      tags: [],
-	      totalposts: 0,
-	      localposts: 0,
-	      special: false
+	      localposts: 5
 	    };
 	    return _this;
 	  }
@@ -55199,19 +55197,7 @@
 	          posts: JSON.parse(getAll.responseText).posts,
 	          tags: JSON.parse(getAll.responseText).tags
 	        });
-	        // this.setState({
-	        //   localposts: this.state.posts.length,
-	        // });
-	        // const getCount = $.ajax({
-	        //   method: 'GET',
-	        //   url: '/blog/api/postcount',
-	        // })
-	        // .done(() => {
-	        //   this.setState({
-	        //     totalposts: parseInt(getCount.responseText),
-	        //   });
-	        // console.log(this.state)
-	        // });
+	        _this2.resetLocalPostCount();
 	      });
 	    }
 	  }, {
@@ -55244,6 +55230,7 @@
 	        _this4.setState({
 	          posts: JSON.parse(getPosts.responseText)
 	        });
+	        _this4.resetLocalPostCount();
 	      });
 	    }
 	  }, {
@@ -55258,6 +55245,7 @@
 	        _this5.setState({
 	          posts: JSON.parse(getPosts.responseText)
 	        });
+	        _this5.resetLocalPostCount();
 	      });
 	    }
 	  }, {
@@ -55265,28 +55253,47 @@
 	    value: function renderPosts() {
 	      var _this6 = this;
 
-	      return this.state.posts.map(function (post) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: post.pk },
-	          _react2.default.createElement(_PostListItem2.default, {
-	            tagview: _this6.getTagPosts.bind(_this6),
-	            post: post,
-	            tags: _this6.state.tags[post.pk]
-	          })
-	        );
+	      return this.state.posts.map(function (post, i) {
+	        if (i < _this6.state.localposts) {
+	          return _react2.default.createElement(
+	            'div',
+	            { key: post.pk },
+	            _react2.default.createElement(_PostListItem2.default, {
+	              tagview: _this6.getTagPosts.bind(_this6),
+	              post: post,
+	              tags: _this6.state.tags[post.pk]
+	            })
+	          );
+	        }
 	      });
 	    }
-
-	    //UPDATE
-
+	  }, {
+	    key: 'updateLocalPostCount',
+	    value: function updateLocalPostCount() {
+	      if (this.state.localposts + 5 > this.state.localposts) {
+	        this.setState({
+	          localposts: this.state.posts.length
+	        });
+	      } else {
+	        this.setState({
+	          localposts: this.state.localposts += 5
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'resetLocalPostCount',
+	    value: function resetLocalPostCount() {
+	      this.setState({
+	        localposts: 5
+	      });
+	    }
 	  }, {
 	    key: 'renderMoreButton',
 	    value: function renderMoreButton() {
-	      if (true) {
+	      if (this.state.posts.length > this.state.localposts) {
 	        return _react2.default.createElement(
 	          _reactBootstrap.Button,
-	          { onClick: this.getMorePosts.bind(this) },
+	          { onClick: this.updateLocalPostCount.bind(this) },
 	          'Load older'
 	        );
 	      } else {
@@ -55337,7 +55344,7 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
-	              { xs: 10, sm: 8 },
+	              { xs: 12, sm: 8, smOffset: 0 },
 	              _react2.default.createElement(
 	                _reactBootstrap.Panel,
 	                null,

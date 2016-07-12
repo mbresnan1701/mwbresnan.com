@@ -11,9 +11,7 @@ class Blog extends React.Component {
     this.state = {
       posts: [],
       tags: [],
-      totalposts: 0,
-      localposts: 0,
-      special: false,
+      localposts: 5,
     };
   }
 
@@ -31,19 +29,7 @@ class Blog extends React.Component {
         posts: JSON.parse(getAll.responseText).posts,
         tags: JSON.parse(getAll.responseText).tags,
       });
-      // this.setState({
-      //   localposts: this.state.posts.length,
-      // });
-      // const getCount = $.ajax({
-      //   method: 'GET',
-      //   url: '/blog/api/postcount',
-      // })
-      // .done(() => {
-      //   this.setState({
-      //     totalposts: parseInt(getCount.responseText),
-      //   });
-        // console.log(this.state)
-      // });
+      this.resetLocalPostCount();
     });
   }
 
@@ -72,6 +58,7 @@ class Blog extends React.Component {
       this.setState({
         posts: JSON.parse(getPosts.responseText),
       });
+      this.resetLocalPostCount();
     });
   }
 
@@ -84,29 +71,48 @@ class Blog extends React.Component {
       this.setState({
         posts: JSON.parse(getPosts.responseText),
       });
+      this.resetLocalPostCount();
     });
   }
 
   renderPosts() {
-    return this.state.posts.map((post) => {
-      return (
-        <div key={post.pk}>
-          <PostListItem
-            tagview={this.getTagPosts.bind(this)}
-            post={post}
-            tags={this.state.tags[post.pk]}
-          />
-        </div>
-
-      );
+    return this.state.posts.map((post, i) => {
+      if (i < this.state.localposts) {
+        return (
+          <div key={post.pk}>
+            <PostListItem
+              tagview={this.getTagPosts.bind(this)}
+              post={post}
+              tags={this.state.tags[post.pk]}
+            />
+          </div>
+        );
+      }
     });
   }
 
-  //UPDATE
+  updateLocalPostCount() {
+    if (this.state.localposts + 5 > this.state.localposts) {
+      this.setState({
+        localposts: this.state.posts.length,
+      });
+    } else {
+      this.setState({
+        localposts: this.state.localposts += 5,
+      });
+    }
+  }
+
+  resetLocalPostCount() {
+    this.setState({
+      localposts: 5,
+    });
+  }
+
   renderMoreButton() {
-    if (true) {
+    if (this.state.posts.length > this.state.localposts) {
       return (
-        <Button onClick={this.getMorePosts.bind(this)}>Load older</Button>
+        <Button onClick={this.updateLocalPostCount.bind(this)}>Load older</Button>
       );
     } else {
       return (
@@ -143,7 +149,7 @@ class Blog extends React.Component {
                 </Well>
               </Panel>
             </Col>
-            <Col xs={10} sm={8}>
+            <Col xs={12} sm={8} smOffset={0}>
               <Panel>
               {this.renderPosts()}
               </Panel>
