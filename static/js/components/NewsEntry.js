@@ -10,8 +10,11 @@ class NewsEntry extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <div></div>
+      <div>
+        {this.props.story.title}
+      </div>
     );
   }
 

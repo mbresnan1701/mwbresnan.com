@@ -56355,6 +56355,10 @@
 
 	var _reactBootstrap = __webpack_require__(230);
 
+	var _NewsEntry = __webpack_require__(508);
+
+	var _NewsEntry2 = _interopRequireDefault(_NewsEntry);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56362,6 +56366,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var numEntries = 5;
 
 	var NewsFeed = function (_React$Component) {
 	  _inherits(NewsFeed, _React$Component);
@@ -56372,7 +56378,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsFeed).call(this, props));
 
 	    _this.state = {
-	      stories: []
+	      stories: null
 	    };
 	    return _this;
 	  }
@@ -56386,7 +56392,7 @@
 	        method: 'GET',
 	        url: 'https://hacker-news.firebaseio.com/v0/topstories.json'
 	      }).done(function () {
-	        var topIds = JSON.parse(getTop.responseText).slice(0, 5);
+	        var topIds = JSON.parse(getTop.responseText).slice(0, numEntries);
 	        var loadedStories = [];
 
 	        var _loop = function _loop(i) {
@@ -56401,34 +56407,40 @@
 	        for (var i = 0; i < topIds.length; i++) {
 	          _loop(i);
 	        }
-	        _this2.setState({
-	          stories: loadedStories
-	        });
-	        console.log(_this2.state);
+	        var check = setInterval(function () {
+	          if (_this2.checkAllStoriesLoaded(loadedStories)) {
+	            _this2.setState({
+	              stories: loadedStories
+	            });
+	            clearInterval(check);
+	          }
+	        }, 20);
 	      });
 	    }
-
-	    // renderDates() {
-	    //   return this.state.dates.map((date) => {
-	    //     if (date.count > 0) {
-	    //       return (
-	    //         <Button
-	    //           onClick={this.handleClick.bind(this, date.month, date.year)}
-	    //           key={date.datestr}
-	    //           bsStyle="link"
-	    //           className="tag-date-list-item"
-	    //         >
-	    //           {date.datestr} ({date.count})
-	    //         </Button>
-	    //       );
-	    //     }
-	    //   });
-	    // }
-
+	  }, {
+	    key: 'checkAllStoriesLoaded',
+	    value: function checkAllStoriesLoaded(arr) {
+	      return arr.length === numEntries;
+	    }
+	  }, {
+	    key: 'renderStories',
+	    value: function renderStories() {
+	      return this.state.stories.map(function (story) {
+	        return _react2.default.createElement(_NewsEntry2.default, { key: story.id, story: story });
+	      });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      if (this.state.stories) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          this.renderStories()
+	        );
+	      } else {
+	        return _react2.default.createElement('div', null);
+	      }
 	    }
 	  }]);
 
@@ -56437,6 +56449,57 @@
 
 	module.exports = NewsFeed;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(494)))
+
+/***/ },
+/* 508 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(230);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewsEntry = function (_React$Component) {
+	  _inherits(NewsEntry, _React$Component);
+
+	  function NewsEntry(props) {
+	    _classCallCheck(this, NewsEntry);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsEntry).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(NewsEntry, [{
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.props);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.story.title
+	      );
+	    }
+	  }]);
+
+	  return NewsEntry;
+	}(_react2.default.Component);
+
+	module.exports = NewsEntry;
 
 /***/ }
 /******/ ]);
