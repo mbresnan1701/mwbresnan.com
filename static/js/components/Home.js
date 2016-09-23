@@ -4,6 +4,7 @@ import PostSnippet from './PostSnippet.js';
 import NewsFeed from './NewsFeed.js';
 import QuoteBox from './QuoteBox.js';
 import NavBar from './NavBar.js';
+import Footer from './Footer.js';
 
 class Home extends React.Component {
 
@@ -54,7 +55,7 @@ class Home extends React.Component {
           </Panel>
 
         </Col>
-
+        <Footer />
       </div>
     );
   }
