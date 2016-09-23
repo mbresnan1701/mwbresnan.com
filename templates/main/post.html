@@ -1,8 +1,6 @@
 {% extends 'masters/index.html' %}
 {% load staticfiles %}
 
-{% block content %}<div id="app"></div>{% endblock %}
-
 {% block header %}
     <header class="intro-header intro-blog">
         <div class="container">
@@ -17,4 +15,8 @@
             </div>
         </div>
     </header>
+{% endblock %}
+
+{% block content %}
+    <div id="app"></div>
 {% endblock %}

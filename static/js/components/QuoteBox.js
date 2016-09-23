@@ -31,7 +31,7 @@ class QuoteBox extends React.Component {
             {this.state.quote[0].fields.quote}
           </div>
           <div className="quote-author">
-            {this.state.quote[0].fields.author}
+            {'-' + this.state.quote[0].fields.author}
           </div>
         </div>
       );

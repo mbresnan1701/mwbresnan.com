@@ -3,6 +3,7 @@ import { Panel, Row, Col } from 'react-bootstrap';
 import PostSnippet from './PostSnippet.js';
 import NewsFeed from './NewsFeed.js';
 import QuoteBox from './QuoteBox.js';
+import NavBar from './NavBar.js';
 
 class Home extends React.Component {
 
@@ -41,14 +42,13 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <div>
           {this.renderRecent()}
         </div>
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           <a className="morebloglink" href="/blog">More Blog Entries</a>
-          <Panel header={"From The Web"}>
-            <NewsFeed />
-          </Panel>
+
           <Panel header={"Quote"}>
             <QuoteBox />
           </Panel>

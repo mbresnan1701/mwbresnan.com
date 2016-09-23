@@ -97,16 +97,27 @@ textarea {
 
 
 
+.navbarContainer {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
 
+#app {
+  background-color: #2d2b2b;
+}
 
+#appRoot {
+  background-color: #2d2b2b;
+  padding: 0;
 
+}
 
-
-
-
-
-
-
+.myNavBar {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
 
 
 
@@ -382,7 +393,8 @@ textarea {
 }
 
 .intro-blog {
-  background-image: url('../img/server-datacenterc.jpg');
+  /*background-image: url('../img/server-datacenterc.jpg');*/
+  background-color: black;
 }
 
 .intro-blogpost {
@@ -397,10 +409,10 @@ textarea {
 }
 
 .myNavBar {
-  background-image: url('../websiteimgs/black-website-background.jpg');
-  margin: 0 auto;
+  /*background-image: url('../websiteimgs/black-website-background.jpg');*/
+  /*margin: 0 auto;*/
   /*background-color: black;*/
-  border-bottom: 1px solid red;
+  /*border-bottom: 1px solid red;*/
 }
 
 footer {

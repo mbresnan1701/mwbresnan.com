@@ -1,11 +1,11 @@
-import React from 'react'
-import { Grid } from 'react-bootstrap';
+import React from 'react';
+import { Grid, Col } from 'react-bootstrap';
 
 class App extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <Grid id="appRoot" fluid>
         <div id="main">
           {this.props.children}
         </div>

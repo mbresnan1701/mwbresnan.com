@@ -3,6 +3,7 @@ import { Panel, Well, Button, Col, Row } from 'react-bootstrap';
 import PostListItem from './PostListItem.js';
 import DateRanges from './DateRanges.js';
 import BlogTags from './BlogTags.js';
+import NewsFeed from './NewsFeed.js';
 
 class Blog extends React.Component {
 
@@ -127,7 +128,7 @@ class Blog extends React.Component {
       return (
         <div>
           <Row>
-            <Col xsHidden sm={4}>
+            <Col xsHidden sm={4} >
               <Panel>
                 <Button bsStyle="link" onClick={this.getInitData.bind(this)}>
                   All Posts
@@ -150,12 +151,13 @@ class Blog extends React.Component {
               </Panel>
             </Col>
             <Col xs={12} sm={8} smOffset={0}>
-              <Panel>
               {this.renderPosts()}
-              </Panel>
               {this.renderMoreButton()}
             </Col>
           </Row>
+          <Panel header={"From The Web"}>
+            <NewsFeed />
+          </Panel>
         </div>
       );
     } else {
