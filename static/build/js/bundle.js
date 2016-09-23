@@ -27122,6 +27122,10 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
+	var _NavBar = __webpack_require__(495);
+
+	var _Footer = __webpack_require__(507);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27142,14 +27146,17 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        _reactBootstrap.Grid,
 	        { id: 'appRoot', fluid: true },
+	        _react2.default.createElement(_NavBar.NavBar, null),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'main' },
 	          this.props.children
-	        )
+	        ),
+	        _react2.default.createElement(_Footer.Footer, null)
 	      );
 	    }
 	  }]);
@@ -46084,7 +46091,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_NavBar2.default, null),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -46103,8 +46109,7 @@
 	            { header: "Quote" },
 	            _react2.default.createElement(_QuoteBox2.default, null)
 	          )
-	        ),
-	        _react2.default.createElement(_Footer2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -56275,7 +56280,10 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NavBar = undefined;
 
 	var _react = __webpack_require__(1);
 
@@ -56285,79 +56293,53 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NavBar = function (_React$Component) {
-	  _inherits(NavBar, _React$Component);
-
-	  function NavBar(props) {
-	    _classCallCheck(this, NavBar);
-
-	    var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(NavBar, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: "navbarContainer" },
+	var NavBar = exports.NavBar = function NavBar() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "navbarContainer" },
+	    _react2.default.createElement(
+	      _reactBootstrap.Navbar,
+	      { className: "navbar-custom myNavBar", fluid: true, staticTop: true },
+	      _react2.default.createElement(
+	        _reactBootstrap.Navbar.Header,
+	        null,
 	        _react2.default.createElement(
-	          _reactBootstrap.Navbar,
-	          { className: "navbar-custom myNavBar", fluid: true, staticTop: true },
+	          _reactBootstrap.Navbar.Brand,
+	          null,
 	          _react2.default.createElement(
-	            _reactBootstrap.Navbar.Header,
-	            null,
-	            _react2.default.createElement(
-	              _reactBootstrap.Navbar.Brand,
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'M.W. Bresnan'
-	              )
-	            ),
-	            _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+	            'a',
+	            { href: '#' },
+	            'M.W. Bresnan'
+	          )
+	        ),
+	        _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Navbar.Collapse,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Nav,
+	          { pullRight: true },
+	          _react2.default.createElement(
+	            _reactBootstrap.NavItem,
+	            { eventKey: 1, href: '/' },
+	            'Home'
 	          ),
 	          _react2.default.createElement(
-	            _reactBootstrap.Navbar.Collapse,
-	            null,
-	            _react2.default.createElement(
-	              _reactBootstrap.Nav,
-	              { pullRight: true },
-	              _react2.default.createElement(
-	                _reactBootstrap.NavItem,
-	                { eventKey: 1, href: '#' },
-	                'Home'
-	              ),
-	              _react2.default.createElement(
-	                _reactBootstrap.NavItem,
-	                { eventKey: 2, href: '#' },
-	                'Blog'
-	              ),
-	              _react2.default.createElement(
-	                _reactBootstrap.NavItem,
-	                { eventKey: 3, href: '#' },
-	                'Contact'
-	              )
-	            )
+	            _reactBootstrap.NavItem,
+	            { eventKey: 2, href: '/blog' },
+	            'Blog'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.NavItem,
+	            { eventKey: 3, href: '/contact' },
+	            'Contact'
 	          )
 	        )
-	      );
-	    }
-	  }]);
-
-	  return NavBar;
-	}(_react2.default.Component);
-
-	module.exports = NavBar;
+	      )
+	    )
+	  );
+	};
 
 /***/ },
 /* 496 */
@@ -57756,7 +57738,10 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Footer = undefined;
 
 	var _react = __webpack_require__(1);
 
@@ -57766,97 +57751,71 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Footer = function (_React$Component) {
-	  _inherits(Footer, _React$Component);
-
-	  function Footer(props) {
-	    _classCallCheck(this, Footer);
-
-	    var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(Footer, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
+	var Footer = exports.Footer = function Footer() {
+	  return _react2.default.createElement(
+	    _reactBootstrap.Col,
+	    { xs: 12, className: 'footer' },
+	    _react2.default.createElement(
+	      _reactBootstrap.Row,
+	      null,
+	      _react2.default.createElement(
 	        _reactBootstrap.Col,
-	        { xs: 12, className: 'footer' },
+	        { md: 10, mdOffset: 1, lg: 8, lgOffset: 2 },
 	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          null,
+	          'ul',
+	          { className: 'list-inline text-center' },
 	          _react2.default.createElement(
-	            _reactBootstrap.Col,
-	            { md: 10, mdOffset: 1, lg: 8, lgOffset: 2 },
+	            'li',
+	            null,
 	            _react2.default.createElement(
-	              'ul',
-	              { className: 'list-inline text-center' },
+	              'a',
+	              { href: 'https://www.github.com/mbresnan1701' },
 	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: 'https://www.github.com/mbresnan1701' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'fa-stack fa-lg' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                    _react2.default.createElement('i', { className: 'fa fa-github fa-stack-1x fa-inverse' })
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: 'https://www.linkedin.com/in/mwbresnan' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'fa-stack fa-lg' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                    _react2.default.createElement('i', { className: 'fa fa-linkedin fa-stack-1x fa-inverse ' })
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'fa-stack fa-lg' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                    _react2.default.createElement('i', { className: 'fa fa-twitter fa-stack-1x fa-inverse' })
-	                  )
-	                )
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-github fa-stack-1x fa-inverse' })
 	              )
-	            ),
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'copyright text-muted' },
-	              'Copyright © mwbresnan.com 2016'
+	              'a',
+	              { href: 'https://www.linkedin.com/in/mwbresnan' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-linkedin fa-stack-1x fa-inverse ' })
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-twitter fa-stack-1x fa-inverse' })
+	              )
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'copyright text-muted' },
+	          'Copyright © mwbresnan.com 2016'
 	        )
-	      );
-	    }
-	  }]);
-
-	  return Footer;
-	}(_react2.default.Component);
-
-	module.exports = Footer;
+	      )
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);

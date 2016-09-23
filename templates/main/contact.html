@@ -1,29 +1,2 @@
 {% extends 'masters/index.html' %}
 {% load staticfiles %}
-
-{% block content %}
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <p>Want to get in touch with me? Got a axe to grind? I don't mind. Shoot me a message and I'll get back to you ASAP!</p>
-            <div id="app">
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block header %}
-    <header class="intro-header intro-contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Contact Me</h1>
-                        <hr class="small">
-                        <span class="subheading">I swear I don't bite!</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-{% endblock %}

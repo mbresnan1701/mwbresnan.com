@@ -43,19 +43,16 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div>
           {this.renderRecent()}
         </div>
         <Col lg={8} lgOffset={2} md={10} mdOffset={1}>
           <a className="morebloglink" href="/blog">More Blog Entries</a>
-
           <Panel header={"Quote"}>
             <QuoteBox />
           </Panel>
 
         </Col>
-        <Footer />
       </div>
     );
   }

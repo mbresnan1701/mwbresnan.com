@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^about/', views.about),
     url(r'^contact/send$', views.contact_send),
-    url(r'^contact/', views.contact),
+    url(r'^contact', views.contact),
     url(r'^blog/', include('blog.urls')),
 ]
