@@ -510,3 +510,22 @@ textarea {
 .aboutme {
   height: 400px;
 }
+
+.linklist {
+  margin-top: 20px;
+}
+
+.copyright {
+  text-align: center;
+}
+
+.infoPanelHeader {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.st-text {
+  text-decoration: line-through;
+}

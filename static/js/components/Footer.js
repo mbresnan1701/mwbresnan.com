@@ -6,7 +6,7 @@ export const Footer = () => (
   <Col xs={12} className="footer">
     <Row>
       <Col md={10} mdOffset={1} lg={8} lgOffset={2}>
-        <ul className="list-inline text-center">
+        <ul className="list-inline text-center linklist">
           <li>
             <a href="https://www.github.com/mbresnan1701">
               <span className="fa-stack fa-lg">

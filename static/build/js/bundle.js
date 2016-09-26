@@ -46095,18 +46095,78 @@
 	          _reactBootstrap.Col,
 	          { xs: 12, className: 'homePanel' },
 	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'portrait' }),
-	          _react2.default.createElement(_reactBootstrap.Col, { xs: 12, md: 7, className: 'bio' })
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { xs: 12, md: 7, className: 'bio' },
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'infoPanelHeader' },
+	              'Welcome!'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'You\'ve reached the site of Matthew William Bresnan - programmer, engineer',
+	              ", ",
+	              _react2.default.createElement(
+	                'strike',
+	                null,
+	                'ninja'
+	              ),
+	              " developer.",
+	              ' Check out my ',
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/blog' },
+	                'blog '
+	              ),
+	              '!'
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { xs: 12, className: 'homePanel' },
-	          _react2.default.createElement(_reactBootstrap.Col, { xs: 12, md: 7, className: 'aboutme' }),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { xs: 12, md: 7, className: 'aboutme' },
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'infoPanelHeader' },
+	              'Who am I?'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'Like all residents of Sillicon Valley, I live and die by the compiler. Software is my business, and business is booming. I\'m currently building consumer focused mobile applications for',
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'https://www.linkedin.com/company/walmartecommerce' },
+	                '@Walmart Labs'
+	              ),
+	              '.'
+	            )
+	          ),
 	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'codepic' })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { xs: 12, className: 'homePanel lastPanel' },
-	          'dldflsdfs'
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'portrait' }),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { xs: 12, md: 7, className: 'bio' },
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'infoPanelHeader' },
+	              'Shameless Self-Plug'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'My money\'s in that office, right? If she start giving me some bullshit about it ain\'t there, and we got to go someplace else and get it, I\'m gonna shoot you in the head then and there. Then I\'m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I\'m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -57774,7 +57834,7 @@
 	        { md: 10, mdOffset: 1, lg: 8, lgOffset: 2 },
 	        _react2.default.createElement(
 	          'ul',
-	          { className: 'list-inline text-center' },
+	          { className: 'list-inline text-center linklist' },
 	          _react2.default.createElement(
 	            'li',
 	            null,
