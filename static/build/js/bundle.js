@@ -27152,8 +27152,8 @@
 	        { id: 'appRoot', fluid: true },
 	        _react2.default.createElement(_NavBar.NavBar, null),
 	        _react2.default.createElement(
-	          'div',
-	          { id: 'main' },
+	          _reactBootstrap.Col,
+	          { xs: 12, id: 'main' },
 	          this.props.children
 	        ),
 	        _react2.default.createElement(_Footer.Footer, null)
@@ -46086,29 +46086,40 @@
 	      });
 	    }
 	  }, {
+	    key: 'renderHomePanels',
+	    value: function renderHomePanels() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { xs: 12, className: 'homePanel' },
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'portrait' }),
+	          _react2.default.createElement(_reactBootstrap.Col, { xs: 12, md: 7, className: 'bio' })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { xs: 12, className: 'homePanel' },
+	          _react2.default.createElement(_reactBootstrap.Col, { xs: 12, md: 7, className: 'aboutme' }),
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'codepic' })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Col,
+	          { xs: 12, className: 'homePanel lastPanel' },
+	          'dldflsdfs'
+	        )
+	      );
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          this.renderRecent()
-	        ),
-	        _react2.default.createElement(
 	          _reactBootstrap.Col,
-	          { lg: 8, lgOffset: 2, md: 10, mdOffset: 1 },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'morebloglink', href: '/blog' },
-	            'More Blog Entries'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Panel,
-	            { header: "Quote" },
-	            _react2.default.createElement(_QuoteBox2.default, null)
-	          )
+	          { xs: 12, className: 'homePanels' },
+	          this.renderHomePanels()
 	        )
 	      );
 	    }

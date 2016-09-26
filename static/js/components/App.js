@@ -10,9 +10,9 @@ class App extends React.Component {
     return (
       <Grid id="appRoot" fluid>
         <NavBar />
-        <div id="main">
+        <Col xs={12} id="main">
           {this.props.children}
-        </div>
+        </Col>
         <Footer />
       </Grid>
     );
