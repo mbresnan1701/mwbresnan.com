@@ -44,8 +44,8 @@ class Home extends React.Component {
     return (
       <div >
         <Col xs={12} className="homePanel">
-          <Col xsHidden md={4} className="portrait" />
-          <Col xs={12} md={7} className="bio">
+          <Col xsHidden md={3} className="portrait" />
+          <Col xs={12} md={8} className="bio">
             <p className="infoPanelHeader">
             Welcome!
             </p>
@@ -58,21 +58,25 @@ class Home extends React.Component {
           </Col>
         </Col>
         <Col xs={12} className="homePanel">
-          <Col xs={12} md={7} className="aboutme" >
+          <Col xs={12} md={8} className="aboutme" >
             <p className="infoPanelHeader">
             Who am I?
             </p>
             <p>
-            Like all residents of Sillicon Valley, I live and die by the compiler. Software is my business, and business is booming.
-            I'm currently building consumer focused mobile applications for
-            <a href="https://www.linkedin.com/company/walmartecommerce">@Walmart Labs</a>.
+            Like most residents of Sillicon Valley, I live and die by the compiler. Software is my business - and my passion.
+            I'm currently building consumer-focused mobile applications for
+            <a href="https://www.linkedin.com/company/walmartecommerce"> @Walmart Labs</a>
+            . In my spare time I work on enhancing my knowledge of tech through study and practice.
+
+            Check out my work on my <a href="https://www.github.com/mbresnan1701"> Github </a> or keep up with me and my work on
+            <a href="https://www.github.com/mbresnan1701"> Twitter </a>!
             </p>
           </Col>
-          <Col xsHidden md={4} className="codepic" />
+          <Col xsHidden md={3} className="codepic" />
         </Col>
         <Col xs={12} className="homePanel lastPanel">
-          <Col xsHidden md={4} className="portrait" />
-          <Col xs={12} md={7} className="bio">
+          <Col xsHidden md={3} className="portrait" />
+          <Col xs={12} md={8} className="bio">
             <p className="infoPanelHeader">
             Shameless Self-Plug
             </p>

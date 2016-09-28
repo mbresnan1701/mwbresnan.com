@@ -58,19 +58,19 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(489);
+	var _Home = __webpack_require__(491);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Blog = __webpack_require__(496);
+	var _Blog = __webpack_require__(497);
 
 	var _Blog2 = _interopRequireDefault(_Blog);
 
-	var _BlogDetail = __webpack_require__(501);
+	var _BlogDetail = __webpack_require__(502);
 
 	var _BlogDetail2 = _interopRequireDefault(_BlogDetail);
 
-	var _Contact = __webpack_require__(506);
+	var _Contact = __webpack_require__(507);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
@@ -27122,9 +27122,9 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _NavBar = __webpack_require__(495);
+	var _NavBar = __webpack_require__(489);
 
-	var _Footer = __webpack_require__(507);
+	var _Footer = __webpack_require__(490);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46003,6 +46003,158 @@
 /* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.NavBar = undefined;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(236);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavBar = exports.NavBar = function NavBar() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "navbarContainer" },
+	    _react2.default.createElement(
+	      _reactBootstrap.Navbar,
+	      { className: "navbar-custom myNavBar", fluid: true, staticTop: true },
+	      _react2.default.createElement(
+	        _reactBootstrap.Navbar.Header,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Navbar.Brand,
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            'M.W. Bresnan'
+	          )
+	        ),
+	        _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Navbar.Collapse,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Nav,
+	          { pullRight: true },
+	          _react2.default.createElement(
+	            _reactBootstrap.NavItem,
+	            { eventKey: 1, href: '/' },
+	            'Home'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.NavItem,
+	            { eventKey: 2, href: '/blog' },
+	            'Blog'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.NavItem,
+	            { eventKey: 3, href: '/contact' },
+	            'Contact'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Footer = undefined;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(236);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Footer = exports.Footer = function Footer() {
+	  return _react2.default.createElement(
+	    _reactBootstrap.Col,
+	    { xs: 12, className: 'footer' },
+	    _react2.default.createElement(
+	      _reactBootstrap.Row,
+	      null,
+	      _react2.default.createElement(
+	        _reactBootstrap.Col,
+	        { md: 10, mdOffset: 1, lg: 8, lgOffset: 2 },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'list-inline text-center linklist' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://www.github.com/mbresnan1701' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-github fa-stack-1x fa-inverse' })
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://www.linkedin.com/in/mwbresnan' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-linkedin fa-stack-1x fa-inverse ' })
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'fa-stack fa-lg' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
+	                _react2.default.createElement('i', { className: 'fa fa-twitter fa-stack-1x fa-inverse' })
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'copyright text-muted' },
+	          'Copyright © mwbresnan.com 2016'
+	        )
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46013,23 +46165,23 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _PostSnippet = __webpack_require__(491);
+	var _PostSnippet = __webpack_require__(493);
 
 	var _PostSnippet2 = _interopRequireDefault(_PostSnippet);
 
-	var _NewsFeed = __webpack_require__(492);
+	var _NewsFeed = __webpack_require__(494);
 
 	var _NewsFeed2 = _interopRequireDefault(_NewsFeed);
 
-	var _QuoteBox = __webpack_require__(494);
+	var _QuoteBox = __webpack_require__(496);
 
 	var _QuoteBox2 = _interopRequireDefault(_QuoteBox);
 
-	var _NavBar = __webpack_require__(495);
+	var _NavBar = __webpack_require__(489);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _Footer = __webpack_require__(507);
+	var _Footer = __webpack_require__(490);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -46094,10 +46246,10 @@
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { xs: 12, className: 'homePanel' },
-	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'portrait' }),
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 3, className: 'portrait' }),
 	          _react2.default.createElement(
 	            _reactBootstrap.Col,
-	            { xs: 12, md: 7, className: 'bio' },
+	            { xs: 12, md: 8, className: 'bio' },
 	            _react2.default.createElement(
 	              'p',
 	              { className: 'infoPanelHeader' },
@@ -46129,7 +46281,7 @@
 	          { xs: 12, className: 'homePanel' },
 	          _react2.default.createElement(
 	            _reactBootstrap.Col,
-	            { xs: 12, md: 7, className: 'aboutme' },
+	            { xs: 12, md: 8, className: 'aboutme' },
 	            _react2.default.createElement(
 	              'p',
 	              { className: 'infoPanelHeader' },
@@ -46138,24 +46290,36 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              'Like all residents of Sillicon Valley, I live and die by the compiler. Software is my business, and business is booming. I\'m currently building consumer focused mobile applications for',
+	              'Like most residents of Sillicon Valley, I live and die by the compiler. Software is my business - and my passion. I\'m currently building consumer-focused mobile applications for',
 	              _react2.default.createElement(
 	                'a',
 	                { href: 'https://www.linkedin.com/company/walmartecommerce' },
-	                '@Walmart Labs'
+	                ' @Walmart Labs'
 	              ),
-	              '.'
+	              '. In my spare time I work on enhancing my knowledge of tech through study and practice. Check out my work on my ',
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'https://www.github.com/mbresnan1701' },
+	                ' Github '
+	              ),
+	              ' or keep up with me and my work on',
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'https://www.github.com/mbresnan1701' },
+	                ' Twitter '
+	              ),
+	              '!'
 	            )
 	          ),
-	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'codepic' })
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 3, className: 'codepic' })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { xs: 12, className: 'homePanel lastPanel' },
-	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 4, className: 'portrait' }),
+	          _react2.default.createElement(_reactBootstrap.Col, { xsHidden: true, md: 3, className: 'portrait' }),
 	          _react2.default.createElement(
 	            _reactBootstrap.Col,
-	            { xs: 12, md: 7, className: 'bio' },
+	            { xs: 12, md: 8, className: 'bio' },
 	            _react2.default.createElement(
 	              'p',
 	              { className: 'infoPanelHeader' },
@@ -46189,10 +46353,10 @@
 	}(_react2.default.Component);
 
 	module.exports = Home;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 490 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -56012,7 +56176,7 @@
 
 
 /***/ },
-/* 491 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56088,7 +56252,7 @@
 	module.exports = PostSnippet;
 
 /***/ },
-/* 492 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -56101,7 +56265,7 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _NewsEntry = __webpack_require__(493);
+	var _NewsEntry = __webpack_require__(495);
 
 	var _NewsEntry2 = _interopRequireDefault(_NewsEntry);
 
@@ -56204,10 +56368,10 @@
 	}(_react2.default.Component);
 
 	module.exports = NewsFeed;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 493 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56261,7 +56425,7 @@
 	module.exports = NewsEntry;
 
 /***/ },
-/* 494 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -56343,77 +56507,10 @@
 	}(_react2.default.Component);
 
 	module.exports = QuoteBox;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 495 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NavBar = undefined;
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(236);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var NavBar = exports.NavBar = function NavBar() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: "navbarContainer" },
-	    _react2.default.createElement(
-	      _reactBootstrap.Navbar,
-	      { className: "navbar-custom myNavBar", fluid: true, staticTop: true },
-	      _react2.default.createElement(
-	        _reactBootstrap.Navbar.Header,
-	        null,
-	        _react2.default.createElement(
-	          _reactBootstrap.Navbar.Brand,
-	          null,
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#' },
-	            'M.W. Bresnan'
-	          )
-	        ),
-	        _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
-	      ),
-	      _react2.default.createElement(
-	        _reactBootstrap.Navbar.Collapse,
-	        null,
-	        _react2.default.createElement(
-	          _reactBootstrap.Nav,
-	          { pullRight: true },
-	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 1, href: '/' },
-	            'Home'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 2, href: '/blog' },
-	            'Blog'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 3, href: '/contact' },
-	            'Contact'
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-
-/***/ },
-/* 496 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -56426,19 +56523,19 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _PostListItem = __webpack_require__(497);
+	var _PostListItem = __webpack_require__(498);
 
 	var _PostListItem2 = _interopRequireDefault(_PostListItem);
 
-	var _DateRanges = __webpack_require__(499);
+	var _DateRanges = __webpack_require__(500);
 
 	var _DateRanges2 = _interopRequireDefault(_DateRanges);
 
-	var _BlogTags = __webpack_require__(500);
+	var _BlogTags = __webpack_require__(501);
 
 	var _BlogTags2 = _interopRequireDefault(_BlogTags);
 
-	var _NewsFeed = __webpack_require__(492);
+	var _NewsFeed = __webpack_require__(494);
 
 	var _NewsFeed2 = _interopRequireDefault(_NewsFeed);
 
@@ -56656,10 +56753,10 @@
 	}(_react2.default.Component);
 
 	module.exports = Blog;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 497 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56672,7 +56769,7 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _TagGroup = __webpack_require__(498);
+	var _TagGroup = __webpack_require__(499);
 
 	var _TagGroup2 = _interopRequireDefault(_TagGroup);
 
@@ -56755,7 +56852,7 @@
 	module.exports = PostListItem;
 
 /***/ },
-/* 498 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56839,7 +56936,7 @@
 	module.exports = TagGroup;
 
 /***/ },
-/* 499 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -56931,10 +57028,10 @@
 	}(_react2.default.Component);
 
 	module.exports = DateRanges;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 500 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57061,7 +57158,7 @@
 	module.exports = BlogTags;
 
 /***/ },
-/* 501 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -57074,15 +57171,15 @@
 
 	var _reactBootstrap = __webpack_require__(236);
 
-	var _Comment = __webpack_require__(502);
+	var _Comment = __webpack_require__(503);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _AddComment = __webpack_require__(503);
+	var _AddComment = __webpack_require__(504);
 
 	var _AddComment2 = _interopRequireDefault(_AddComment);
 
-	var _reactDisqusThread = __webpack_require__(504);
+	var _reactDisqusThread = __webpack_require__(505);
 
 	var _reactDisqusThread2 = _interopRequireDefault(_reactDisqusThread);
 
@@ -57223,10 +57320,10 @@
 	}(_react2.default.Component);
 
 	module.exports = BlogDetail;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 502 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57297,7 +57394,7 @@
 	module.exports = Comment;
 
 /***/ },
-/* 503 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -57432,18 +57529,18 @@
 	}(_react2.default.Component);
 
 	module.exports = AddComment;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ },
-/* 504 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(505);
+	module.exports = __webpack_require__(506);
 
 /***/ },
-/* 505 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57634,7 +57731,7 @@
 	});
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -57801,92 +57898,7 @@
 	}(_react2.default.Component);
 
 	module.exports = Contact;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(490)))
-
-/***/ },
-/* 507 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Footer = undefined;
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(236);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Footer = exports.Footer = function Footer() {
-	  return _react2.default.createElement(
-	    _reactBootstrap.Col,
-	    { xs: 12, className: 'footer' },
-	    _react2.default.createElement(
-	      _reactBootstrap.Row,
-	      null,
-	      _react2.default.createElement(
-	        _reactBootstrap.Col,
-	        { md: 10, mdOffset: 1, lg: 8, lgOffset: 2 },
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-inline text-center linklist' },
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: 'https://www.github.com/mbresnan1701' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'fa-stack fa-lg' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                _react2.default.createElement('i', { className: 'fa fa-github fa-stack-1x fa-inverse' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: 'https://www.linkedin.com/in/mwbresnan' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'fa-stack fa-lg' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                _react2.default.createElement('i', { className: 'fa fa-linkedin fa-stack-1x fa-inverse ' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'fa-stack fa-lg' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle fa-stack-2x ' }),
-	                _react2.default.createElement('i', { className: 'fa fa-twitter fa-stack-1x fa-inverse' })
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'copyright text-muted' },
-	          'Copyright © mwbresnan.com 2016'
-	        )
-	      )
-	    )
-	  );
-	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)))
 
 /***/ }
 /******/ ]);
