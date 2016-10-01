@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Row, Panel, Col, FormGroup, FormControl, Button } from 'react-bootstrap';
 import reactDOM from 'react-dom';
 
 class Contact extends React.Component {
@@ -50,43 +50,49 @@ class Contact extends React.Component {
 
   render() {
     return (
-      <form name="sentMessage" id="contactForm" noValidate>
-        <Row className="control-group">
-          <FormGroup xs={12} className="floating-label-form-group controls">
-            <label>Name</label>
-            <FormControl ref="name" type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name." />
-            <p className="help-block text-danger"></p>
-          </FormGroup>
-        </Row>
-        <Row className="control-group">
-          <FormGroup xs={12} className="floating-label-form-group controls">
-            <label>Email Address</label>
-            <FormControl ref="email" type="email" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address." />
-            <p className="help-block text-danger"></p>
-          </FormGroup>
-        </Row>
-        <Row className="control-group">
-          <FormGroup xs={12} className="floating-label-form-group controls">
-            <label>Phone Number</label>
-            <FormControl ref="phnum" type="tel" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number." />
-            <p className="help-block text-danger"></p>
-          </FormGroup>
-        </Row>
-        <Row className="control-group">
-          <FormGroup xs={12} className="floating-label-form-group controls">
-            <label>Message</label>
-            <FormControl ref="msg" rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></FormControl>
-            <p className="help-block text-danger"></p>
-          </FormGroup>
-        </Row>
-        <br />
-        <div id="success"></div>
-        <Row>
-          <FormGroup xs={12}>
-            <Button onClick={this.submitForm.bind(this)}>Send</Button>
-          </FormGroup>
-        </Row>
-      </form>
+      <div className="contactme">
+        <Col xs={10} xsOffset={1}>
+          <Panel>
+            <form name="sentMessage" id="contactForm" noValidate>
+              <Row className="control-group">
+                <FormGroup xs={12} className="floating-label-form-group controls">
+                  <label>Name</label>
+                  <FormControl ref="name" type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name." />
+                  <p className="help-block text-danger"></p>
+                </FormGroup>
+              </Row>
+              <Row className="control-group">
+                <FormGroup xs={12} className="floating-label-form-group controls">
+                  <label>Email Address</label>
+                  <FormControl ref="email" type="email" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address." />
+                  <p className="help-block text-danger"></p>
+                </FormGroup>
+              </Row>
+              <Row className="control-group">
+                <FormGroup xs={12} className="floating-label-form-group controls">
+                  <label>Phone Number</label>
+                  <FormControl ref="phnum" type="tel" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number." />
+                  <p className="help-block text-danger"></p>
+                </FormGroup>
+              </Row>
+              <Row className="control-group">
+                <FormGroup xs={12} className="floating-label-form-group controls">
+                  <label>Message</label>
+                  <FormControl ref="msg" rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></FormControl>
+                  <p className="help-block text-danger"></p>
+                </FormGroup>
+              </Row>
+              <br />
+              <div id="success"></div>
+              <Row>
+                <FormGroup xs={12}>
+                  <Button onClick={this.submitForm.bind(this)}>Send</Button>
+                </FormGroup>
+              </Row>
+            </form>
+          </Panel>
+        </Col>
+      </div>
     );
   }
 

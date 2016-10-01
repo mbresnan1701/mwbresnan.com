@@ -56335,7 +56335,6 @@
 	  }, {
 	    key: 'renderStories',
 	    value: function renderStories() {
-	      console.log(this.state);
 	      return this.state.stories.map(function (story) {
 	        return _react2.default.createElement(_NewsEntry2.default, { key: story.id, story: story });
 	      });
@@ -56345,13 +56344,17 @@
 	    value: function render() {
 	      if (this.state.stories) {
 	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          this.renderStories(),
+	          _reactBootstrap.Col,
+	          { xs: 10, xsOffset: 1, className: 'newsfeed' },
 	          _react2.default.createElement(
-	            'div',
-	            null,
-	            'Items courtesy of HackerNews'
+	            _reactBootstrap.Panel,
+	            { header: "From The Web" },
+	            this.renderStories(),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'Items courtesy of HackerNews'
+	            )
 	          )
 	        );
 	      } else {
@@ -56696,7 +56699,7 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
-	              { xsHidden: true, sm: 4 },
+	              { xsHidden: true, sm: 4, smOffset: 1 },
 	              _react2.default.createElement(
 	                _reactBootstrap.Panel,
 	                null,
@@ -56709,7 +56712,7 @@
 	                'By Date:',
 	                _react2.default.createElement(
 	                  _reactBootstrap.Well,
-	                  null,
+	                  { className: 'customWell' },
 	                  _react2.default.createElement(_DateRanges2.default, {
 	                    dateview: this.getDatePosts.bind(this)
 	                  })
@@ -56728,16 +56731,12 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
-	              { xs: 12, sm: 8, smOffset: 0 },
+	              { xs: 10, xsOffset: 1, sm: 6, smOffset: 0 },
 	              this.renderPosts(),
 	              this.renderMoreButton()
 	            )
 	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Panel,
-	            { header: "From The Web" },
-	            _react2.default.createElement(_NewsFeed2.default, null)
-	          )
+	          _react2.default.createElement(_NewsFeed2.default, null)
 	        );
 	      } else {
 	        return _react2.default.createElement(
@@ -56998,17 +56997,20 @@
 	      return this.state.dates.map(function (date) {
 	        if (date.count > 0) {
 	          return _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            {
-	              onClick: _this3.handleClick.bind(_this3, date.month, date.year),
-	              key: date.datestr,
-	              bsStyle: 'link',
-	              className: 'tag-date-list-item'
-	            },
-	            date.datestr,
-	            ' (',
-	            date.count,
-	            ')'
+	            _reactBootstrap.Col,
+	            { sm: 10, smOffset: 1, key: date.datestr },
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              {
+	                onClick: _this3.handleClick.bind(_this3, date.month, date.year),
+	                bsStyle: 'link',
+	                className: 'tag-date-list-item'
+	              },
+	              date.datestr,
+	              ' (',
+	              date.count,
+	              ')'
+	            )
 	          );
 	        }
 	      });
@@ -57019,7 +57021,15 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.renderDates()
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { sm: 12 },
+	            this.renderDates()
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -57813,80 +57823,92 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'form',
-	        { name: 'sentMessage', id: 'contactForm', noValidate: true },
+	        'div',
+	        { className: 'contactme' },
 	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
+	          _reactBootstrap.Col,
+	          { xs: 10, xsOffset: 1 },
 	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
+	            _reactBootstrap.Panel,
+	            null,
 	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Name'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Email Address'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Phone Number'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'control-group' },
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12, className: 'floating-label-form-group controls' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Message'
-	            ),
-	            _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
-	            _react2.default.createElement('p', { className: 'help-block text-danger' })
-	          )
-	        ),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('div', { id: 'success' }),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.FormGroup,
-	            { xs: 12 },
-	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { onClick: this.submitForm.bind(this) },
-	              'Send'
+	              'form',
+	              { name: 'sentMessage', id: 'contactForm', noValidate: true },
+	              _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                { className: 'control-group' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.FormGroup,
+	                  { xs: 12, className: 'floating-label-form-group controls' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    null,
+	                    'Name'
+	                  ),
+	                  _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'name', type: 'text', placeholder: 'Name', id: 'name', required: true, 'data-validation-required-message': 'Please enter your name.' }),
+	                  _react2.default.createElement('p', { className: 'help-block text-danger' })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                { className: 'control-group' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.FormGroup,
+	                  { xs: 12, className: 'floating-label-form-group controls' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    null,
+	                    'Email Address'
+	                  ),
+	                  _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'email', type: 'email', placeholder: 'Email Address', id: 'email', required: true, 'data-validation-required-message': 'Please enter your email address.' }),
+	                  _react2.default.createElement('p', { className: 'help-block text-danger' })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                { className: 'control-group' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.FormGroup,
+	                  { xs: 12, className: 'floating-label-form-group controls' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    null,
+	                    'Phone Number'
+	                  ),
+	                  _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'phnum', type: 'tel', placeholder: 'Phone Number', id: 'phone', required: true, 'data-validation-required-message': 'Please enter your phone number.' }),
+	                  _react2.default.createElement('p', { className: 'help-block text-danger' })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                { className: 'control-group' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.FormGroup,
+	                  { xs: 12, className: 'floating-label-form-group controls' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    null,
+	                    'Message'
+	                  ),
+	                  _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'msg', rows: '5', placeholder: 'Message', id: 'message', required: true, 'data-validation-required-message': 'Please enter a message.' }),
+	                  _react2.default.createElement('p', { className: 'help-block text-danger' })
+	                )
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('div', { id: 'success' }),
+	              _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                null,
+	                _react2.default.createElement(
+	                  _reactBootstrap.FormGroup,
+	                  { xs: 12 },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { onClick: this.submitForm.bind(this) },
+	                    'Send'
+	                  )
+	                )
+	              )
 	            )
 	          )
 	        )

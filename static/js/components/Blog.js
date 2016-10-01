@@ -128,17 +128,17 @@ class Blog extends React.Component {
       return (
         <div>
           <Row>
-            <Col xsHidden sm={4} >
+            <Col xsHidden sm={4} smOffset={1}>
               <Panel>
                 <Button bsStyle="link" onClick={this.getInitData.bind(this)}>
                   All Posts
                 </Button>
                 <br />
                 By Date:
-                <Well>
-                  <DateRanges
-                    dateview={this.getDatePosts.bind(this)}
-                  />
+                <Well className="customWell">
+                    <DateRanges
+                      dateview={this.getDatePosts.bind(this)}
+                    />
                 </Well>
                 By Tag:
                 <Well>
@@ -150,14 +150,12 @@ class Blog extends React.Component {
                 </Well>
               </Panel>
             </Col>
-            <Col xs={12} sm={8} smOffset={0}>
+            <Col xs={10} xsOffset={1} sm={6} smOffset={0}>
               {this.renderPosts()}
               {this.renderMoreButton()}
             </Col>
           </Row>
-          <Panel header={"From The Web"}>
-            <NewsFeed />
-          </Panel>
+          <NewsFeed />
         </div>
       );
     } else {

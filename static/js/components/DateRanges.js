@@ -30,14 +30,15 @@ class DateRanges extends React.Component {
     return this.state.dates.map((date) => {
       if (date.count > 0) {
         return (
-          <Button
-            onClick={this.handleClick.bind(this, date.month, date.year)}
-            key={date.datestr}
-            bsStyle="link"
-            className="tag-date-list-item"
-          >
-            {date.datestr} ({date.count})
-          </Button>
+          <Col sm={10} smOffset={1} key={date.datestr}>
+            <Button
+              onClick={this.handleClick.bind(this, date.month, date.year)}
+              bsStyle="link"
+              className="tag-date-list-item"
+            >
+              {date.datestr} ({date.count})
+            </Button>
+          </Col>
         );
       }
     });
@@ -46,7 +47,11 @@ class DateRanges extends React.Component {
   render() {
     return (
       <div>
-        {this.renderDates()}
+        <Row>
+          <Col sm={12}>
+            {this.renderDates()}
+          </Col>
+        </Row>
       </div>
     );
   }

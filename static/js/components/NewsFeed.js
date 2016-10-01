@@ -46,7 +46,6 @@ class NewsFeed extends React.Component {
   }
 
   renderStories() {
-    console.log(this.state)
     return this.state.stories.map((story) => {
       return (
         <NewsEntry key={story.id} story={story} />
@@ -57,12 +56,14 @@ class NewsFeed extends React.Component {
   render() {
     if (this.state.stories) {
       return (
-        <div>
-          {this.renderStories()}
-          <div>
-            Items courtesy of HackerNews
-          </div>
-        </div>
+        <Col xs={10} xsOffset={1} className="newsfeed">
+          <Panel header={"From The Web"}>
+            {this.renderStories()}
+            <div>
+              Items courtesy of HackerNews
+            </div>
+          </Panel>
+        </Col>
       );
     } else {
       return (
